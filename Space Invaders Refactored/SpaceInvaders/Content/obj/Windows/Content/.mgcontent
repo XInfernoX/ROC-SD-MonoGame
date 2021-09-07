@@ -4,11 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/2122/C# Advanced/Space Invaders Refactored/SpaceInvaders/Content/alien1.png</File>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/2122/C# Advanced/Space Invaders Refactored/SpaceInvaders/Content/background.png</File>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/2122/C# Advanced/Space Invaders Refactored/SpaceInvaders/Content/laser1.png</File>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/2122/C# Advanced/Space Invaders Refactored/SpaceInvaders/Content/laser2.png</File>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/2122/C# Advanced/Space Invaders Refactored/SpaceInvaders/Content/player.png</File>
+    <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/alien1.png</File>
+    <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/background.png</File>
+    <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/laser1.png</File>
+    <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/laser2.png</File>
+    <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

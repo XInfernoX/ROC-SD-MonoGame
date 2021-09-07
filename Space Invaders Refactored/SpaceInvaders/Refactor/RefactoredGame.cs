@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace SpaceInvaders.Refactor
 {
@@ -12,12 +13,14 @@ namespace SpaceInvaders.Refactor
         private SpriteBatch _spriteBatch;
 
 
-        // Background data model.
         private GameObject background;
+        
         private GameObject player;
-        private GameObject laser;
+        private GameObject playerLaser;
 
         private GameObject alien;
+        private GameObject alienLaserPrefab;
+
 
 
         private List<GameObject> aliens;
@@ -31,7 +34,6 @@ namespace SpaceInvaders.Refactor
         private int numberOfAlienLasers;
         private List<GameObject> alienLasers;
         private Stack<GameObject> alienLaserStock;
-        private GameObject alienLaserPrefab;
         private TimeSpan previousAlienLaserRelease;
         private int alienLaserReleaseDelay;
         private Random alienLaserRandomizer;
@@ -44,10 +46,13 @@ namespace SpaceInvaders.Refactor
             IsMouseVisible = true;
 
             player = new GameObject("player");
+            playerLaser = new GameObject("laser");
+
+
             alien = new GameObject("Alien");
 
+
             background = new GameObject("background");
-            laser = new GameObject("laser");
 
             aliens = new List<GameObject>();
             alienLasers = new List<GameObject>();
@@ -87,12 +92,16 @@ namespace SpaceInvaders.Refactor
             player.AddComponent(playerRenderer);
 
             SpriteRenderer laserRenderer = new SpriteRenderer("laser", Content, Color.White);
-            laser.AddComponent(laserRenderer);
+            playerLaser.AddComponent(laserRenderer);
 
 
             SpriteRenderer alienRenderer = new SpriteRenderer("alien1", Content, Color.White);
             alien.AddComponent(alienRenderer);
 
+
+            alienLaserPrefab = new GameObject();
+            alienLaserPrefab.Active = true;
+            alienLaserPrefab.AddTexture(Content.Load<Texture2D>("laser1"));
 
 
 
@@ -101,21 +110,28 @@ namespace SpaceInvaders.Refactor
             int numberOfAliensInARow = viewPort.Width / (alienRenderer.Width * 2);
             int numberOfRows = numberOfAliens / numberOfAliensInARow;
 
-
             for (int i = 0; i < numberOfAliens; i++)
             {
-                GameObject nextAlien = new GameObject(alien);
-                nextAlien.SetPosition(new Vector2(
-                    (i / numberOfRows) * (alien.Width * 1.5f) + (alien.Width * 0.2f),
-                    (i % numberOfRows) * (alien.Height * 1.2f)
-                    ));
-                aliens.Add(nextAlien);
+                //GameObject nextAlien = new GameObject(alien);
+                Vector2 spawnPosition = new Vector2(
+                    (i / numberOfRows) * (alienRenderer.Width * 1.5f) + (alienRenderer.Width * 0.2f),
+                    (i % numberOfRows) * (alienRenderer.Height * 1.2f)
+            );
+
+                GameObject newAlien = CreateAlien(spawnPosition);
+                aliens.Add(newAlien);
             }
 
-            // Load alien laser asset.
-            alienLaserPrefab = new GameObject();
-            alienLaserPrefab.Active = true;
-            alienLaserPrefab.AddTexture(Content.Load<Texture2D>("laser1"));
+
+        }
+
+        private GameObject CreateAlien(Vector2 pSpawnPosition)
+        {
+            GameObject newAlien = new GameObject("new Alien", pSpawnPosition);
+            SpriteRenderer newAlienRendererer = new SpriteRenderer("alien1", Content);
+            newAlien.AddComponent(newAlienRendererer);
+
+            return newAlien;
         }
 
         protected override void Update(GameTime gameTime)
@@ -127,18 +143,18 @@ namespace SpaceInvaders.Refactor
 
             // TODO: Add your update logic here
             // Laser movement
-            if (laser.Active)
+            if (playerLaser.Active)
             {
-                Vector2 pos = laser.GetPosition();
+                Vector2 pos = playerLaser.GetPosition();
                 if (pos.Y > 0)
                 {
-                    pos.Y -= laser.Speed;
+                    pos.Y -= playerLaser.Speed;
                 }
                 else
                 {
-                    laser.Active = false;
+                    playerLaser.Active = false;
                 }
-                laser.SetPosition(pos);
+                playerLaser.SetPosition(pos);
             }
             // Alien laser moverment
             int n = alienLasers.Count;
@@ -181,13 +197,13 @@ namespace SpaceInvaders.Refactor
                 }
             }
             // Laser shot
-            if (!laser.Active & state.IsKeyDown(Keys.Space))
+            if (!playerLaser.Active & state.IsKeyDown(Keys.Space))
             {
-                laser.Active = true;
+                playerLaser.Active = true;
                 Vector2 pos = player.GetPosition();
-                pos.X += (player.Width / 2) - (laser.Width / 2);
-                pos.Y -= laser.Height;
-                laser.SetPosition(pos);
+                pos.X += (player.Width / 2) - (playerLaser.Width / 2);
+                pos.Y -= playerLaser.Height;
+                playerLaser.SetPosition(pos);
             }
 
             // Alien movement
@@ -250,7 +266,7 @@ namespace SpaceInvaders.Refactor
             _spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
             player.Draw(_spriteBatch);
-            laser.Draw(_spriteBatch);
+            playerLaser.Draw(_spriteBatch);
             foreach (GameObject alien in aliens)
             {
                 alien.Draw(_spriteBatch);
@@ -268,14 +284,14 @@ namespace SpaceInvaders.Refactor
         private void CollistionDetection()
         {
             // Check if player lasers hit an alien.
-            if (laser.Active)
+            if (playerLaser.Active)
             {
                 foreach (GameObject alien in aliens)
                 {
-                    if (alien.Collision(laser))
+                    if (alien.Collision(playerLaser))
                     {
                         alien.Active = false;
-                        laser.Active = false;
+                        playerLaser.Active = false;
                         break;
                     }
                 }
