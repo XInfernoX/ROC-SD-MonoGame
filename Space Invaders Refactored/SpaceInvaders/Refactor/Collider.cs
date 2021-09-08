@@ -1,36 +1,50 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
 namespace SpaceInvaders.Refactor
 {
     public class Collider : Component
     {
-        //Fields
-        private SpriteRenderer _spriteRenderer;
+        //Events
+        public Action<Collider> OnCollision = delegate { };
 
-        private int _rectangleWidth;
-        private int _rectangleHeight;
+        //Fields
+        private Point _size;
+        private Rectangle _collider;
 
         //Constructor
         public Collider(SpriteRenderer pSpriteRenderer)
         {
-            _spriteRenderer = pSpriteRenderer;
+            _size = new Point(pSpriteRenderer.Width, pSpriteRenderer.Height);
 
-            _rectangleWidth = pSpriteRenderer.Width;
-            _rectangleHeight = pSpriteRenderer.Height;
+            UpdateColliderPosition();
+        }
+        public Collider(Point pSize)
+        {
+            _size = pSize;
         }
 
         //Copy Constructor-ish
         public override Component Copy()
         {
-            return new Collider(_spriteRenderer);
+            return new Collider(_size);
         }
 
-        public bool CollidesWith(Collider pOther)
+        private void UpdateColliderPosition()
         {
-            Vector2 myPosition = transform.Position;
+            Vector2 position = transform.Position;
+            _collider = new Rectangle(_size.X, _size.Y, (int)position.X, (int)position.Y);
+        }
 
-            Rectangle myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, _rectangleWidth, _rectangleHeight);
+        public void CollisionCheck(Collider pOther)
+        {
+            UpdateColliderPosition();
+
+            if (_collider.Contains(pOther._collider))
+            {
+                OnCollision(pOther);
+            }
         }
     }
 }
