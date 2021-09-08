@@ -27,6 +27,10 @@ namespace SpaceInvaders.Refactor
         }
         public SpriteRenderer(string pAssetName, ContentManager pContent) : this(pAssetName, pContent, Color.White, 1.0f) { }
 
+        public override Component Copy()
+        {
+            return new SpriteRenderer(_texture, _color, _layerDepth);
+        }
 
         public SpriteRenderer(Texture2D pTexture, Color pColor, float pLayerDepth = 1.0f)
         {

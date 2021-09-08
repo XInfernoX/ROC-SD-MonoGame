@@ -2,6 +2,7 @@
 using System.Diagnostics;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceInvaders.Refactor
 {
@@ -78,6 +79,14 @@ namespace SpaceInvaders.Refactor
                 _components.Add(currentComponent);
             }
         }
+
+        /// <summary>
+        /// <param name="pName">Name of the GameObject</param>
+        /// <param name="pComponents">Starting components of the GameObject</param>
+        /// </summary>
+        public GameObject(string pName, params Component[] pComponents) : this(pName, Vector2.Zero, 0, Vector2.One, pComponents) { }
+
+
         /// <summary>
         /// Looks for a Component of type T on this GameObject and returns the first instance found
         /// </summary>
@@ -137,7 +146,12 @@ namespace SpaceInvaders.Refactor
         {
             for (int i = 0; i < _components.Count; i++)
             {
-                _components[i].Update(pGameTime);
+                Component currentComponent = _components[i];
+
+                if (currentComponent is MonoBehaviour)
+                {
+                    ((MonoBehaviour)currentComponent).Update(pGameTime);
+                }
             }
         }
 
@@ -145,7 +159,25 @@ namespace SpaceInvaders.Refactor
         {
             for (int i = 0; i < _components.Count; i++)
             {
-                _components[i].LateUpdate(pGameTime);
+                Component currentComponent = _components[i];
+
+                if(currentComponent is MonoBehaviour)
+                {
+                    ((MonoBehaviour)currentComponent).LateUpdate(pGameTime);
+                }
+            }
+        }
+
+        public void Draw(SpriteBatch pSpriteBatch)
+        {
+            for (int i = 0; i < _components.Count; i++)
+            {
+                Component currentComponent = _components[i];
+
+                if(currentComponent is SpriteRenderer)
+                {
+                    ((SpriteRenderer)currentComponent).Draw(_transform, pSpriteBatch);
+                }
             }
         }
 
@@ -153,8 +185,6 @@ namespace SpaceInvaders.Refactor
         {
             return name;
         }
-
-
     }
 }
 

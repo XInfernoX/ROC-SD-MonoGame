@@ -27,15 +27,13 @@ namespace SpaceInvaders.Refactor
         }
 
         public abstract Component Copy();
-
-        public virtual void Update(GameTime pGameTime) { }
-        public virtual void FixedUpdate(GameTime pGameTime) { }
-        public virtual void LateUpdate(GameTime pGameTime) { }
     }
 
 
     public abstract class MonoBehaviour : Component
     {
-        
+        public virtual void Update(GameTime pGameTime) { }
+        public virtual void FixedUpdate(GameTime pGameTime) { }
+        public virtual void LateUpdate(GameTime pGameTime) { }
     }
 }
