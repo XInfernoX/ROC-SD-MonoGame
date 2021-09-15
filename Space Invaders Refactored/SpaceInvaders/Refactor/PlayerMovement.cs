@@ -21,10 +21,10 @@ namespace SpaceInvaders.Refactor
             _playerWidth = pPlayerWidth;
         }
         //Copy Constructor-ish
-        public override Component Copy()
-        {
-            return new PlayerMovement(_speed, _viewport, _playerWidth);
-        }
+        //public override Component Copy()
+        //{
+        //    return new PlayerMovement(_speed, _viewport, _playerWidth);
+        //}
 
         //Event functions
         public override void Update(GameTime pGameTime)
@@ -45,7 +45,7 @@ namespace SpaceInvaders.Refactor
             {
                 Vector2 pos = transform.Position;
 
-                if (pos.X + _playerWidth / 2 > 0)
+                if (pos.X - (_playerWidth / 2) > 0)
                 {
                     pos.X -= _speed;
                     transform.SetPosition(pos);

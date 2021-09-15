@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
 
 namespace SpaceInvaders.Refactor
 {
     //CONSIDER whether we want to hide "_owner.", Makes sense from a Unity resemblance perspective, but might show students the relation between Components and owners
-    public abstract class Component
+    public abstract class Component : IDisposable
     {
         //Fields
         private GameObject _gameObject;
@@ -11,6 +11,7 @@ namespace SpaceInvaders.Refactor
         //Properties
         protected GameObject gameObject => _gameObject;
         protected Transform transform => _gameObject.transform;
+        protected RefactoredGame game => _gameObject.game;
 
         //Constructors
         public Component() : this(null) { }
@@ -26,14 +27,22 @@ namespace SpaceInvaders.Refactor
             _gameObject = pOwner;
         }
 
-        public abstract Component Copy();
-    }
+        public void Destroy(GameObject pGameObject)
+        {
+            pGameObject.Dispose();
+        }
+        public void Destroy(Component pComponent)
+        {
+            pComponent.Dispose();
+        }
 
+        public override string ToString()
+        {
+            return $"Component of: {gameObject}";
+        }
 
-    public abstract class MonoBehaviour : Component
-    {
-        public virtual void Update(GameTime pGameTime) { }
-        public virtual void FixedUpdate(GameTime pGameTime) { }
-        public virtual void LateUpdate(GameTime pGameTime) { }
+        public virtual void Dispose() { }
+
+        //public abstract Component Copy();
     }
 }

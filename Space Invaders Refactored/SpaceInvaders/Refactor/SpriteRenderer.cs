@@ -7,7 +7,6 @@ namespace SpaceInvaders.Refactor
     public class SpriteRenderer : Component
     {
         //Fields
-        private string _assetName;
         private Texture2D _texture;
         private Color _color = Color.White;
         private float _layerDepth = 1.0f;
@@ -19,7 +18,6 @@ namespace SpaceInvaders.Refactor
         //Constructors
         public SpriteRenderer(string pAssetName, ContentManager pContent, Color pColor, float pLayerDepth = 1.0f)
         {
-            _assetName = pAssetName;
             _texture = pContent.Load<Texture2D>(pAssetName);
 
             _color = pColor;
@@ -27,10 +25,10 @@ namespace SpaceInvaders.Refactor
         }
         public SpriteRenderer(string pAssetName, ContentManager pContent) : this(pAssetName, pContent, Color.White, 1.0f) { }
 
-        public override Component Copy()
-        {
-            return new SpriteRenderer(_texture, _color, _layerDepth);
-        }
+        //public override Component Copy()
+        //{
+        //    return new SpriteRenderer(_texture, _color, _layerDepth);
+        //}
 
         public SpriteRenderer(Texture2D pTexture, Color pColor, float pLayerDepth = 1.0f)
         {

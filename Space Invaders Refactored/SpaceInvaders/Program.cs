@@ -3,6 +3,8 @@
 using System;
 using Microsoft.Xna.Framework;
 
+using SpaceInvaders.Refactor;
+
 namespace SpaceInvaders
 {
     public static class Program
@@ -14,7 +16,7 @@ namespace SpaceInvaders
             using Game game = new Game1();
             game.Run();
 #else
-            using Game game = new Game();
+            using Game game = new RefactoredGame();
             game.Run();
 #endif
         }

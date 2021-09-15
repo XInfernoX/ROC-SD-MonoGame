@@ -11,6 +11,7 @@ namespace SpaceInvaders.Refactor
         private Vector2 _origin;
 
 
+        //CONSIDER using unity's naming convention vs Standard C#: "position" vs "Position"
         //Properties (Get only)
         public Vector2 Position => _position;
         public float Rotation => _rotation;
@@ -27,10 +28,10 @@ namespace SpaceInvaders.Refactor
             _origin = pOriginal.Origin;
         }
 
-        public override Component Copy()
-        {
-            return new Transform(_position, _rotation, _scale, _origin);
-        }
+        //public override Component Copy()
+        //{
+        //    return new Transform(_position, _rotation, _scale, _origin);
+        //}
 
         //Constructors
         public Transform() : this(Vector2.Zero, 0.0f, new Vector2(1, 1)) { }
@@ -95,7 +96,7 @@ namespace SpaceInvaders.Refactor
 
         public void Rotate(float pRotation) => _rotation += pRotation;
 
-        //Set Methods
+        //Set Methods CONSIDER removing these and using setters for properties like Unity
         public void SetPosition(Vector2 pPosition) =>_position = pPosition;
         public void SetOrigin(Vector2 pOrigin) => _origin = pOrigin;
         public void SetRotation(float pRotation) => _rotation = pRotation;

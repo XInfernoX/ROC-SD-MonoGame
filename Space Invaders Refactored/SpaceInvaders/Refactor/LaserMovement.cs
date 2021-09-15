@@ -19,9 +19,9 @@ namespace SpaceInvaders.Refactor
             transform.Translate(translation);
         }
 
-        public override Component Copy()
-        {
-            return new LaserMovement(_direction, _speed);
-        }
+        //public override Component Copy()
+        //{
+        //    return new LaserMovement(_direction, _speed);
+        //}
     }
 }
