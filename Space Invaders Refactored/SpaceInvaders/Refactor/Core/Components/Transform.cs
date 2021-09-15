@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.Core.Components
 {
     public class Transform : Component
     {
@@ -34,23 +34,20 @@ namespace SpaceInvaders.Refactor
         //}
 
         //Constructors
-        public Transform() : this(Vector2.Zero, 0.0f, new Vector2(1, 1)) { }
-
-        public Transform(Vector2 pPosition)
+        public Transform(Vector2 pPosition, float pRotation, Vector2 pScale, Vector2 pOrigin)
         {
             _position = pPosition;
-        }
-
-        public Transform(Vector2 pPosition, float pRotation, Vector2 pScale) : this(pPosition)
-        {
             _rotation = pRotation;
             _scale = pScale;
-        }
-
-        public Transform(Vector2 pPosition, float pRotation, Vector2 pScale, Vector2 pOrigin) : this(pPosition, pRotation, pScale)
-        {
             _origin = pOrigin;
         }
+
+        public Transform() : this(Vector2.Zero, 0, Vector2.One, new Vector2(0.5f, 0.5f)) { }
+        public Transform(Vector2 pPosition) : this(pPosition, 0, Vector2.One, new Vector2(0.5f, 0.5f)) { }
+        public Transform(Vector2 pPosition, float pRotation) : this(pPosition, pRotation, Vector2.One, new Vector2(0.5f, 0.5f)) { }
+        public Transform(Vector2 pPosition, float pRotation, Vector2 pScale) : this(pPosition, pRotation, pScale, new Vector2(0.5f, 0.5f)) { }
+
+
 
         //Methods
 
@@ -87,9 +84,6 @@ namespace SpaceInvaders.Refactor
             float yTranslation = sine * pTranslation.X + cosine * pTranslation.Y;
 
             Vector2 transformedTranslation = new Vector2(xTranslation, yTranslation);
-            //System.Console.WriteLine($"pTranslation: {pTranslation} => transformedTranslation: {transformedTranslation}");
-
-            //System.Console.WriteLine(transformedTranslation);
 
             Translate(transformedTranslation);
         }

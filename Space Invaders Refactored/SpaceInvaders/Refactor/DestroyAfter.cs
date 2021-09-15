@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using SpaceInvaders.Refactor.Core.Components;
 
 namespace SpaceInvaders.Refactor
 {
     public class DestroyAfter : MonoBehaviour
     {
         //Fields
-        private float _destroyTime;
+        private readonly float _destroyTime;
+
         private float _lifeTime;
 
         //Constructors

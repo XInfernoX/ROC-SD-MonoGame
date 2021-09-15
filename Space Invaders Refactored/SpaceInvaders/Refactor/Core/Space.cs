@@ -1,4 +1,4 @@
-﻿namespace SpaceInvaders.Refactor
+﻿namespace SpaceInvaders.Refactor.Core
 {
     public enum Space
     {

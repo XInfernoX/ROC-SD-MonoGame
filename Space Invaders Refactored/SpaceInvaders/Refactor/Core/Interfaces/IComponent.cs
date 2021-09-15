@@ -1,4 +1,4 @@
-﻿namespace SpaceInvaders.Refactor
+﻿namespace SpaceInvaders.Refactor.Core.Interfaces
 {
     //CONSIDER whether Origin should be in Transform or in SpriteRenderer
 

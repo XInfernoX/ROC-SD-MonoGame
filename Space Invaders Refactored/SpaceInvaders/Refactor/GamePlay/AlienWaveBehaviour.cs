@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceInvaders.Refactor.Core;
+using SpaceInvaders.Refactor.Core.Components;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.GamePlay
 {
     public class AlienWaveBehaviour : MonoBehaviour
     {
@@ -18,14 +19,14 @@ namespace SpaceInvaders.Refactor
         private const int _moveSteps = 4;
 
         //Tracking
-        private List<GameObject> _aliens = new List<GameObject>();
+        private readonly List<GameObject> _aliens = new List<GameObject>();
         private float _previousStepTime;
         private int _alienStepCount;
 
         //Calculated
-        private int _horizontalStepSize;
-        private int _verticalStepSize;
-        private int _spacing;
+        private readonly int _horizontalStepSize;
+        private readonly int _verticalStepSize;
+        private readonly int _spacing;
 
         public AlienWaveBehaviour(RefactoredGame pGame, Texture2D pAlienTexture, Texture2D pAlienLaserTexture, Viewport pViewport, int pNumberOfRows, int pNumberOfColumns, float pStepDuration)
         {
@@ -38,14 +39,12 @@ namespace SpaceInvaders.Refactor
             _numberOfColumns = pNumberOfColumns;
             _stepDuration = pStepDuration;
 
-            //Calculate remainding values
-            int _totalHorizontalMoveDistance = (pViewport.Width / _moveSteps);
-            _horizontalStepSize = _totalHorizontalMoveDistance / _moveSteps;
+            //Calculate remaining values
+            int totalHorizontalMoveDistance = (pViewport.Width / _moveSteps);
+            _horizontalStepSize = totalHorizontalMoveDistance / _moveSteps;
             _verticalStepSize = (pViewport.Height / 20);
 
-            System.Console.WriteLine($"totalHorizontalMoveDistance:{ _totalHorizontalMoveDistance}, horizontalStepSize: {_horizontalStepSize}, _verticalStepSize: {_verticalStepSize}");
-
-            int combinedSpacingWidth = pViewport.Width - (pNumberOfColumns * pAlienTexture.Width) - _totalHorizontalMoveDistance;
+            int combinedSpacingWidth = pViewport.Width - (pNumberOfColumns * pAlienTexture.Width) - totalHorizontalMoveDistance;
             _spacing = combinedSpacingWidth / (pNumberOfColumns + 1);//Possible loss of precision due to rounding to an int (Floor)
 
             //Create aliens
@@ -106,12 +105,13 @@ namespace SpaceInvaders.Refactor
 
         private GameObject CreateAlien()
         {
-            OneHitDeath oneHitDeath = new OneHitDeath();
+            Alien alien = new Alien();
+            //OneHitDeath oneHitDeath = new OneHitDeath();
             SpriteRenderer alienRenderer = new SpriteRenderer(_alienTexture, Color.White, 0.4f);
-            AlienLaserShooter alienLaserShooter = new AlienLaserShooter(_alienLaserTexture, 5, 10);
+            AlienLaserShooter alienLaserShooter = new AlienLaserShooter(_alienLaserTexture, 6, 10);
             Collider alienCollider = new Collider(alienRenderer);
 
-            return new GameObject(_game, "Alien", alienRenderer, alienLaserShooter, oneHitDeath, alienCollider);
+            return new GameObject(_game, "Alien", alien, alienRenderer, alienLaserShooter, alienCollider);
         }
     }
 }

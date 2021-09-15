@@ -1,8 +1,7 @@
 ﻿using System;
-
 using Microsoft.Xna.Framework;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.Core.Components
 {
     public abstract class MonoBehaviour : Component
     {
@@ -21,7 +20,7 @@ namespace SpaceInvaders.Refactor
 
         public override string ToString()
         {
-            return $"MonoBehaviour of {gameObject}";
+            return $"Unspecified MonoBehaviour";
         }
     }
 }

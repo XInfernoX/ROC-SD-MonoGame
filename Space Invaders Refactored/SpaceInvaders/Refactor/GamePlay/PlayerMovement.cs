@@ -1,16 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using SpaceInvaders.Refactor.Core.Components;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.GamePlay
 {
     //NOTE Viewport is a struct (value type) won't update when game window size is changed during gameplay!
     public class PlayerMovement : MonoBehaviour
     {
         //Fields
-        private float _speed;
-        private Viewport _viewport;
-        private int _playerWidth;
+        private readonly float _speed;
+        private readonly Viewport _viewport;
+        private readonly int _playerWidth;
 
         //Constructor
         public PlayerMovement(float pSpeed, Viewport pViewPort, int pPlayerWidth)

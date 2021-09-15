@@ -1,12 +1,13 @@
 ﻿
 using Microsoft.Xna.Framework;
+using SpaceInvaders.Refactor.Core.Components;
 
 namespace SpaceInvaders.Refactor
 {
     public class Rotator : MonoBehaviour
     {
         //Fields
-        private float _rotationSpeed;
+        private readonly float _rotationSpeed;
 
         //Constructor
         public Rotator(float pRotationSpeed)

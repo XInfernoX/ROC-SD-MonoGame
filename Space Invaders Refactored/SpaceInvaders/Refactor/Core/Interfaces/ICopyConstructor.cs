@@ -1,4 +1,4 @@
-﻿namespace SpaceInvaders.Refactor
+﻿namespace SpaceInvaders.Refactor.Core.Interfaces
 {
     public interface ICopyConstructor<T>
     {

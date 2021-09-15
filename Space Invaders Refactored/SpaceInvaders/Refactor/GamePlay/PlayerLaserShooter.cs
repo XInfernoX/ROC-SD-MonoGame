@@ -1,17 +1,17 @@
-﻿using System;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using SpaceInvaders.Refactor.Core;
+using SpaceInvaders.Refactor.Core.Components;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.GamePlay
 {
     public class PlayerLaserShooter : MonoBehaviour
     {
         //Fields
-        private Texture2D _laserTexture;
+        private readonly Texture2D _laserTexture;
+        private readonly float _laserCooldown;
 
-        private float _laserCooldown;
         private float _lastLaserShotFired;
 
         //Constructor
@@ -43,7 +43,7 @@ namespace SpaceInvaders.Refactor
 
         private GameObject CreatePlayerLaser()
         {
-            Console.WriteLine("CreatePlayerLaser");
+            PlayerLaser playerLaser = new PlayerLaser();
             SpriteRenderer laserRenderer = new SpriteRenderer(_laserTexture);
             LaserMovement laserMovement = new LaserMovement(new Vector2(0, -1), 500);
             Collider laserCollider = new Collider(laserRenderer);
@@ -53,7 +53,7 @@ namespace SpaceInvaders.Refactor
             spawnPosition.Y -= laserRenderer.Height;
 
             GameObject newPlayerLaser = new GameObject(game, "new playerLaser", spawnPosition, new Vector2(0.5f, 1.0f), 0, Vector2.One,
-                laserMovement, laserRenderer, laserCollider, laserDestroyer);
+                playerLaser, laserMovement, laserRenderer, laserCollider, laserDestroyer);
             return newPlayerLaser;
         }
     }

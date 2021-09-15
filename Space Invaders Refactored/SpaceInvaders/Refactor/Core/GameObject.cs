@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceInvaders.Refactor.Core.Components;
 
-
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.Core
 {
     public class GameObject : IDisposable
     {
         //CONSIDER creating a list of LogicComponents and a list of GraphicalComponents, one gets Updated while the other gets drawn
-        //CONSIDER Removing copy constructor of GameObject and also all Component.Copy() functions, let them make a method to create a prefab instead!
 
         //Fields
         private readonly RefactoredGame _game;
@@ -18,7 +16,7 @@ namespace SpaceInvaders.Refactor
         private readonly Transform _transform;
         private readonly List<Component> _components = new List<Component>();
 
-        //Properties
+        //Properties - CONSIDER whether to use Unity's naming convention (camelCase) vs Conventional (PascalCase) for these Properties
         public string name => _name;
         public Transform transform => _transform;
         public RefactoredGame game => _game;
@@ -98,9 +96,7 @@ namespace SpaceInvaders.Refactor
         /// <param name="pComponents">Starting components of the GameObject</param>
         public GameObject(RefactoredGame pGame, string pName, Vector2 pPosition, Vector2 pOrigin, float pRotation, params Component[] pComponents) : this(pGame, pName, pPosition, pOrigin, pRotation, Vector2.One, pComponents) { }
 
-        /// <summary>
-        /// Looks for a Component of type T on this GameObject and returns the first instance found
-        /// </summary>
+        /// <summary>Looks for a Component of type T on this GameObject and returns the first instance found</summary>
         /// <typeparam name="T">Type of component to look for</typeparam>
         /// <returns>A reference to found component</returns>
         public T GetComponent<T>() where T : Component
@@ -113,11 +109,9 @@ namespace SpaceInvaders.Refactor
 
             return null;
         }
-        /// <summary>
-        /// Looks for Components of type T on this GameObject and returns an array of instances found
-        /// </summary>
+        /// <summary>Looks for Components of type T on this GameObject and returns an array of instances found</summary>
         /// <typeparam name="T">Type of components to look for</typeparam>
-        /// <returns>References to found components stored in a List</returns>
+        /// <returns>Collection of references to found components as an array</returns>
         public T[] GetComponents<T>() where T : Component
         {
             List<T> foundComponents = new List<T>();
@@ -130,11 +124,9 @@ namespace SpaceInvaders.Refactor
             return foundComponents.ToArray();
         }
 
-        /// <summary>
-        /// Adds a new component of type T to this GameObject and returns a reference to it
-        /// </summary>
+        /// <summary>Adds a new component of type T to this GameObject and returns a reference to it</summary>
         /// <typeparam name="T">Type of component to add</typeparam>
-        /// <returns>A reference to added component</returns>
+        /// <returns>A reference to newly added component</returns>
         public T AddComponent<T>() where T : Component
         {
             T newComponent = Activator.CreateInstance(typeof(T), this) as T;
@@ -142,60 +134,54 @@ namespace SpaceInvaders.Refactor
             _components.Add(newComponent);
             return newComponent;
         }
+        /// <summary>Adds a new component to this GameObject</summary>
+        /// <param name="pComponent">The component reference to add</param>
         public void AddComponent(Component pComponent)
         {
             pComponent.SetOwner(this);
             _components.Add(pComponent);
         }
 
+        /// <summary>Updates all Components attached to this GameObject</summary>
+        /// <param name="pGameTime">GameTime reference (should be from Game.Update(GameTime))</param>
         public void Update(GameTime pGameTime)
         {
             for (int i = 0; i < _components.Count; i++)
             {
                 Component currentComponent = _components[i];
 
-                if (currentComponent is MonoBehaviour)
+                if (currentComponent is MonoBehaviour behaviour)
                 {
-                    ((MonoBehaviour)currentComponent).Update(pGameTime);
+                    behaviour.Update(pGameTime);
                 }
             }
         }
-
+        /// <summary>Updates all Components attached to this GameObject a second time after the Update method</summary>
+        /// <param name="pGameTime">GameTime reference (should be from Game.Update(GameTime))</param>
         public void LateUpdate(GameTime pGameTime)
         {
             for (int i = 0; i < _components.Count; i++)
             {
                 Component currentComponent = _components[i];
 
-                if (currentComponent is MonoBehaviour)
+                if (currentComponent is MonoBehaviour behaviour)
                 {
-                    ((MonoBehaviour)currentComponent).LateUpdate(pGameTime);
+                    behaviour.LateUpdate(pGameTime);
                 }
             }
         }
 
-        //public void CollisionCheck(Collider pOther)
-        //{
-        //    for (int i = 0; i < _components.Count; i++)
-        //    {
-        //        Component currentComponent = _components[i];
-
-        //        if(currentComponent is Collider)
-        //        {
-        //            ((Collider)currentComponent).CollisionCheck(pOther);
-        //        }
-        //    }
-        //}
-
+        /// <summary>Checks all collider components of this GameObject with all collider components of another GameObject for a collision</summary>
+        /// <param name="pOther">Reference to the other GameObject to check collision against</param>
         public void CollisionCheck(GameObject pOther)
         {
             bool collision = false;
 
             for (int myComponentIndex = 0; myComponentIndex < _components.Count; myComponentIndex++)
             {
-                Component currentComponent = _components[myComponentIndex];
+                Component myCurrentComponent = _components[myComponentIndex];
 
-                if (currentComponent is Collider collider)
+                if (myCurrentComponent is Collider collider)
                 {
                     Collider[] otherColliders = pOther.GetComponents<Collider>();
                     for (int otherComponentIndex = 0; otherComponentIndex < otherColliders.Length; otherComponentIndex++)
@@ -213,42 +199,57 @@ namespace SpaceInvaders.Refactor
                 }
             }
         }
-
-        private void CallOnCollisionEventMethods(GameObject pOne, GameObject pOther)
+        /// <summary>Notifies all MonoBehaviour components a collision has happened between two GameObjects</summary>
+        /// <param name="pFirstGameObject">First GameObject to notify</param>
+        /// <param name="pSecondGameObject">Second GameObject to notify</param>
+        private void CallOnCollisionEventMethods(GameObject pFirstGameObject, GameObject pSecondGameObject)
         {
-            MonoBehaviour[] oneMonoBehaviours = pOne.GetComponents<MonoBehaviour>();
-            for (int i = 0; i < oneMonoBehaviours.Length; i++)
+            MonoBehaviour[] firstMonoBehaviours = pFirstGameObject.GetComponents<MonoBehaviour>();
+            for (int i = 0; i < firstMonoBehaviours.Length; i++)
             {
-                //oneMonoBehaviours[i].OnCollision();
-                oneMonoBehaviours[i].OnCollision(pOther);
+                firstMonoBehaviours[i].OnCollision(pSecondGameObject);
             }
 
-            MonoBehaviour[] otherMonoBehaviours = pOther.GetComponents<MonoBehaviour>();
-            for (int i = 0; i < otherMonoBehaviours.Length; i++)
+            MonoBehaviour[] secondMonoBehaviours = pSecondGameObject.GetComponents<MonoBehaviour>();
+            for (int i = 0; i < secondMonoBehaviours.Length; i++)
             {
-                //otherMonoBehaviours[i].OnCollision();
-                otherMonoBehaviours[i].OnCollision(pOther);
+                secondMonoBehaviours[i].OnCollision(pFirstGameObject);
             }
         }
 
+        /// <summary>Draws all SpriteRenderer components attached to this GameObject</summary>
+        /// <param name="pSpriteBatch">SpriteBatch reference used to draw</param>
         public void Draw(SpriteBatch pSpriteBatch)
         {
             for (int i = 0; i < _components.Count; i++)
             {
                 Component currentComponent = _components[i];
 
-                if (currentComponent is SpriteRenderer)
+                if (currentComponent is SpriteRenderer renderer)
                 {
-                    ((SpriteRenderer)currentComponent).Draw(_transform, pSpriteBatch);
+                    renderer.Draw(_transform, pSpriteBatch);
                 }
             }
         }
 
+        /// <summary>
+        /// Overrides object.ToString() method, this method gets automatically called when this GameObject is printed to the Console.
+        /// This method prints the name of this GameObject and all attached Components, useful for debugging purposes
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return name;
+            string fullName = $"GameObject: {name}\n";
+
+            for (int i = 0; i < _components.Count; i++)
+            {
+                fullName += $"\t{_components[i]}\n";
+            }
+
+            return fullName;
         }
 
+        /// <summary>Gets called upon Destroying this GameObject, it cleans up itself by Destroying and removing all Components and finally itself from the Game</summary>
         public void Dispose()
         {
             for (int i = _components.Count - 1; i >= 0; i--)

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SpaceInvaders
+namespace SpaceInvaders.Example
 {
     class GameObject
     {

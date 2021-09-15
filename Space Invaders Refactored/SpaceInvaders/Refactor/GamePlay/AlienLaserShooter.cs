@@ -1,20 +1,21 @@
 ﻿using System;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceInvaders.Refactor.Core;
+using SpaceInvaders.Refactor.Core.Components;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.GamePlay
 {
     public class AlienLaserShooter : MonoBehaviour
     {
         //Fields
-        private Texture2D _laserTexture;
-        private float _minLaserCooldown;
-        private float _maxLaserCooldown;
-        private float _randomRange;
+        private readonly Texture2D _laserTexture;
+        private readonly float _minLaserCooldown;
+        private readonly float _maxLaserCooldown;
+        private readonly float _randomRange;
 
         private float _lastLaserShotFired;
-        private Random _random;
+        private readonly Random _random;
 
         //Constructor
         public AlienLaserShooter(Texture2D pLaserTexture, float pMinLaserCooldown, float pMaxLaserCooldown)
@@ -27,7 +28,6 @@ namespace SpaceInvaders.Refactor
             _random = new Random();
 
             _lastLaserShotFired = (float)_random.NextDouble() * (pMinLaserCooldown - 1) + 1;
-            //UpdateLastLaserShotFired();
         }
 
         //Methods
@@ -37,25 +37,25 @@ namespace SpaceInvaders.Refactor
             {
                 UpdateLastLaserShotFired();
 
-                GameObject alienlaser = CreateAlienLaser();
-                game.AddGameObject(alienlaser);
+                GameObject alienLaser = CreateAlienLaser();
+                game.AddGameObject(alienLaser);
             }
         }
 
         private void UpdateLastLaserShotFired()
         {
             _lastLaserShotFired += (float)_random.NextDouble() * _randomRange + _minLaserCooldown;
-
         }
 
         private GameObject CreateAlienLaser()
         {
+            AlienLaser alienLaser = new AlienLaser();
             SpriteRenderer laserRenderer = new SpriteRenderer(_laserTexture);
             Collider laserCollider = new Collider(laserRenderer);
-            LaserMovement laserMovement = new LaserMovement(new Vector2(0, 1), 300);
+            LaserMovement laserMovement = new LaserMovement(new Vector2(0, 1), 250);
             DestroyAfter laserDestroyer = new DestroyAfter(2);
-            GameObject newPlayerLaser = new GameObject(game, "new playerLaser", transform.Position, new Vector2(0.5f, 0.0f), 0, Vector2.One, 
-                laserRenderer, laserCollider, laserMovement, laserDestroyer);
+            GameObject newPlayerLaser = new GameObject(game, "new AlienLaser", transform.Position, new Vector2(0.5f, 0.0f), 0, Vector2.One, 
+                alienLaser, laserRenderer, laserCollider, laserMovement, laserDestroyer);
             return newPlayerLaser;
         }
     }

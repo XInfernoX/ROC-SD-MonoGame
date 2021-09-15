@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using SpaceInvaders.Refactor.Core.Components;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.GamePlay
 {
     public class LaserMovement : MonoBehaviour
     {
-        private Vector2 _direction;
-        private float _speed;
+        private readonly Vector2 _direction;
+        private readonly float _speed;
 
         public LaserMovement(Vector2 pDirection, float pSpeed)
         {

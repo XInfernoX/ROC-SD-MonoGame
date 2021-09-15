@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.Core.Components
 {
     //CONSIDER whether we want to hide "_owner.", Makes sense from a Unity resemblance perspective, but might show students the relation between Components and owners
     public abstract class Component : IDisposable
@@ -14,11 +14,19 @@ namespace SpaceInvaders.Refactor
         protected RefactoredGame game => _gameObject.game;
 
         //Constructors
-        public Component() : this(null) { }
+        protected Component()
+        {
+        }
 
-        public Component(GameObject pOwner)
+        protected Component(GameObject pOwner)
         {
             _gameObject = pOwner;
+        }
+
+        //Copy Constructor
+        protected Component(Component pOriginal)
+        {
+            _gameObject = pOriginal._gameObject;
         }
 
         //Methods
@@ -38,7 +46,7 @@ namespace SpaceInvaders.Refactor
 
         public override string ToString()
         {
-            return $"Component of: {gameObject}";
+            return $"Unspecified Component";
         }
 
         public virtual void Dispose() { }

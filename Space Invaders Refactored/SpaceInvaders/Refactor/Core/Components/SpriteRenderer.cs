@@ -1,15 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.Core.Components
 {
     public class SpriteRenderer : Component
     {
         //Fields
-        private Texture2D _texture;
-        private Color _color = Color.White;
-        private float _layerDepth = 1.0f;
+        private readonly Texture2D _texture;
+        private readonly Color _color;
+        private readonly float _layerDepth;
 
         //Properties
         public int Width => _texture.Width;

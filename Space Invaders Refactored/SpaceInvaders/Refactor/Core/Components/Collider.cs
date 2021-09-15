@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace SpaceInvaders.Refactor
+namespace SpaceInvaders.Refactor.Core.Components
 {
     public class Collider : Component
     {
@@ -48,7 +48,7 @@ namespace SpaceInvaders.Refactor
 
         public override string ToString()
         {
-            return $"Collider of: {gameObject}";
+            return $"Collider";
         }
     }
 }
