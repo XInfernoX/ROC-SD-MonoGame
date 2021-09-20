@@ -14,6 +14,8 @@ namespace SpaceInvaders.Refactor.Core.Components
         //Properties
         public int Width => _texture.Width;
         public int Height => _texture.Height;
+        public Vector2 Size => new Vector2(_texture.Width, _texture.Height);
+        public Rectangle Bounds => _texture.Bounds;
 
         //Constructors
         public SpriteRenderer(string pAssetName, ContentManager pContent, Color pColor, float pLayerDepth = 1.0f)

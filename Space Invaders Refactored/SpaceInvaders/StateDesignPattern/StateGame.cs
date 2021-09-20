@@ -1,50 +1,13 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+
+using SpaceInvaders.Refactor;
 using SpaceInvaders.Refactor.Core;
 using SpaceInvaders.Refactor.Core.Components;
 
 namespace SpaceInvaders.StateDesignPattern
 {
-    public enum ButtonState
-    {
-    }
-
-    public class Button : MonoBehaviour
-    {
-        private Action OnButtonHoverEnter = delegate { };
-        private Action OnButtonHoverExit = delegate { };
-        private Action OnButtonClick = delegate { };
-
-        private SpriteRenderer _spriteRenderer;
-        private Collider _collider;
-
-        public Button(SpriteRenderer pRenderer, Collider pCollider)
-        {
-            _spriteRenderer = pRenderer;
-            _collider = pCollider;
-        }
-
-        public override void Update(GameTime pGameTime)
-        {
-            MouseState state = Mouse.GetState();
-
-            if(_collider.OverLapCheck(state.Position))
-            {
-                Console.WriteLine($"Button overlap!");
-            }
-
-            base.Update(pGameTime);
-        }
-    }
-
-
-
-
-
-
-    public class StateGame : Game
+    public class StateGame : RefactoredGameBase
     {
         public StateGame()
         {
@@ -60,20 +23,23 @@ namespace SpaceInvaders.StateDesignPattern
         {
             base.LoadContent();
 
-            SpriteRenderer keyRenderer = new SpriteRenderer(Content.Load<Texture2D>("key"));
-            //GameObject keyButton = new GameObject();
+            Viewport viewport = GraphicsDevice.Viewport;
+
+            SpriteRenderer keyRenderer = new SpriteRenderer(Content.Load<Texture2D>("tile_0009"));
+            Collider keyCollider = new Collider(keyRenderer);
+            Button keyButton = new Button(keyRenderer, keyCollider);
+            GameObject button = new GameObject(this, "Key", new Vector2(0f, 0f),new Vector2(0.9f, 0.5f),0, new Vector2(10,10),keyRenderer, keyCollider, keyButton);
+            AddGameObject(button);
         }
 
-        protected override void Update(GameTime gameTime)
+        protected override void Update(GameTime pGameTime)
         {
-            base.Update(gameTime);
+            base.Update(pGameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime pGameTime)
         {
-            base.Draw(gameTime);
+            base.Draw(pGameTime);
         }
-
-
     }
 }

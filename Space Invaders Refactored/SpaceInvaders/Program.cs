@@ -1,9 +1,13 @@
-﻿#define USE_REFACTOR
+﻿//#define USE_EXAMPLE
+//#define USE_REFACTOR
+#define USE_STATE
 
 using System;
 using Microsoft.Xna.Framework;
 
+using SpaceInvaders.Example;
 using SpaceInvaders.Refactor;
+using SpaceInvaders.StateDesignPattern;
 
 namespace SpaceInvaders
 {
@@ -12,13 +16,14 @@ namespace SpaceInvaders
         [STAThread]
         private static void Main()
         {
-#if !USE_REFACTOR
+#if USE_EXAMPLE
             using Game game = new Game1();
-            game.Run();
-#else
+#elif USE_REFACTOR
             using Game game = new SpaceInvadersGame();
-            game.Run();
+#elif USE_STATE
+            using Game game = new StateGame();
 #endif
+            game.Run();
         }
     }
 }
