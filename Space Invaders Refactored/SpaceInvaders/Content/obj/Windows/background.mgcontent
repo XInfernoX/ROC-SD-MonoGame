@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/LWL01/source/repos/SpaceInvaders/SpaceInvaders/Content/background.png</SourceFile>
+  <SourceFile>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/background.png</SourceFile>
   <SourceTime>2019-05-17T14:01:52.4233088+02:00</SourceTime>
-  <DestFile>C:/Users/LWL01/source/repos/SpaceInvaders/SpaceInvaders/Content/bin/Windows/background.xnb</DestFile>
-  <DestTime>2021-03-23T11:23:54.7613584+01:00</DestTime>
+  <DestFile>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/bin/Windows/background.xnb</DestFile>
+  <DestTime>2021-09-16T14:24:51.1855474+02:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
+  <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T16:17:54+02:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T18:17:54+02:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

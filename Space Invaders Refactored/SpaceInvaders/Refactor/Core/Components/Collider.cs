@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace SpaceInvaders.Refactor.Core.Components
 {
-    public class Collider : Component
+    public class Collider : Component, ICollideable
     {
         //Events
         public Action<Collider> OnCollision = delegate { };
@@ -44,6 +44,13 @@ namespace SpaceInvaders.Refactor.Core.Components
             }
 
             return false;
+        }
+
+        public bool OverLapCheck(Point pPoint)
+        {
+            UpdateColliderPosition();
+
+            return _collider.Contains(pPoint);
         }
 
         public override string ToString()

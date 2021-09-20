@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace SpaceInvaders.Refactor.Core.Components
 {
-    public abstract class MonoBehaviour : Component
+    public abstract class MonoBehaviour : Component, IUpdateable
     {
         //Events
         public event Action OnCollisionEnter = delegate { };

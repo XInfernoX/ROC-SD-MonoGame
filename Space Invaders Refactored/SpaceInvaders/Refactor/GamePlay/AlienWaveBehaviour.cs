@@ -9,7 +9,7 @@ namespace SpaceInvaders.Refactor.GamePlay
     public class AlienWaveBehaviour : MonoBehaviour
     {
         //Fields - Constructor/Configuration
-        private readonly RefactoredGame _game;
+        private readonly SpaceInvadersGame _game;
         private readonly Texture2D _alienTexture;
         private readonly Texture2D _alienLaserTexture;
         private readonly int _numberOfRows;
@@ -28,7 +28,7 @@ namespace SpaceInvaders.Refactor.GamePlay
         private readonly int _verticalStepSize;
         private readonly int _spacing;
 
-        public AlienWaveBehaviour(RefactoredGame pGame, Texture2D pAlienTexture, Texture2D pAlienLaserTexture, Viewport pViewport, int pNumberOfRows, int pNumberOfColumns, float pStepDuration)
+        public AlienWaveBehaviour(SpaceInvadersGame pGame, Texture2D pAlienTexture, Texture2D pAlienLaserTexture, Viewport pViewport, int pNumberOfRows, int pNumberOfColumns, float pStepDuration)
         {
             //Store all configuration values
             _game = pGame;

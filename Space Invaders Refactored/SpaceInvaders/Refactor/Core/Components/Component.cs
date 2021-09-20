@@ -11,7 +11,7 @@ namespace SpaceInvaders.Refactor.Core.Components
         //Properties
         protected GameObject gameObject => _gameObject;
         protected Transform transform => _gameObject.transform;
-        protected RefactoredGame game => _gameObject.game;
+        protected RefactoredGameBase game => _gameObject.game;
 
         //Constructors
         protected Component()
@@ -35,12 +35,14 @@ namespace SpaceInvaders.Refactor.Core.Components
             _gameObject = pOwner;
         }
 
+        //CONSIDER moving both Destroy functions to MonoBehaviour
         public void Destroy(GameObject pGameObject)
         {
             pGameObject.Dispose();
         }
         public void Destroy(Component pComponent)
         {
+            pComponent._gameObject.RemoveComponent(pComponent);
             pComponent.Dispose();
         }
 
@@ -49,7 +51,10 @@ namespace SpaceInvaders.Refactor.Core.Components
             return $"Unspecified Component";
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+            _gameObject = null;
+        }
 
         //public abstract Component Copy();
     }

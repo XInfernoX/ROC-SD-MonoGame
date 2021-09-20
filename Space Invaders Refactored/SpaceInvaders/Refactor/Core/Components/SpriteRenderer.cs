@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceInvaders.Refactor.Core.Components
 {
-    public class SpriteRenderer : Component
+    public class SpriteRenderer : Component, IDrawable
     {
         //Fields
         private readonly Texture2D _texture;
@@ -40,11 +40,11 @@ namespace SpaceInvaders.Refactor.Core.Components
         public SpriteRenderer(Texture2D pTexture) : this(pTexture, Color.White, 1.0f) { }
         public SpriteRenderer(Texture2D pTexture, float pLayerDepth) : this(pTexture, Color.White, pLayerDepth) { }
 
-        public void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
+        public void Draw(SpriteBatch pSpriteBatch)
         {
-            Vector2 scaledOrigin = new Vector2(pTransform.Origin.X * _texture.Width, pTransform.Origin.Y * _texture.Height);
-            float radians = MathHelper.ToRadians(pTransform.Rotation);
-            pSpriteBatch.Draw(_texture, pTransform.Position, null, _color, radians, scaledOrigin, pTransform.Scale, SpriteEffects.None, _layerDepth);
+            Vector2 scaledOrigin = new Vector2(transform.Origin.X * _texture.Width, transform.Origin.Y * _texture.Height);
+            float radians = MathHelper.ToRadians(transform.Rotation);
+            pSpriteBatch.Draw(_texture, transform.Position, null, _color, radians, scaledOrigin, transform.Scale, SpriteEffects.None, _layerDepth);
         }
     }
 }
