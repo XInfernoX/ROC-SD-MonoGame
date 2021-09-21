@@ -6,6 +6,7 @@
   <SourceFiles>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/alien1.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/background.png</File>
+    <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/File.spritefont</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/laser1.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/laser2.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/player.png</File>
@@ -15,6 +16,7 @@
   <DestFiles>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File>Arial.spritefont</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

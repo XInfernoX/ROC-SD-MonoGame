@@ -2,5 +2,7 @@
 {
     public enum ButtonState
     {
+        Default,
+        Hovered
     }
 }

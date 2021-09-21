@@ -6,10 +6,13 @@ namespace SpaceInvaders.Refactor.Core.Components
 {
     public class SpriteRenderer : Component, IDrawable
     {
+        //CONSIDER removing readonly from _color and _layerDepth
+
         //Fields
         private readonly Texture2D _texture;
-        private readonly Color _color;
-        private readonly float _layerDepth;
+
+        private Color _color;
+        private float _layerDepth;
 
         //Properties
         public int Width => _texture.Width;
@@ -41,6 +44,17 @@ namespace SpaceInvaders.Refactor.Core.Components
 
         public SpriteRenderer(Texture2D pTexture) : this(pTexture, Color.White, 1.0f) { }
         public SpriteRenderer(Texture2D pTexture, float pLayerDepth) : this(pTexture, Color.White, pLayerDepth) { }
+
+        //Methods
+        public void SetColor(Color pNewColor)
+        {
+            _color = pNewColor;
+        }
+
+        public void SetLayerDepth(float pLayerDepth)
+        {
+            _layerDepth = pLayerDepth;
+        }
 
         public void Draw(SpriteBatch pSpriteBatch)
         {

@@ -5,10 +5,6 @@
 using System;
 using Microsoft.Xna.Framework;
 
-using SpaceInvaders.Example;
-using SpaceInvaders.Refactor;
-using SpaceInvaders.StateDesignPattern;
-
 namespace SpaceInvaders
 {
     public static class Program
@@ -17,11 +13,11 @@ namespace SpaceInvaders
         private static void Main()
         {
 #if USE_EXAMPLE
-            using Game game = new Game1();
+            using Game game = new SpaceInvaders.Example.Game1();
 #elif USE_REFACTOR
-            using Game game = new SpaceInvadersGame();
+            using Game game = new SpaceInvaders.Refactor.SpaceInvadersGame();
 #elif USE_STATE
-            using Game game = new StateGame();
+            using Game game = new SpaceInvaders.StateDesignPattern.StateGame();
 #endif
             game.Run();
         }

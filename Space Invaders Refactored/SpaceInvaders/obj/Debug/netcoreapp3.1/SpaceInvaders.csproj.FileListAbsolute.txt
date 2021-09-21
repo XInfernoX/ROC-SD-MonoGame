@@ -208,3 +208,5 @@ C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\key.xnb
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\tile_0027.xnb
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\tile_0009.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Arial.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\File.xnb

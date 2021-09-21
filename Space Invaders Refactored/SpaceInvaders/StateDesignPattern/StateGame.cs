@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using SpaceInvaders.Refactor;
 using SpaceInvaders.Refactor.Core;
-using SpaceInvaders.Refactor.Core.Components;
 
 namespace SpaceInvaders.StateDesignPattern
 {
@@ -14,32 +14,26 @@ namespace SpaceInvaders.StateDesignPattern
 
         }
 
-        protected override void Initialize()
-        {
-            base.Initialize();
-        }
-
         protected override void LoadContent()
         {
             base.LoadContent();
 
             Viewport viewport = GraphicsDevice.Viewport;
 
-            SpriteRenderer keyRenderer = new SpriteRenderer(Content.Load<Texture2D>("tile_0009"));
-            Collider keyCollider = new Collider(keyRenderer);
-            Button keyButton = new Button(keyRenderer, keyCollider);
-            GameObject button = new GameObject(this, "Key", new Vector2(0f, 0f),new Vector2(0.9f, 0.5f),0, new Vector2(10,10),keyRenderer, keyCollider, keyButton);
+            //Text
+            SpriteFont font = Content.Load<SpriteFont>("Arial");
+            Text textComponent = new Text(font, "Test", new Vector2(0,0), new Vector2(0.5f, 0.5f), Color.White);
+
+            GameObject text = new GameObject(this, "Text", new Vector2(viewport.Width / 2, viewport.Height / 2), textComponent);
+            AddGameObject(text);
+
+
+            //Button
+            Texture2D buttonTexture = Content.Load<Texture2D>("tile_0009");
+
+            Button keyButton = new Button(buttonTexture, Color.White, Color.Aquamarine);
+            GameObject button = new GameObject(this, "Key", new Vector2(viewport.Width / 2, viewport.Height / 2), new Vector2(0f, 0f), 0, new Vector2(10, 10), keyButton);
             AddGameObject(button);
-        }
-
-        protected override void Update(GameTime pGameTime)
-        {
-            base.Update(pGameTime);
-        }
-
-        protected override void Draw(GameTime pGameTime)
-        {
-            base.Draw(pGameTime);
         }
     }
 }
