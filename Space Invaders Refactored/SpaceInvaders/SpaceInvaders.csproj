@@ -12,6 +12,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="StateGame\GamePlay\**" />
+    <EmbeddedResource Remove="StateGame\GamePlay\**" />
+    <None Remove="StateGame\GamePlay\**" />
+  </ItemGroup>
+  <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
@@ -20,8 +25,5 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StateDesignPattern\GamePlay\" />
   </ItemGroup>
 </Project>
