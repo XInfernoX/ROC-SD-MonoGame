@@ -46,12 +46,12 @@ namespace SpaceInvaders.Example
             Collider = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
-        
-        public void SetPosition( Vector2 position)
+
+        public void SetPosition(Vector2 position)
         {
             this.position = position;
-            this.Collider.X = (int) position.X;
-            this.Collider.Y = (int) position.Y;
+            this.Collider.X = (int)position.X;
+            this.Collider.Y = (int)position.Y;
         }
 
         public Vector2 GetPosition()
@@ -78,7 +78,7 @@ namespace SpaceInvaders.Example
             return false;
         }
 
-        public bool Collision(Point pPoint)
+        public bool Collision(Point pPoint)//New
         {
             if (Active & Collider.Contains(pPoint))
             {
@@ -92,6 +92,15 @@ namespace SpaceInvaders.Example
             if (Active)
             {
                 spriteBatch.Draw(texture, position, Color.White);
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Color pColor, float pScale = 1) //New
+        {
+            if (Active)
+            {
+                Vector2 scale = Vector2.One * pScale;
+                spriteBatch.Draw(texture, position,null,pColor,0,Vector2.One / 2, scale, SpriteEffects.None, 0);
             }
         }
     }

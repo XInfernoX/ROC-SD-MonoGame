@@ -1,5 +1,5 @@
-﻿//#define USE_EXAMPLE
-//#define USE_REFACTOR
+﻿#define USE_EXAMPLE
+#define USE_REFACTOR
 #define USE_STATE
 
 using System;

@@ -12,29 +12,70 @@ namespace SpaceInvaders.StateDesignPattern
         Level1
     }
 
+    public enum EnemyState
+    {
+        Patrolling,
+        Chasing,
+        Evading
+    }
+
     public class StateGame : Game
     {
         //Fields
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        //State
         private GameState _gameState = GameState.Menu;
 
         //PlayButton
         private readonly GameObject _playButton;
-        private ButtonStatus _playbuttonStatus;
-        private Color _currentPlayButtonColor;
+        private ButtonStatus _playButtonStatus;
+        private Color _currentPlayButtonColor = Color.White;
 
         //QuitButton
         private readonly GameObject _quitButton;
-        private ButtonStatus _quitbuttonStatus;
-        private Color _currentQuitButtonColor;
+        private ButtonStatus _quitButtonStatus;
+        private Color _currentQuitButtonColor = Color.White;
+
+        //MenuButton
+        private readonly GameObject _menuButton;
+        private ButtonStatus _menuButtonStatus;
+        private Color _currentMenuButtonColor = Color.White;
 
         //ButtonColors
-        private readonly Color _defaultColor;
-        private readonly Color _hoverColor;
-        private readonly Color _pressedColor;
+        private readonly Color _defaultColor = Color.White;
+        private readonly Color _hoverColor = Color.Aquamarine;
+        private readonly Color _pressedColor = Color.Red;
 
+        //Resources
+        private Texture2D _buttonTexture;
+        private Texture2D _playerTexture;
+        private Texture2D _playerShieldTexture;
+        private Texture2D _playerWeaponTexture;
+        private Texture2D _playerWeaponShieldTexture;
+        private Texture2D _enemyTexture;
+        private Texture2D _weaponTexture;
+        private Texture2D _shieldTexture;
+        private Texture2D _flagTexture;
+
+        private SpriteFont _arial;
+
+        //Player
+        private readonly GameObject _player;
+        private float _playerSpeed = 3;
+
+        //Enemy
+        private readonly GameObject _enemy;
+        private float _enemySpeed = 2;
+        private EnemyState _enemyState = EnemyState.Patrolling;
+        private GameObject[] _wayPoints;
+        private int _currentWayPointIndex = 0;
+        private float _playerDetectionRange = 100;
+
+        //Pickups
+        private readonly GameObject _shield;
+        private readonly GameObject _weapon;
 
         //Constructor
         public StateGame()
@@ -44,13 +85,39 @@ namespace SpaceInvaders.StateDesignPattern
             IsMouseVisible = true;
 
             _playButton = new GameObject();
+            _menuButton = new GameObject();
             _quitButton = new GameObject();
+
+            _player = new GameObject();
+            _enemy = new GameObject();
+
+            _weapon = new GameObject();
+            _shield = new GameObject();
+
+            _wayPoints = new GameObject[]
+            {
+                new GameObject(),
+                new GameObject(),
+                new GameObject()
+            };
         }
 
         protected override void Initialize()
         {
             _playButton.Active = true;
+            _menuButton.Active = true;
             _quitButton.Active = true;
+
+            _player.Active = true;
+            _enemy.Active = true;
+
+            _weapon.Active = true;
+            _shield.Active = true;
+
+            for (int i = 0; i < _wayPoints.Length; i++)
+            {
+                _wayPoints[i].Active = true;
+            }
 
             base.Initialize();
         }
@@ -62,36 +129,57 @@ namespace SpaceInvaders.StateDesignPattern
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Textures
-            Texture2D buttonTexture = Content.Load<Texture2D>("UI_Title_64x64");
+            _buttonTexture = Content.Load<Texture2D>("UI_Title_64x64");
+            _playerTexture = Content.Load<Texture2D>("Knight");
+            _playerShieldTexture = Content.Load<Texture2D>("KnightShield");
+            _playerWeaponTexture = Content.Load<Texture2D>("KnightWeapon");
+            _playerWeaponShieldTexture = Content.Load<Texture2D>("KnightWeaponShield");
+            _enemyTexture = Content.Load<Texture2D>("Enemy");
+            _weaponTexture = Content.Load<Texture2D>("Weapon");
+            _shieldTexture = Content.Load<Texture2D>("Shield");
+            _flagTexture = Content.Load<Texture2D>("Flag");
 
             //Fonts
-            SpriteFont arial = Content.Load<SpriteFont>("Arial");
+            _arial = Content.Load<SpriteFont>("Arial");
 
-            _playButton.AddTexture(buttonTexture);
-            _quitButton.AddTexture(buttonTexture);
 
             Viewport viewPort = GraphicsDevice.Viewport;
             float third = viewPort.Height / 3;
 
+            //PlayButton
+            _playButton.AddTexture(_buttonTexture);
             _playButton.SetPosition(new Vector2(viewPort.Width / 2, third));
+
+            //QuitButton
+            _quitButton.AddTexture(_buttonTexture);
             _quitButton.SetPosition(new Vector2(viewPort.Width / 2, third * 2));
 
+            //MenuButton
+            _menuButton.AddTexture(_buttonTexture);
+            _menuButton.SetPosition(new Vector2(viewPort.Width - _buttonTexture.Width, 0));
 
+            //Player
+            _player.AddTexture(_playerTexture);
+            _player.SetPosition(new Vector2(viewPort.Width / 2, third * 2));
 
+            //Enemy
+            _enemy.AddTexture(_enemyTexture);
+            _enemy.SetPosition(new Vector2(viewPort.Width / 2, third));
 
+            //Pickups
+            _weapon.AddTexture(_weaponTexture);
+            _weapon.SetPosition(new Vector2(100, third));
+            _shield.AddTexture(_shieldTexture);
+            _shield.SetPosition(new Vector2(viewPort.Width - 100, third));
 
-
-
-
-
-
-
-
-
-
-
-
-
+            //WayPoints
+            for (int i = 0; i < _wayPoints.Length; i++)
+            {
+                _wayPoints[i].AddTexture(_flagTexture);
+            }
+            _wayPoints[0].SetPosition(new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f));
+            _wayPoints[1].SetPosition(new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f));
+            _wayPoints[2].SetPosition(new Vector2(viewPort.Width / 2, viewPort.Height / 2));
 
             //Viewport viewport = GraphicsDevice.Viewport;
             //float third = viewport.Height / 3;
@@ -135,7 +223,6 @@ namespace SpaceInvaders.StateDesignPattern
         {
             base.Update(pGameTime);
 
-
             switch (_gameState)
             {
                 case GameState.Menu:
@@ -154,26 +241,25 @@ namespace SpaceInvaders.StateDesignPattern
             MouseState mouseState = Mouse.GetState();
 
             //PlayButtonBehaviour
-            switch (_playbuttonStatus)
+            switch (_playButtonStatus)
             {
                 case ButtonStatus.Default:
                     if (_playButton.Collision(mouseState.Position))
                     {
-                        _playbuttonStatus = ButtonStatus.Hovered;
+                        _playButtonStatus = ButtonStatus.Hovered;
                         _currentPlayButtonColor = _hoverColor;
                     }
                     break;
                 case ButtonStatus.Hovered:
                     if (!_playButton.Collision(mouseState.Position))
                     {
-                        _playbuttonStatus = ButtonStatus.Default;
+                        _playButtonStatus = ButtonStatus.Default;
                         _currentPlayButtonColor = _defaultColor;
                     }
 
                     if (mouseState.LeftButton == ButtonState.Pressed)
                     {
-                        Console.WriteLine("Change status to Pressed");
-                        _playbuttonStatus = ButtonStatus.Pressed;
+                        _playButtonStatus = ButtonStatus.Pressed;
                         _currentPlayButtonColor = _pressedColor;
                     }
                     break;
@@ -182,16 +268,13 @@ namespace SpaceInvaders.StateDesignPattern
                     {
                         if (_playButton.Collision(mouseState.Position))
                         {
-                            //Click!
-                            Console.WriteLine("Click!");
-                            _playbuttonStatus = ButtonStatus.Hovered;
+                            _playButtonStatus = ButtonStatus.Hovered;
                             _currentPlayButtonColor = _hoverColor;
                             MoveToLevel1();
                         }
                         else
                         {
-                            Console.WriteLine("Change status to Default");
-                            _playbuttonStatus = ButtonStatus.Default;
+                            _playButtonStatus = ButtonStatus.Default;
                             _currentPlayButtonColor = _defaultColor;
                         }
                     }
@@ -199,44 +282,41 @@ namespace SpaceInvaders.StateDesignPattern
             }
 
             //QuitButtonBehaviour
-            switch (_quitbuttonStatus)
+            switch (_quitButtonStatus)
             {
                 case ButtonStatus.Default:
-                    if (_playButton.Collision(mouseState.Position))
+                    if (_quitButton.Collision(mouseState.Position))
                     {
-                        _quitbuttonStatus = ButtonStatus.Hovered;
+                        _quitButtonStatus = ButtonStatus.Hovered;
                         _currentQuitButtonColor = _hoverColor;
                     }
                     break;
                 case ButtonStatus.Hovered:
-                    if (!_playButton.Collision(mouseState.Position))
+                    if (!_quitButton.Collision(mouseState.Position))
                     {
-                        _quitbuttonStatus = ButtonStatus.Default;
+                        _quitButtonStatus = ButtonStatus.Default;
                         _currentQuitButtonColor = _defaultColor;
                     }
 
                     if (mouseState.LeftButton == ButtonState.Pressed)
                     {
-                        Console.WriteLine("Change status to Pressed");
-                        _quitbuttonStatus = ButtonStatus.Pressed;
+                        _quitButtonStatus = ButtonStatus.Pressed;
                         _currentQuitButtonColor = _pressedColor;
                     }
                     break;
                 case ButtonStatus.Pressed:
                     if (mouseState.LeftButton == ButtonState.Released)
                     {
-                        if (_playButton.Collision(mouseState.Position))
+                        if (_quitButton.Collision(mouseState.Position))
                         {
                             //Click!
-                            Console.WriteLine("Click!");
-                            _quitbuttonStatus = ButtonStatus.Hovered;
+                            _quitButtonStatus = ButtonStatus.Hovered;
                             _currentQuitButtonColor = _hoverColor;
                             QuitGame();
                         }
                         else
                         {
-                            Console.WriteLine("Change status to Default");
-                            _quitbuttonStatus = ButtonStatus.Default;
+                            _quitButtonStatus = ButtonStatus.Default;
                             _currentQuitButtonColor = _defaultColor;
                         }
                     }
@@ -246,7 +326,159 @@ namespace SpaceInvaders.StateDesignPattern
 
         private void UpdateLevel1(GameTime pGameTime)
         {
+            MouseState mouseState = Mouse.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
 
+            //MenuButton
+            switch (_menuButtonStatus)
+            {
+                case ButtonStatus.Default:
+                    if (_menuButton.Collision(mouseState.Position))
+                    {
+                        _menuButtonStatus = ButtonStatus.Hovered;
+                        _currentMenuButtonColor = _hoverColor;
+                    }
+                    break;
+                case ButtonStatus.Hovered:
+                    if (!_menuButton.Collision(mouseState.Position))
+                    {
+                        _menuButtonStatus = ButtonStatus.Default;
+                        _currentMenuButtonColor = _defaultColor;
+                    }
+
+                    if (mouseState.LeftButton == ButtonState.Pressed)
+                    {
+                        _menuButtonStatus = ButtonStatus.Pressed;
+                        _currentMenuButtonColor = _pressedColor;
+                    }
+                    break;
+                case ButtonStatus.Pressed:
+                    if (mouseState.LeftButton == ButtonState.Released)
+                    {
+                        if (_menuButton.Collision(mouseState.Position))
+                        {
+                            _menuButtonStatus = ButtonStatus.Hovered;
+                            _currentMenuButtonColor = _hoverColor;
+                            MoveToMenu();
+                        }
+                        else
+                        {
+                            _menuButtonStatus = ButtonStatus.Default;
+                            _currentMenuButtonColor = _defaultColor;
+                        }
+                    }
+                    break;
+            }
+
+            //PlayerInput
+            Vector2 playerInput = Vector2.Zero;
+            if (keyboardState.IsKeyDown(Keys.A))
+                playerInput.X--;
+            if (keyboardState.IsKeyDown(Keys.D))
+                playerInput.X++;
+            if (keyboardState.IsKeyDown(Keys.W))
+                playerInput.Y--;
+            if (keyboardState.IsKeyDown(Keys.S))
+                playerInput.Y++;
+
+            if (playerInput != Vector2.Zero)
+            {
+                playerInput.Normalize();
+                Vector2 playerTranslation = playerInput * _playerSpeed;
+                _player.SetPosition(_player.GetPosition() + playerTranslation);
+            }
+
+            if (_player.Collision(_weapon))
+            {
+                _weapon.Active = false;
+
+                if (_shield.Active)
+                {
+                    _player.AddTexture(_playerWeaponTexture);
+                }
+                else
+                {
+                    _player.AddTexture(_playerWeaponShieldTexture);
+                }
+            }
+
+            if (_player.Collision(_shield))
+            {
+                _shield.Active = false;
+
+                if (_weapon.Active)
+                {
+                    _player.AddTexture(_playerShieldTexture);
+                }
+                else
+                {
+                    _player.AddTexture(_playerWeaponShieldTexture);
+                }
+            }
+
+
+
+
+            //Enemy Behaviour
+            switch (_enemyState)
+            {
+                case EnemyState.Patrolling:
+                    //PatrolMovement
+                    Vector2 currentWayPoint = _wayPoints[_currentWayPointIndex].GetPosition();
+                    Vector2 patrolDirection = (currentWayPoint - _enemy.GetPosition());
+                    patrolDirection.Normalize();
+                    Vector2 patrolTranslation =
+                        patrolDirection * _enemySpeed;
+                    _enemy.SetPosition(_enemy.GetPosition() + patrolTranslation);
+
+                    Vector2 wayPointDifference = _enemy.GetPosition() - currentWayPoint;
+                    if (wayPointDifference.Length() < 5)
+                    {
+                        _currentWayPointIndex++;
+                        _currentWayPointIndex %= _wayPoints.Length;
+                    }
+
+                    //PlayerDetection
+                    Vector2 playerDifferencePatrol = _enemy.GetPosition() - _player.GetPosition();
+                    float playerDistancePatrol = playerDifferencePatrol.Length();
+                    if (playerDistancePatrol < _playerDetectionRange)
+                    {
+                        if (!_weapon.Active && !_shield.Active)
+                            _enemyState = EnemyState.Evading;
+                        else
+                            _enemyState = EnemyState.Chasing;
+                    }
+                    break;
+                case EnemyState.Chasing:
+                    Vector2 chaseDirection = _player.GetPosition() - _enemy.GetPosition();
+                    chaseDirection.Normalize();
+                    Vector2 chaseTranslation = chaseDirection * _enemySpeed;
+                    _enemy.SetPosition(_enemy.GetPosition() + chaseTranslation);
+
+                    Vector2 playerDifferenceChase = _enemy.GetPosition() - _player.GetPosition();
+                    float playerDistanceChase = playerDifferenceChase.Length();
+
+                    if (playerDistanceChase < _playerDetectionRange)
+                    {
+                        if (!_weapon.Active && !_shield.Active)
+                            _enemyState = EnemyState.Evading;
+                    }
+                    else
+                    {
+                        _enemyState = EnemyState.Patrolling;
+                    }
+
+                    break;
+                case EnemyState.Evading:
+                    Console.WriteLine("Evading");
+                    Vector2 evadeDirection = _player.GetPosition() - _enemy.GetPosition();
+                    evadeDirection.Normalize();
+                    Vector2 evadeTranslation = -evadeDirection * _enemySpeed;
+                    _enemy.SetPosition(_enemy.GetPosition() + evadeTranslation);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         protected override void Draw(GameTime pGameTime)
@@ -270,18 +502,40 @@ namespace SpaceInvaders.StateDesignPattern
             _spriteBatch.End();
 
             base.Draw(pGameTime);
-
         }
 
         private void DrawMenu(GameTime pGameTime)
         {
-            _playButton.Draw(_spriteBatch);
-            _quitButton.Draw(_spriteBatch);
+            _playButton.Draw(_spriteBatch, _currentPlayButtonColor);
+            _quitButton.Draw(_spriteBatch, _currentQuitButtonColor);
+
+            Vector2 textOffset = new Vector2(_buttonTexture.Width / 2, _buttonTexture.Height / 2);
+
+            Vector2 playSize = _arial.MeasureString("Play");
+            _spriteBatch.DrawString(_arial, "Play", _playButton.GetPosition() + textOffset - playSize / 2, Color.White);
+
+            Vector2 quitSize = _arial.MeasureString("Quit");
+            _spriteBatch.DrawString(_arial, "Quit", _quitButton.GetPosition() + textOffset - playSize / 2, Color.White);
         }
 
         private void DrawLevel1(GameTime pGameTime)
         {
+            _menuButton.Draw(_spriteBatch, _currentMenuButtonColor);
 
+            Vector2 textOffset = new Vector2(_buttonTexture.Width / 2, _buttonTexture.Height / 2);
+
+            Vector2 menuSize = _arial.MeasureString("Menu");
+            _spriteBatch.DrawString(_arial, "Menu", _menuButton.GetPosition() + textOffset - menuSize / 2, Color.White);
+
+            _player.Draw(_spriteBatch, Color.White, 2);
+            _enemy.Draw(_spriteBatch, Color.White, 2);
+            _shield.Draw(_spriteBatch, Color.White, 2);
+            _weapon.Draw(_spriteBatch, Color.White, 2);
+
+            for (int i = 0; i < _wayPoints.Length; i++)
+            {
+                _wayPoints[i].Draw(_spriteBatch);
+            }
         }
     }
 }

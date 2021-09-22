@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/tile_0027.png</SourceFile>
-  <SourceTime>2021-09-21T11:30:45.1241164+02:00</SourceTime>
-  <DestFile>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/bin/Windows/key.xnb</DestFile>
-  <DestTime>2021-09-21T15:11:31.3122802+02:00</DestTime>
+  <SourceFile>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/PlayerShield.png</SourceFile>
+  <SourceTime>2021-09-22T12:08:04.679728+02:00</SourceTime>
+  <DestFile>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/bin/Windows/Content/PlayerShield.xnb</DestFile>
+  <DestTime>2021-09-22T12:15:49.6774787+02:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
+  <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T16:17:54+02:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T18:17:54+02:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

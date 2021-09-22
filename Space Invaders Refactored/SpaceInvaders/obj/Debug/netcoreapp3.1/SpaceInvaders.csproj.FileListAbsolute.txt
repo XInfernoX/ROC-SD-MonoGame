@@ -223,3 +223,22 @@ C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Title.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Title_128x64.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Title_64x64.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI Panel.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI Slot.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI Title.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Panel.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Slot.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Title.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Title_128x64.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Title_64x64.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Enemy.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerShield.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerWeapon.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerWeaponShield.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Shield.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Weapon.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Knight.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightShield.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeapon.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeaponShield.xnb
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Flag.xnb
