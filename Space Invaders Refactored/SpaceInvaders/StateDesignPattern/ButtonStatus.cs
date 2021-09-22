@@ -1,8 +1,9 @@
 ﻿namespace SpaceInvaders.StateDesignPattern
 {
-    public enum ButtonState
+    public enum ButtonStatus
     {
         Default,
-        Hovered
+        Hovered,
+        Pressed,
     }
 }

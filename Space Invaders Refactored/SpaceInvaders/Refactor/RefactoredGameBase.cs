@@ -93,7 +93,7 @@ namespace SpaceInvaders.Refactor
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront);
+            _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp);
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {

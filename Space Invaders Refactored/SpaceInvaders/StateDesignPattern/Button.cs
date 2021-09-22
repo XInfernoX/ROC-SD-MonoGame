@@ -11,34 +11,45 @@ using IUpdateable = SpaceInvaders.Refactor.Core.IUpdateable;
 namespace SpaceInvaders.StateDesignPattern
 {
     //CONSIDER making a IUIElement interface
-
-
     public class Button : Component, IDrawable, IUpdateable
     {
         //Events
-        private Action OnButtonHoverEnter = delegate { };
-        private Action OnButtonHoverExit = delegate { };
-        private Action OnButtonClick = delegate { };
+        public event Action OnButtonHoverEnter = delegate { };
+        public event Action OnButtonHoverExit = delegate { };
+        public event Action OnButtonClick = delegate { };
 
         //Fields
         private readonly Texture2D _texture;
         private readonly Color _defaultColor;
         private readonly Color _hoverColor;
+        private readonly Color _pressedColor;
 
         private Rectangle _collider;
 
-        private ButtonState _currentState = ButtonState.Default;
+        private ButtonStatus _currentStatus = ButtonStatus.Default;
         private Color _currentColor;
 
         //Constructor
-        public Button(Texture2D pTexture, Color pDefaultColor, Color pHoverColor)
+        public Button(Texture2D pTexture, Color pDefaultColor, Color pHoverColor, Color pPressedColor)
         {
             _texture = pTexture;
             _defaultColor = pDefaultColor;
             _hoverColor = pHoverColor;
+            _pressedColor = pPressedColor;
 
             //Default values
-            _currentState = ButtonState.Default;
+            _currentStatus = ButtonStatus.Default;
+            _currentColor = _defaultColor;
+        }
+
+        public Button(Texture2D pTexture, ButtonColorScheme pColorScheme)
+        {
+            _texture = pTexture;
+            _defaultColor = pColorScheme.DefaultColor;
+            _hoverColor = pColorScheme.HoverColor;
+            _pressedColor = pColorScheme.PressedColor;
+
+            _currentStatus = ButtonStatus.Default;
             _currentColor = _defaultColor;
         }
 
@@ -54,13 +65,16 @@ namespace SpaceInvaders.StateDesignPattern
         {
             MouseState mouseState = Mouse.GetState();
 
-            switch (_currentState)
+            switch (_currentStatus)
             {
-                case ButtonState.Default:
+                case ButtonStatus.Default:
                     DefaultState(mouseState);
                     break;
-                case ButtonState.Hovered:
+                case ButtonStatus.Hovered:
                     HoveredState(mouseState);
+                    break;
+                case ButtonStatus.Pressed:
+                    PressedState(mouseState);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -71,7 +85,9 @@ namespace SpaceInvaders.StateDesignPattern
         {
             if (OverLapCheck(pMouseState.Position))
             {
-                _currentState = ButtonState.Hovered;
+                OnButtonHoverEnter();
+                Console.WriteLine("Change status to Hovered");
+                _currentStatus = ButtonStatus.Hovered;
                 _currentColor = _hoverColor;
             }
         }
@@ -80,8 +96,39 @@ namespace SpaceInvaders.StateDesignPattern
         {
             if (!OverLapCheck(pMouseState.Position))
             {
-                _currentState = ButtonState.Default;
+                OnButtonHoverExit();
+                Console.WriteLine("Change status to Default");
+                _currentStatus = ButtonStatus.Default;
                 _currentColor = _defaultColor;
+            }
+
+            if (pMouseState.LeftButton == ButtonState.Pressed)
+            {
+                Console.WriteLine("Change status to Pressed");
+                _currentStatus = ButtonStatus.Pressed;
+                _currentColor = _pressedColor;
+            }
+        }
+
+        public void PressedState(MouseState pMouseState)
+        {
+            if (pMouseState.LeftButton == ButtonState.Released)
+            {
+                if (OverLapCheck(pMouseState.Position))
+                {
+                    //Click!
+                    Console.WriteLine("Click!");
+                    OnButtonClick();
+
+                    _currentStatus = ButtonStatus.Hovered;
+                    _currentColor = _hoverColor;
+                }
+                else
+                {
+                    Console.WriteLine("Change status to Default");
+                    _currentStatus = ButtonStatus.Default;
+                    _currentColor = _defaultColor;
+                }
             }
         }
 

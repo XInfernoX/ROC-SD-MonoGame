@@ -78,6 +78,15 @@ namespace SpaceInvaders.Example
             return false;
         }
 
+        public bool Collision(Point pPoint)
+        {
+            if (Active & Collider.Contains(pPoint))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if (Active)
