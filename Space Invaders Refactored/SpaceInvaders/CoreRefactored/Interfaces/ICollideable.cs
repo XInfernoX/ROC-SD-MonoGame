@@ -1,7 +1,7 @@
 ﻿using CoreRefactored.Components;
 using Microsoft.Xna.Framework;
 
-namespace CoreRefactored
+namespace CoreRefactored.Interfaces
 {
     //TODO Continue once different Collider types are introduced
     public interface ICollideable

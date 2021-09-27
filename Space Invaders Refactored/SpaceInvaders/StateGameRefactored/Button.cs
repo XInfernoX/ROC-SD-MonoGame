@@ -1,155 +1,97 @@
-﻿using System;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using CoreRefactored.Components;
 using StateGame;
-using IDrawable = CoreRefactored.IDrawable;
-using IUpdateable = CoreRefactored.IUpdateable;
+
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace StateGameRefactored
 {
-    //CONSIDER making a IUIElement interface
-    public class Button : Component, IDrawable, IUpdateable
+    public class Button : GameObject
     {
-        //Events
-        public event Action OnButtonHoverEnter = delegate { };
-        public event Action OnButtonHoverExit = delegate { };
-        public event Action OnButtonClick = delegate { };
+        protected StateGameRefactored _game;
 
-        //Fields
-        private readonly Texture2D _texture;
-        private readonly Color _defaultColor;
-        private readonly Color _hoverColor;
-        private readonly Color _pressedColor;
+        private ButtonStatus _status;
+        private Color _currentButtonColor;
 
-        private Rectangle _collider;
+        private Color _defaultColor;
+        private Color _hoverColor;
+        private Color _pressedColor;
 
-        private ButtonStatus _currentStatus = ButtonStatus.Default;
-        private Color _currentColor;
-
-        //Constructor
-        public Button(Texture2D pTexture, Color pDefaultColor, Color pHoverColor, Color pPressedColor)
+        public Button(StateGameRefactored pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor)
         {
-            _texture = pTexture;
+            _game = pGame;
+
             _defaultColor = pDefaultColor;
             _hoverColor = pHoverColor;
             _pressedColor = pPressedColor;
-
-            //Default values
-            _currentStatus = ButtonStatus.Default;
-            _currentColor = _defaultColor;
         }
 
-        public Button(Texture2D pTexture, ButtonColorScheme pColorScheme)
-        {
-            _texture = pTexture;
-            _defaultColor = pColorScheme.DefaultColor;
-            _hoverColor = pColorScheme.HoverColor;
-            _pressedColor = pColorScheme.PressedColor;
-
-            _currentStatus = ButtonStatus.Default;
-            _currentColor = _defaultColor;
-        }
-
-        //Methods
-        public void Draw(SpriteBatch pSpriteBatch)
-        {
-            Vector2 scaledOrigin = new Vector2(transform.Origin.X * _texture.Width, transform.Origin.Y * _texture.Height);
-            float radians = MathHelper.ToRadians(transform.Rotation);
-            pSpriteBatch.Draw(_texture, transform.Position, null, _currentColor, radians, scaledOrigin, transform.Scale, SpriteEffects.None, 0.5f);
-        }
-
-        public void Update(GameTime pGameTime)
+        public override void Update()
         {
             MouseState mouseState = Mouse.GetState();
 
-            switch (_currentStatus)
+            //PlayButtonBehaviour
+            switch (_status)
             {
                 case ButtonStatus.Default:
-                    DefaultState(mouseState);
+                    UpdateDefaultState(mouseState);
                     break;
                 case ButtonStatus.Hovered:
-                    HoveredState(mouseState);
+                    UpdateHoveredState(mouseState);
                     break;
                 case ButtonStatus.Pressed:
-                    PressedState(mouseState);
+                    UpdatePressedState(mouseState);
                     break;
-                default:
-                    throw new NotImplementedException();
             }
         }
 
-        public void DefaultState(MouseState pMouseState)
+        private void UpdateDefaultState(MouseState pMouseState)
         {
-            if (OverLapCheck(pMouseState.Position))
+            if (Collision(pMouseState.Position))
             {
-                OnButtonHoverEnter();
-                Console.WriteLine("Change status to Hovered");
-                _currentStatus = ButtonStatus.Hovered;
-                _currentColor = _hoverColor;
+                _status = ButtonStatus.Hovered;
+                _currentButtonColor = _hoverColor;
             }
         }
 
-        public void HoveredState(MouseState pMouseState)
+        private void UpdateHoveredState(MouseState pMouseState)
         {
-            if (!OverLapCheck(pMouseState.Position))
+            if (!Collision(pMouseState.Position))
             {
-                OnButtonHoverExit();
-                Console.WriteLine("Change status to Default");
-                _currentStatus = ButtonStatus.Default;
-                _currentColor = _defaultColor;
+                _status = ButtonStatus.Default;
+                _currentButtonColor = _defaultColor;
             }
 
             if (pMouseState.LeftButton == ButtonState.Pressed)
             {
-                Console.WriteLine("Change status to Pressed");
-                _currentStatus = ButtonStatus.Pressed;
-                _currentColor = _pressedColor;
+                _status = ButtonStatus.Pressed;
+                _currentButtonColor = _pressedColor;
             }
         }
 
-        public void PressedState(MouseState pMouseState)
+        private void UpdatePressedState(MouseState pMouseState)
         {
             if (pMouseState.LeftButton == ButtonState.Released)
             {
-                if (OverLapCheck(pMouseState.Position))
+                if (Collision(pMouseState.Position))
                 {
-                    //Click!
-                    Console.WriteLine("Click!");
+                    _status = ButtonStatus.Hovered;
+                    _currentButtonColor = _hoverColor;
                     OnButtonClick();
-
-                    _currentStatus = ButtonStatus.Hovered;
-                    _currentColor = _hoverColor;
                 }
                 else
                 {
-                    Console.WriteLine("Change status to Default");
-                    _currentStatus = ButtonStatus.Default;
-                    _currentColor = _defaultColor;
+                    _status = ButtonStatus.Default;
+                    _currentButtonColor = _defaultColor;
                 }
             }
         }
 
-        public void LateUpdate(GameTime pGameTime)
+        public override void Draw(SpriteBatch pSpriteBatch)
         {
+            pSpriteBatch.Draw(_texture, _position, _currentButtonColor);
         }
 
-        private void UpdateCollider()
-        {
-            Vector2 size = transform.Scale * new Vector2(_texture.Bounds.Width, _texture.Bounds.Height);
-            Vector2 position = transform.Position - transform.Origin * size;
-
-            _collider = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
-        }
-
-        public bool OverLapCheck(Point pPoint)
-        {
-            UpdateCollider();
-
-            return _collider.Contains(pPoint);
-        }
+        protected virtual void OnButtonClick() { }
     }
 }

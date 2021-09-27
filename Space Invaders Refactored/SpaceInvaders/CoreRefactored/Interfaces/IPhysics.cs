@@ -1,4 +1,4 @@
-﻿namespace CoreRefactored
+﻿namespace CoreRefactored.Interfaces
 {
     //Experimental!
     public interface IPhysics

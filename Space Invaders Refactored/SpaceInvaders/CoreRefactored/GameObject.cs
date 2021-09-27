@@ -4,6 +4,10 @@ using CoreRefactored.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using CoreRefactored.Interfaces;
+using IDrawable = CoreRefactored.Interfaces.IDrawable;
+using IUpdateable = CoreRefactored.Interfaces.IUpdateable;
+
 namespace CoreRefactored
 {
     public class GameObject : IDisposable

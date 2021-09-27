@@ -1,4 +1,4 @@
-﻿#define REFACTORED
+﻿//#define REFACTORED
 //#define SPACE_INVADERS
 #define STATE_GAME
 
