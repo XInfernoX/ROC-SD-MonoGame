@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace CoreRefactored
+namespace CoreRefactored.Interfaces
 {
     public interface IDrawable
     {

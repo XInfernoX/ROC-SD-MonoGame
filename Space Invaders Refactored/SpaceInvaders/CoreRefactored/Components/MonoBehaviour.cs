@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
+using IUpdateable = CoreRefactored.Interfaces.IUpdateable;
+
 namespace CoreRefactored.Components
 {
     public abstract class MonoBehaviour : Component, IUpdateable

@@ -9,9 +9,9 @@ namespace SpaceInvadersRefactored
     public class SpaceInvadersGame : RefactoredGameBase
     {
         //Fields
-        private CoreRefactored.GameObject _background;
-        private CoreRefactored.GameObject _player;
-        private CoreRefactored.GameObject _alienWave1;
+        private GameObject _background;
+        private GameObject _player;
+        private GameObject _alienWave1;
 
         //Constructor
         protected override void LoadContent()

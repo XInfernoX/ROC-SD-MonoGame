@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using IDrawable = CoreRefactored.Interfaces.IDrawable;
+
 namespace CoreRefactored.Components
 {
     public class SpriteRenderer : Component, IDrawable

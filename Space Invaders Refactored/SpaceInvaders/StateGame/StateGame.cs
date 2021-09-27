@@ -2,23 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using CoreExample;
 
 namespace StateGame
 {
-    public enum GameState
-    {
-        Menu,
-        Level1
-    }
-
-    public enum EnemyState
-    {
-        Patrolling,
-        Chasing,
-        Evading
-    }
-
+    //TODO swap CoreExample.GameObject for StateGame.GameObject 
     public class StateGame : Game
     {
         //Fields
@@ -29,17 +16,17 @@ namespace StateGame
         private GameState _gameState = GameState.Menu;
 
         //PlayButton
-        private readonly GameObject _playButton;
+        private readonly CoreExample.GameObject _playButton;
         private ButtonStatus _playButtonStatus;
         private Color _currentPlayButtonColor = Color.White;
 
         //QuitButton
-        private readonly GameObject _quitButton;
+        private readonly CoreExample.GameObject _quitButton;
         private ButtonStatus _quitButtonStatus;
         private Color _currentQuitButtonColor = Color.White;
 
         //MenuButton
-        private readonly GameObject _menuButton;
+        private readonly CoreExample.GameObject _menuButton;
         private ButtonStatus _menuButtonStatus;
         private Color _currentMenuButtonColor = Color.White;
 
@@ -62,20 +49,20 @@ namespace StateGame
         private SpriteFont _arial;
 
         //Player
-        private readonly GameObject _player;
+        private readonly CoreExample.GameObject _player;
         private float _playerSpeed = 3;
 
         //Enemy
-        private readonly GameObject _enemy;
+        private readonly CoreExample.GameObject _enemy;
         private float _enemySpeed = 2;
         private EnemyState _enemyState = EnemyState.Patrolling;
-        private GameObject[] _wayPoints;
+        private readonly CoreExample.GameObject[] _wayPoints;
         private int _currentWayPointIndex = 0;
         private float _playerDetectionRange = 100;
 
         //Pickups
-        private readonly GameObject _shield;
-        private readonly GameObject _weapon;
+        private readonly CoreExample.GameObject _shield;
+        private readonly CoreExample.GameObject _weapon;
 
         //Constructor
         public StateGame()
@@ -84,21 +71,21 @@ namespace StateGame
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            _playButton = new GameObject();
-            _menuButton = new GameObject();
-            _quitButton = new GameObject();
+            _playButton = new CoreExample.GameObject();
+            _menuButton = new CoreExample.GameObject();
+            _quitButton = new CoreExample.GameObject();
 
-            _player = new GameObject();
-            _enemy = new GameObject();
+            _player = new CoreExample.GameObject();
+            _enemy = new CoreExample.GameObject();
 
-            _weapon = new GameObject();
-            _shield = new GameObject();
+            _weapon = new CoreExample.GameObject();
+            _shield = new CoreExample.GameObject();
 
-            _wayPoints = new GameObject[]
+            _wayPoints = new CoreExample.GameObject[]
             {
-                new GameObject(),
-                new GameObject(),
-                new GameObject()
+                new CoreExample.GameObject(),
+                new CoreExample.GameObject(),
+                new CoreExample.GameObject()
             };
         }
 

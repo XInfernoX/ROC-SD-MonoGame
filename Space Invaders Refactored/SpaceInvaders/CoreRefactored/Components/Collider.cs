@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreRefactored.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace CoreRefactored.Components

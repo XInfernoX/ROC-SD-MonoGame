@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace StateGameRefactored
+namespace CoreRefactored
 {
     public class ButtonColorScheme
     {

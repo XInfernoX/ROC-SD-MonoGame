@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using CoreRefactored.Components;
-using IDrawable = CoreRefactored.IDrawable;
 
-namespace StateGameRefactored
+using IDrawable = CoreRefactored.Interfaces.IDrawable;
+
+namespace CoreRefactored.Components
 {
     public class Text : Component, IDrawable
     {
