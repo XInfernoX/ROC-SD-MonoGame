@@ -16,17 +16,17 @@ namespace StateGame
         private GameState _gameState = GameState.Menu;
 
         //PlayButton
-        private readonly CoreExample.GameObject _playButton;
+        private readonly GameObject _playButton;
         private ButtonStatus _playButtonStatus;
         private Color _currentPlayButtonColor = Color.White;
 
         //QuitButton
-        private readonly CoreExample.GameObject _quitButton;
+        private readonly GameObject _quitButton;
         private ButtonStatus _quitButtonStatus;
         private Color _currentQuitButtonColor = Color.White;
 
         //MenuButton
-        private readonly CoreExample.GameObject _menuButton;
+        private readonly GameObject _menuButton;
         private ButtonStatus _menuButtonStatus;
         private Color _currentMenuButtonColor = Color.White;
 
@@ -49,20 +49,20 @@ namespace StateGame
         private SpriteFont _arial;
 
         //Player
-        private readonly CoreExample.GameObject _player;
+        private readonly GameObject _player;
         private float _playerSpeed = 3;
 
         //Enemy
-        private readonly CoreExample.GameObject _enemy;
+        private readonly GameObject _enemy;
         private float _enemySpeed = 2;
         private EnemyState _enemyState = EnemyState.Patrolling;
-        private readonly CoreExample.GameObject[] _wayPoints;
+        private readonly GameObject[] _wayPoints;
         private int _currentWayPointIndex = 0;
         private float _playerDetectionRange = 100;
 
         //Pickups
-        private readonly CoreExample.GameObject _shield;
-        private readonly CoreExample.GameObject _weapon;
+        private readonly GameObject _shield;
+        private readonly GameObject _weapon;
 
         //Constructor
         public StateGame()
@@ -71,21 +71,21 @@ namespace StateGame
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            _playButton = new CoreExample.GameObject();
-            _menuButton = new CoreExample.GameObject();
-            _quitButton = new CoreExample.GameObject();
+            _playButton = new GameObject();
+            _menuButton = new GameObject();
+            _quitButton = new GameObject();
 
-            _player = new CoreExample.GameObject();
-            _enemy = new CoreExample.GameObject();
+            _player = new GameObject();
+            _enemy = new GameObject();
 
-            _weapon = new CoreExample.GameObject();
-            _shield = new CoreExample.GameObject();
+            _weapon = new GameObject();
+            _shield = new GameObject();
 
-            _wayPoints = new CoreExample.GameObject[]
+            _wayPoints = new GameObject[]
             {
-                new CoreExample.GameObject(),
-                new CoreExample.GameObject(),
-                new CoreExample.GameObject()
+                new GameObject(),
+                new GameObject(),
+                new GameObject()
             };
         }
 
@@ -134,39 +134,40 @@ namespace StateGame
             float third = viewPort.Height / 3;
 
             //PlayButton
-            _playButton.AddTexture(_buttonTexture);
-            _playButton.SetPosition(new Vector2(viewPort.Width / 2, third));
+            _playButton.Texture = _buttonTexture;
+            _playButton.Position = new Vector2(viewPort.Width / 2, third);
 
             //QuitButton
-            _quitButton.AddTexture(_buttonTexture);
-            _quitButton.SetPosition(new Vector2(viewPort.Width / 2, third * 2));
+            _quitButton.Texture = _buttonTexture;
+            _quitButton.Position = new Vector2(viewPort.Width / 2, third * 2);
 
             //MenuButton
-            _menuButton.AddTexture(_buttonTexture);
-            _menuButton.SetPosition(new Vector2(viewPort.Width - _buttonTexture.Width, 0));
+            _menuButton.Texture = _buttonTexture;
+            _menuButton.Position = new Vector2(viewPort.Width - _buttonTexture.Width, 0);
 
             //Player
-            _player.AddTexture(_playerTexture);
-            _player.SetPosition(new Vector2(viewPort.Width / 2, third * 2));
+            _player.Texture = _playerTexture;
+            _player.Position = new Vector2(viewPort.Width / 2, third * 2);
 
             //Enemy
-            _enemy.AddTexture(_enemyTexture);
-            _enemy.SetPosition(new Vector2(viewPort.Width / 2, third));
+            _enemy.Texture = _enemyTexture;
+            _enemy.Position = new Vector2(viewPort.Width / 2, third);
 
             //Pickups
-            _weapon.AddTexture(_weaponTexture);
-            _weapon.SetPosition(new Vector2(100, third));
-            _shield.AddTexture(_shieldTexture);
-            _shield.SetPosition(new Vector2(viewPort.Width - 100, third));
+            _weapon.Texture = _weaponTexture;
+            _weapon.Position = new Vector2(100, third);
+            _shield.Texture = _shieldTexture;
+            _shield.Position = new Vector2(viewPort.Width - 100, third);
+            _shield.Position = new Vector2(viewPort.Width - 100, third);
 
             //WayPoints
             for (int i = 0; i < _wayPoints.Length; i++)
             {
-                _wayPoints[i].AddTexture(_flagTexture);
+                _wayPoints[i].Texture = _flagTexture;
             }
-            _wayPoints[0].SetPosition(new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f));
-            _wayPoints[1].SetPosition(new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f));
-            _wayPoints[2].SetPosition(new Vector2(viewPort.Width / 2, viewPort.Height / 2));
+            _wayPoints[0].Position = new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f);
+            _wayPoints[1].Position = new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f);
+            _wayPoints[2].Position = new Vector2(viewPort.Width / 2, viewPort.Height / 2);
 
             //Viewport viewport = GraphicsDevice.Viewport;
             //float third = viewport.Height / 3;
@@ -372,7 +373,7 @@ namespace StateGame
             {
                 playerInput.Normalize();
                 Vector2 playerTranslation = playerInput * _playerSpeed;
-                _player.SetPosition(_player.GetPosition() + playerTranslation);
+                _player.Position += playerTranslation;
             }
 
             if (_player.Collision(_weapon))
@@ -381,11 +382,11 @@ namespace StateGame
 
                 if (_shield.Active)
                 {
-                    _player.AddTexture(_playerWeaponTexture);
+                    _player.Texture = _playerWeaponTexture;
                 }
                 else
                 {
-                    _player.AddTexture(_playerWeaponShieldTexture);
+                    _player.Texture = _playerWeaponShieldTexture;
                 }
             }
 
@@ -395,11 +396,11 @@ namespace StateGame
 
                 if (_weapon.Active)
                 {
-                    _player.AddTexture(_playerShieldTexture);
+                    _player.Texture = _playerShieldTexture;
                 }
                 else
                 {
-                    _player.AddTexture(_playerWeaponShieldTexture);
+                    _player.Texture = _playerWeaponShieldTexture;
                 }
             }
 
@@ -411,14 +412,14 @@ namespace StateGame
             {
                 case EnemyState.Patrolling:
                     //PatrolMovement
-                    Vector2 currentWayPoint = _wayPoints[_currentWayPointIndex].GetPosition();
-                    Vector2 patrolDirection = (currentWayPoint - _enemy.GetPosition());
+                    Vector2 currentWayPoint = _wayPoints[_currentWayPointIndex].Position;
+                    Vector2 patrolDirection = (currentWayPoint - _enemy.Position);
                     patrolDirection.Normalize();
                     Vector2 patrolTranslation =
                         patrolDirection * _enemySpeed;
-                    _enemy.SetPosition(_enemy.GetPosition() + patrolTranslation);
+                    _enemy.Position += patrolTranslation;
 
-                    Vector2 wayPointDifference = _enemy.GetPosition() - currentWayPoint;
+                    Vector2 wayPointDifference = _enemy.Position - currentWayPoint;
                     if (wayPointDifference.Length() < 5)
                     {
                         _currentWayPointIndex++;
@@ -426,7 +427,7 @@ namespace StateGame
                     }
 
                     //PlayerDetection
-                    Vector2 playerDifferencePatrol = _enemy.GetPosition() - _player.GetPosition();
+                    Vector2 playerDifferencePatrol = _enemy.Position - _player.Position;
                     float playerDistancePatrol = playerDifferencePatrol.Length();
                     if (playerDistancePatrol < _playerDetectionRange)
                     {
