@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using StateGame;
 
 namespace StateGameRefactored
 {
     public class PlayButton : Button
     {
-        public PlayButton(StateGameRefactored pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor) : base(pGame, pDefaultColor, pHoverColor, pPressedColor)
-        {
-            _game = pGame;
-        }
+        public PlayButton(Vector2 pPosition, Texture2D pTexture, StateGameRefactored pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor)
+            : base(pPosition, pTexture, pGame, pDefaultColor, pHoverColor, pPressedColor) { }
 
         protected override void OnButtonClick()
         {

@@ -1,11 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace StateGameRefactored
 {
     public class Player : GameObject
     {
-        public override void Update()
+        public Player(Vector2 pPosition, Texture2D pTexture) : base(pPosition, pTexture)
+        {
+
+        }
+
+        public override void Update(GameTime pGameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
 

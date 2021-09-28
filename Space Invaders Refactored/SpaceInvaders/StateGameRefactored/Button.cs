@@ -25,9 +25,11 @@ namespace StateGameRefactored
             _defaultColor = pDefaultColor;
             _hoverColor = pHoverColor;
             _pressedColor = pPressedColor;
+
+            SetButtonState(ButtonStatus.Default, _defaultColor);
         }
 
-        public override void Update()
+        public override void Update(GameTime pGameTime)
         {
             MouseState mouseState = Mouse.GetState();
 
@@ -46,12 +48,17 @@ namespace StateGameRefactored
             }
         }
 
+        private void SetButtonState(ButtonStatus pStatus, Color pColor)
+        {
+            _status = pStatus;
+            _currentButtonColor = pColor;
+        }
+
         private void UpdateDefaultState(MouseState pMouseState)
         {
             if (Collision(pMouseState.Position))
             {
-                _status = ButtonStatus.Hovered;
-                _currentButtonColor = _hoverColor;
+                SetButtonState(ButtonStatus.Hovered, _hoverColor);
             }
         }
 
@@ -59,14 +66,12 @@ namespace StateGameRefactored
         {
             if (!Collision(pMouseState.Position))
             {
-                _status = ButtonStatus.Default;
-                _currentButtonColor = _defaultColor;
+                SetButtonState(ButtonStatus.Default, _defaultColor);
             }
 
             if (pMouseState.LeftButton == ButtonState.Pressed)
             {
-                _status = ButtonStatus.Pressed;
-                _currentButtonColor = _pressedColor;
+                SetButtonState(ButtonStatus.Pressed, _pressedColor);
             }
         }
 
@@ -76,14 +81,12 @@ namespace StateGameRefactored
             {
                 if (Collision(pMouseState.Position))
                 {
-                    _status = ButtonStatus.Hovered;
-                    _currentButtonColor = _hoverColor;
+                    SetButtonState(ButtonStatus.Hovered, _hoverColor);
                     OnButtonClick();
                 }
                 else
                 {
-                    _status = ButtonStatus.Default;
-                    _currentButtonColor = _defaultColor;
+                    SetButtonState(ButtonStatus.Default, _defaultColor);
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using StateGame;
 
 namespace StateGameRefactored
@@ -13,10 +14,8 @@ namespace StateGameRefactored
 
         private EnemyState _state;
         private int _currentWayPointIndex = 0;
-        
 
-
-        public Enemy(GameObject[] pWayPoints, Player pPlayer, float pPlayerDetectionRange, GameObject pShield, GameObject pWeapon)
+        public Enemy(Vector2 pPosition, Texture2D pTexture, GameObject[] pWayPoints, Player pPlayer, float pPlayerDetectionRange, GameObject pShield, GameObject pWeapon) : base(pPosition, pTexture)
         {
             _wayPoints = pWayPoints;
             _player = pPlayer;
@@ -26,7 +25,7 @@ namespace StateGameRefactored
             _weapon = pWeapon;
         }
 
-        public override void Update()
+        public override void Update(GameTime pGameTime)
         {
             switch (_state)
             {

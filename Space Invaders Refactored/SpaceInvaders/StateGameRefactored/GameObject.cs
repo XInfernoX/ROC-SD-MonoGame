@@ -74,6 +74,13 @@ namespace StateGameRefactored
             _active = pActive;
         }
 
+        public GameObject(Vector2 pPosition)
+        {
+            _position = pPosition;
+            _speed = 0;
+            _active = true;
+        }
+
         public GameObject(Vector2 pPosition, Texture2D pTexture)
         {
             _position = pPosition;
@@ -131,6 +138,6 @@ namespace StateGameRefactored
             }
         }
 
-        public virtual void Update() { }
+        public virtual void Update(GameTime pGameTime) { }
     }
 }

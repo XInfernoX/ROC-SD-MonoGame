@@ -242,3 +242,14 @@ C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Ref
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeapon.xnb
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeaponShield.xnb
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Flag.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Enemy.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Flag.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Knight.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightShield.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeapon.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeaponShield.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerShield.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerWeapon.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerWeaponShield.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Shield.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Weapon.xnb

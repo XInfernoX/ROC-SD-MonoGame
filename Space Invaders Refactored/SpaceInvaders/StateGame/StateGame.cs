@@ -438,12 +438,13 @@ namespace StateGame
                     }
                     break;
                 case EnemyState.Chasing:
-                    Vector2 chaseDirection = _player.GetPosition() - _enemy.GetPosition();
+                    Vector2 chaseDirection = _player.Position - _enemy.Position;
                     chaseDirection.Normalize();
                     Vector2 chaseTranslation = chaseDirection * _enemySpeed;
-                    _enemy.SetPosition(_enemy.GetPosition() + chaseTranslation);
 
-                    Vector2 playerDifferenceChase = _enemy.GetPosition() - _player.GetPosition();
+                    _enemy.Position += chaseTranslation;
+
+                    Vector2 playerDifferenceChase = _enemy.Position - _player.Position;
                     float playerDistanceChase = playerDifferenceChase.Length();
 
                     if (playerDistanceChase < _playerDetectionRange)
@@ -459,10 +460,10 @@ namespace StateGame
                     break;
                 case EnemyState.Evading:
                     Console.WriteLine("Evading");
-                    Vector2 evadeDirection = _player.GetPosition() - _enemy.GetPosition();
+                    Vector2 evadeDirection = _player.Position - _enemy.Position;
                     evadeDirection.Normalize();
                     Vector2 evadeTranslation = -evadeDirection * _enemySpeed;
-                    _enemy.SetPosition(_enemy.GetPosition() + evadeTranslation);
+                    _enemy.Position += evadeTranslation;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -500,10 +501,10 @@ namespace StateGame
             Vector2 textOffset = new Vector2(_buttonTexture.Width / 2, _buttonTexture.Height / 2);
 
             Vector2 playSize = _arial.MeasureString("Play");
-            _spriteBatch.DrawString(_arial, "Play", _playButton.GetPosition() + textOffset - playSize / 2, Color.White);
+            _spriteBatch.DrawString(_arial, "Play", _playButton.Position + textOffset - playSize / 2, Color.White);
 
             Vector2 quitSize = _arial.MeasureString("Quit");
-            _spriteBatch.DrawString(_arial, "Quit", _quitButton.GetPosition() + textOffset - playSize / 2, Color.White);
+            _spriteBatch.DrawString(_arial, "Quit", _quitButton.Position + textOffset - playSize / 2, Color.White);
         }
 
         private void DrawLevel1(GameTime pGameTime)
@@ -513,7 +514,7 @@ namespace StateGame
             Vector2 textOffset = new Vector2(_buttonTexture.Width / 2, _buttonTexture.Height / 2);
 
             Vector2 menuSize = _arial.MeasureString("Menu");
-            _spriteBatch.DrawString(_arial, "Menu", _menuButton.GetPosition() + textOffset - menuSize / 2, Color.White);
+            _spriteBatch.DrawString(_arial, "Menu", _menuButton.Position + textOffset - menuSize / 2, Color.White);
 
             _player.Draw(_spriteBatch, Color.White, 2);
             _enemy.Draw(_spriteBatch, Color.White, 2);
