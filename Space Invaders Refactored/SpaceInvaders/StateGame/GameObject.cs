@@ -11,8 +11,6 @@ namespace StateGame
         private Texture2D _texture;
         private Rectangle _collider = Rectangle.Empty;
 
-        private int _speed = 10;
-
         // Properties
         public bool Active
         {
@@ -41,30 +39,25 @@ namespace StateGame
             }
         }
 
-        public Rectangle Collider//Readonly
+        public Rectangle Collider //Readonly
         {
             get { return _collider; }
         }
 
-        public int Width//Readonly
+        public int Width //Readonly
         {
             get { return _texture.Width; }
         }
 
-        public int Height//Readonly
+        public int Height //Readonly
         {
             get { return _texture.Height; }
         }
 
-        public int Speed
-        {
-            get { return _speed; }
-            set { _speed = value; }
-        }
-
-
         //Constructors
-        public GameObject() { }
+        public GameObject()
+        {
+        }
 
         // Copy constructor
         public GameObject(GameObject pOriginal)
@@ -73,25 +66,26 @@ namespace StateGame
             _position = pOriginal._position;
             _texture = pOriginal._texture;
             _collider = pOriginal._collider;
-            _speed = pOriginal._speed;
         }
 
         //Methods
         public bool Collision(GameObject pOther)
         {
-            if (_active & _collider.Contains(pOther._position))
+            if (_active && _collider.Intersects(pOther._collider))
             {
                 return true;
             }
+
             return false;
         }
 
-        public bool Collision(Point pPoint)
+        public bool Contains(Point pPoint)
         {
             if (_active & _collider.Contains(pPoint))
             {
                 return true;
             }
+
             return false;
         }
 

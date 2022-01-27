@@ -1,4 +1,4 @@
-﻿using CoreRefactored.Components;
+﻿using SpaceInvadersRefactored.Components;
 
 namespace SpaceInvadersRefactored.GamePlay
 {

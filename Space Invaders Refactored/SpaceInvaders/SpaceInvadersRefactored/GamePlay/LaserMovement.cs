@@ -1,5 +1,6 @@
-﻿using CoreRefactored.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+
+using SpaceInvadersRefactored.Components;
 
 namespace SpaceInvadersRefactored.GamePlay
 {

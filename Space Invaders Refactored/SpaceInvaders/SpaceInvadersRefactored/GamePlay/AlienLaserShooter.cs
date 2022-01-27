@@ -1,8 +1,10 @@
 ﻿using System;
-using CoreRefactored.Components;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using CoreRefactored;
+
+using SpaceInvadersRefactored.Components;
+
 
 namespace SpaceInvadersRefactored.GamePlay
 {
@@ -37,7 +39,7 @@ namespace SpaceInvadersRefactored.GamePlay
             {
                 UpdateLastLaserShotFired();
 
-                CoreRefactored.GameObject alienLaser = CreateAlienLaser();
+                GameObject alienLaser = CreateAlienLaser();
                 game.AddGameObject(alienLaser);
             }
         }
@@ -47,14 +49,14 @@ namespace SpaceInvadersRefactored.GamePlay
             _lastLaserShotFired += (float)_random.NextDouble() * _randomRange + _minLaserCooldown;
         }
 
-        private CoreRefactored.GameObject CreateAlienLaser()
+        private GameObject CreateAlienLaser()
         {
             AlienLaser alienLaser = new AlienLaser();
             SpriteRenderer laserRenderer = new SpriteRenderer(_laserTexture);
             Collider laserCollider = new Collider(laserRenderer);
             LaserMovement laserMovement = new LaserMovement(new Vector2(0, 1), 250);
             DestroyAfter laserDestroyer = new DestroyAfter(2);
-            CoreRefactored.GameObject newPlayerLaser = new CoreRefactored.GameObject(game, "new AlienLaser", transform.Position, new Vector2(0.5f, 0.0f), 0, Vector2.One, 
+            GameObject newPlayerLaser = new GameObject(game, "new AlienLaser", transform.Position, new Vector2(0.5f, 0.0f), 0, Vector2.One, 
                 alienLaser, laserRenderer, laserCollider, laserMovement, laserDestroyer);
             return newPlayerLaser;
         }

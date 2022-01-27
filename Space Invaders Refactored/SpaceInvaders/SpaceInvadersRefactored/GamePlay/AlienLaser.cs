@@ -1,10 +1,10 @@
-﻿using CoreRefactored.Components;
+﻿using SpaceInvadersRefactored.Components;
 
 namespace SpaceInvadersRefactored.GamePlay
 {
     public class AlienLaser : MonoBehaviour
     {
-        public override void OnCollision(CoreRefactored.GameObject pOther)
+        public override void OnCollision(GameObject pOther)
         {
             Player player = pOther.GetComponent<Player>();
 

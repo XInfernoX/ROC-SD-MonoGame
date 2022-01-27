@@ -1,8 +1,8 @@
-﻿using CoreRefactored.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using CoreRefactored;
+
+using SpaceInvadersRefactored.Components;
 
 namespace SpaceInvadersRefactored.GamePlay
 {
@@ -36,12 +36,12 @@ namespace SpaceInvadersRefactored.GamePlay
             if (state.IsKeyDown(Keys.Space) && pGameTime.TotalGameTime.TotalSeconds > _lastLaserShotFired)
             {
                 _lastLaserShotFired = (float)pGameTime.TotalGameTime.TotalSeconds + _laserCooldown;
-                CoreRefactored.GameObject newPlayerLaser = CreatePlayerLaser();
+                GameObject newPlayerLaser = CreatePlayerLaser();
                 game.AddGameObject(newPlayerLaser);
             }
         }
 
-        private CoreRefactored.GameObject CreatePlayerLaser()
+        private GameObject CreatePlayerLaser()
         {
             PlayerLaser playerLaser = new PlayerLaser();
             SpriteRenderer laserRenderer = new SpriteRenderer(_laserTexture);
@@ -52,7 +52,7 @@ namespace SpaceInvadersRefactored.GamePlay
             Vector2 spawnPosition = transform.Position;
             spawnPosition.Y -= laserRenderer.Height;
 
-            CoreRefactored.GameObject newPlayerLaser = new CoreRefactored.GameObject(game, "new playerLaser", spawnPosition, new Vector2(0.5f, 1.0f), 0, Vector2.One,
+            GameObject newPlayerLaser = new GameObject(game, "new playerLaser", spawnPosition, new Vector2(0.5f, 1.0f), 0, Vector2.One,
                 playerLaser, laserMovement, laserRenderer, laserCollider, laserDestroyer);
             return newPlayerLaser;
         }

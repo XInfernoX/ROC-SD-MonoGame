@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace StateGameRefactored
+namespace StateGameRefactored1
 {
     public class Text : GameObject
     {
@@ -57,6 +57,8 @@ namespace StateGameRefactored
             _font = pSpriteFont;
             _text = pText;
             _color = pColor;
+
+            _offset = pSpriteFont.MeasureString(pText);
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)

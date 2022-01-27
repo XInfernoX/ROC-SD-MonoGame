@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dmeel\\Documents\\Projects\\ROC\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj": {}
+    "C:\\Users\\dmeel\\OneDrive - ROC van Twente\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dmeel\\Documents\\Projects\\ROC\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj": {
+    "C:\\Users\\dmeel\\OneDrive - ROC van Twente\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dmeel\\Documents\\Projects\\ROC\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj",
+        "projectUniqueName": "C:\\Users\\dmeel\\OneDrive - ROC van Twente\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj",
         "projectName": "MonoGame-UnityFramework",
-        "projectPath": "C:\\Users\\dmeel\\Documents\\Projects\\ROC\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj",
+        "projectPath": "C:\\Users\\dmeel\\OneDrive - ROC van Twente\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework.csproj",
         "packagesPath": "C:\\Users\\dmeel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dmeel\\Documents\\Projects\\ROC\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\obj\\",
+        "outputPath": "C:\\Users\\dmeel\\OneDrive - ROC van Twente\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\MonoGame-UnityFramework\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dmeel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -67,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

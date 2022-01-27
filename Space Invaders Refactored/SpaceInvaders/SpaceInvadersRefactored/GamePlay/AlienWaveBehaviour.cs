@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
-using CoreRefactored.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using CoreRefactored;
+using SpaceInvadersRefactored.Components;
 
 namespace SpaceInvadersRefactored.GamePlay
 {
     public class AlienWaveBehaviour : MonoBehaviour
     {
         //Fields - Constructor/Configuration
-        private readonly SpaceInvadersGame _game;
+        private readonly SpaceInvaders _game;
         private readonly Texture2D _alienTexture;
         private readonly Texture2D _alienLaserTexture;
         private readonly int _numberOfRows;
@@ -19,7 +18,7 @@ namespace SpaceInvadersRefactored.GamePlay
         private const int _moveSteps = 4;
 
         //Tracking
-        private readonly List<CoreRefactored.GameObject> _aliens = new List<CoreRefactored.GameObject>();
+        private readonly List<GameObject> _aliens = new List<GameObject>();
         private float _previousStepTime;
         private int _alienStepCount;
 
@@ -28,7 +27,7 @@ namespace SpaceInvadersRefactored.GamePlay
         private readonly int _verticalStepSize;
         private readonly int _spacing;
 
-        public AlienWaveBehaviour(SpaceInvadersGame pGame, Texture2D pAlienTexture, Texture2D pAlienLaserTexture, Viewport pViewport, int pNumberOfRows, int pNumberOfColumns, float pStepDuration)
+        public AlienWaveBehaviour(SpaceInvaders pGame, Texture2D pAlienTexture, Texture2D pAlienLaserTexture, Viewport pViewport, int pNumberOfRows, int pNumberOfColumns, float pStepDuration)
         {
             //Store all configuration values
             _game = pGame;
@@ -95,7 +94,7 @@ namespace SpaceInvadersRefactored.GamePlay
         {
             for (int i = 0; i < pNumberOfAliens; i++)
             {
-                CoreRefactored.GameObject newAlien = CreateAlien();
+                GameObject newAlien = CreateAlien();
                 _aliens.Add(newAlien);
                 _game.AddGameObject(newAlien);
             }
@@ -103,7 +102,7 @@ namespace SpaceInvadersRefactored.GamePlay
             PositionAliens();
         }
 
-        private CoreRefactored.GameObject CreateAlien()
+        private GameObject CreateAlien()
         {
             Alien alien = new Alien();
             //OneHitDeath oneHitDeath = new OneHitDeath();
@@ -111,7 +110,7 @@ namespace SpaceInvadersRefactored.GamePlay
             AlienLaserShooter alienLaserShooter = new AlienLaserShooter(_alienLaserTexture, 6, 10);
             Collider alienCollider = new Collider(alienRenderer);
 
-            return new CoreRefactored.GameObject(_game, "Alien", alien, alienRenderer, alienLaserShooter, alienCollider);
+            return new GameObject(_game, "Alien", alien, alienRenderer, alienLaserShooter, alienCollider);
         }
     }
 }
