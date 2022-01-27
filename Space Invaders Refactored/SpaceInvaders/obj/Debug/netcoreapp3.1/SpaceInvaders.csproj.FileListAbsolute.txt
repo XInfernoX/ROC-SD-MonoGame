@@ -387,3 +387,5 @@ C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\Space Invaders 
 C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Megaman2.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Gate.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\LittleStar.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Megaman.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Megaman2.xnb
