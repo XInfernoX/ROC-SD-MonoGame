@@ -210,14 +210,7 @@ C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Ref
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\tile_0009.xnb
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Arial.xnb
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\File.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Arial.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\File.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\key.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\tile_0009.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\tile_0027.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI Panel.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI Slot.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI Title.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Panel.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Slot.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\UI_Title.xnb
@@ -248,9 +241,6 @@ C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightShield.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeapon.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\KnightWeaponShield.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerShield.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerWeapon.xnb
-C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\PlayerWeaponShield.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Shield.xnb
 C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Weapon.xnb
 C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\rpgTile169.xnb
@@ -395,3 +385,5 @@ C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\Space Invaders 
 C:\Users\XInfernoX\OneDrive - ROC van Twente\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\LittleStar.xnb
 C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Megaman.xnb
 C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Megaman2.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\Gate.xnb
+C:\Users\XInfernoX\Documents\Projects\ROC\MonoGame-UnityFramework\Space Invaders Refactored\SpaceInvaders\bin\Debug\netcoreapp3.1\Content\LittleStar.xnb
