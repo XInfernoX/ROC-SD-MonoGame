@@ -2,14 +2,18 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ComponentDesignPattern.Assignment1
+namespace ComponentDesignPattern.Assignment4
 {
-    public class SpriteRenderer
+    public class SpriteRenderer : MonoBehaviour
     {
         //Fields
         private Texture2D _texture;
         private Color _color;
         private float _layerDepth;
+
+        //Temporarily
+        private SpriteFont _font;
+        private string _text;
 
         //Properties
         public int Width => _texture.Width;
@@ -21,6 +25,19 @@ namespace ComponentDesignPattern.Assignment1
         {
             get => _color;
             set => _color = value;
+        }
+
+        //Temporarily
+        public string Text
+        {
+            get => _text;
+            set => _text = value;
+        }
+
+        public SpriteFont SpriteFont
+        {
+            get => _font;
+            set => _font = value;
         }
 
         //Constructor
@@ -42,6 +59,15 @@ namespace ComponentDesignPattern.Assignment1
             float radians = MathHelper.ToRadians(pTransform.Rotation);
             pSpriteBatch.Draw(_texture, pTransform.Position, null, _color, radians, scaledOrigin, pTransform.Scale, SpriteEffects.None, _layerDepth);
 
+            if (_font != null)
+            {
+                Vector2 textPosition = pTransform.Position;
+                textPosition.X -= _font.MeasureString(_text).X / 2;
+                textPosition.Y += (1.0f - pTransform.Origin.Y) * Height;
+                pSpriteBatch.DrawString(_font, _text, textPosition, Color.White);
+            }
+
+
             //https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.SpriteBatch.html
 
             //DestinationRectangle - The drawing bounds on screen.
@@ -62,7 +88,6 @@ namespace ComponentDesignPattern.Assignment1
 
             //============================================================
 
-
             //Texture2D texture
             //Vector2 position
             //Color color
@@ -74,8 +99,6 @@ namespace ComponentDesignPattern.Assignment1
             //float layerDepth
             //Rectangle sourceRectangle
             //Rectangle destinationRectangle
-
-
         }
     }
 }

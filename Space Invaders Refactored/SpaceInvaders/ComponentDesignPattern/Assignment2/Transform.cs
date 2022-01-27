@@ -2,7 +2,7 @@
 
 namespace ComponentDesignPattern.Assignment2
 {
-    public class Transform : MonoBehaviour
+    public class Transform
     {
         //Fields
         private Vector2 _position;

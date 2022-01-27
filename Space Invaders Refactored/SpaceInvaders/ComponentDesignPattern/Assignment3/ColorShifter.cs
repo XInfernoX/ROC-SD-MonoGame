@@ -1,25 +1,35 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment2
+namespace ComponentDesignPattern.Assignment3
 {
-    public class ColorShifterObject : GameObject
+    public class ColorShifter : MonoBehaviour
     {
         private float _shiftSpeed;
         private float _hue;
 
-        public ColorShifterObject(string pName, Transform pTransform, SpriteRenderer pRenderer, float pShiftSpeed) : base(pName, pTransform, pRenderer)
+        private SpriteRenderer _spriteRenderer;
+
+        public ColorShifter(float pShiftSpeed)
         {
             _shiftSpeed = pShiftSpeed;
         }
 
-        public override void UpdateGameObject(GameTime pGameTime)
+        public override void Awake()
+        {
+            Console.WriteLine("ColorShifterObject.Awake");
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+
+            Console.WriteLine(_spriteRenderer == null);
+        }
+
+        public override void UpdateMonoBehaviour(GameTime pGameTime)
         {
             _hue += (float)(pGameTime.ElapsedGameTime.TotalSeconds * _shiftSpeed);
 
             _hue %= 1.0f;
 
-            SpriteRenderer.Color = HSLToRGB(_hue, 1.0f, 0.5f);
+            _spriteRenderer.Color = HSLToRGB(_hue, 1.0f, 0.5f);
         }
         //https://www.alanzucconi.com/2016/01/06/colour-interpolation/
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment2
+namespace ComponentDesignPattern.Assignment3
 {
     public class RotatorObject : GameObject
     {

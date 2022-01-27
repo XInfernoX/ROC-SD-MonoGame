@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ComponentDesignPattern.Assignment1
+namespace ComponentDesignPattern.Assignment4
 {
-    public class AnimatedSpriteRenderer : Component
+    public class AnimatedSpriteRenderer : MonoBehaviour
     {
         //Fields
         private readonly Texture2D _spriteSheet;
@@ -112,7 +112,7 @@ namespace ComponentDesignPattern.Assignment1
         {
         }
 
-        public override void Update(GameTime pGameTime)
+        public override void UpdateMonoBehaviour(GameTime pGameTime)
         {
             _animationTime += (float)pGameTime.ElapsedGameTime.TotalSeconds * _timeModifier;
             _animationTime %= 1.0f;
@@ -124,7 +124,7 @@ namespace ComponentDesignPattern.Assignment1
             _currentSourceRectangle = _sourceRectangles[currentFrame];
         }
 
-        public override void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
+        public void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
         {
             Vector2 scaledOrigin =
                 new Vector2(pTransform.Origin.X * SingleSpriteWidth, pTransform.Origin.Y * SingleSpriteHeight);

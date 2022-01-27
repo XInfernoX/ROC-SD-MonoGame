@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ComponentDesignPattern.Assignment1
+namespace ComponentDesignPattern.Assignment4
 {
     public class Component
     {

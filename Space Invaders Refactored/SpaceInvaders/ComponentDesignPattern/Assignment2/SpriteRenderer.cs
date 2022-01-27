@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ComponentDesignPattern.Assignment2
 {
-    public class SpriteRenderer : MonoBehaviour
+    public class SpriteRenderer
     {
         //Fields
         private Texture2D _texture;

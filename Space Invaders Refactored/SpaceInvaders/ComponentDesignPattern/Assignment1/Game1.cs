@@ -11,8 +11,8 @@ namespace ComponentDesignPattern.Assignment1
 
         private GameObject _littleStar1;
         private GameObject _littleStar2;
-
-        private GameObject _megaMan;
+        private GameObject _littleStar3;
+        private GameObject _littleStar4;
 
         public Game1()
         {
@@ -27,29 +27,34 @@ namespace ComponentDesignPattern.Assignment1
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Viewport viewport = GraphicsDevice.Viewport;
+            Texture2D starIndicator = Content.Load<Texture2D>("StarIndicators");
 
-            Transform keyTransform = new Transform(new Vector2(50, 50), new Vector2(0.5f, 0.5f), 0, new Vector2(1, 1));
-            SpriteRenderer keyRenderer = new SpriteRenderer(Content.Load<Texture2D>("LittleStar"), Color.Blue, 0.0f);
 
-            Transform keyTransform2 = new Transform(new Vector2(75, 75), new Vector2(0.5f, 0.5f), 0, new Vector2(1, 1));
-            SpriteRenderer keyRenderer2 = new SpriteRenderer(Content.Load<Texture2D>("LittleStar"), Color.Red, 1);
+            Transform transformTopLeft = new Transform(new Vector2(0, 0), new Vector2(0f, 0f));
+            SpriteRenderer spriteRendererTopLeft = new SpriteRenderer(starIndicator);
+            _littleStar1 = new GameObject("Star1", transformTopLeft, spriteRendererTopLeft);
 
-            _littleStar1 = new GameObject("Key", keyTransform, keyRenderer);
-            _littleStar2 = new GameObject("Key2", keyTransform2, keyRenderer2);
+            Transform transformTopRight = new Transform(new Vector2(viewport.Width, 0), new Vector2(1f, 0f));
+            SpriteRenderer spriteRendererTopRight = new SpriteRenderer(starIndicator);
+            _littleStar2 = new GameObject("Star2", transformTopRight, spriteRendererTopRight);
 
-            Transform megaManTransform = new Transform(new Vector2(viewport.Width * 0.5f, viewport.Height * 0.5f));
-            AnimatedSpriteRenderer animatedSpriteRenderer = new AnimatedSpriteRenderer(
-                Content.Load<Texture2D>("Megaman2"), 5, 2, 12f);
+            Transform transformBottomLeft = new Transform(new Vector2(0, viewport.Height), new Vector2(0f, 1f));
+            SpriteRenderer spriteRendererBottomLeft = new SpriteRenderer(starIndicator);
+            _littleStar3 = new GameObject("Star1", transformBottomLeft, spriteRendererBottomLeft);
 
-            _megaMan = new GameObject("MegaMan", megaManTransform, animatedSpriteRenderer);
+            Transform transformBottomRight = new Transform(new Vector2(viewport.Width, viewport.Height), new Vector2(1f, 1f));
+            SpriteRenderer spriteRendererBottomRight = new SpriteRenderer(starIndicator);
+            _littleStar4 = new GameObject("Star2", transformBottomRight, spriteRendererBottomRight);
+
+
         }
 
         protected override void Update(GameTime pGameTime)
         {
             _littleStar1.UpdateGameObject(pGameTime);
             _littleStar2.UpdateGameObject(pGameTime);
-
-            _megaMan.UpdateGameObject(pGameTime);
+            _littleStar3.UpdateGameObject(pGameTime);
+            _littleStar4.UpdateGameObject(pGameTime);
         }
 
         protected override void Draw(GameTime pGameTime)
@@ -62,8 +67,8 @@ namespace ComponentDesignPattern.Assignment1
 
             _littleStar1.DrawGameObject(_spriteBatch);
             _littleStar2.DrawGameObject(_spriteBatch);
-
-            _megaMan.DrawGameObject(_spriteBatch);
+            _littleStar3.DrawGameObject(_spriteBatch);
+            _littleStar4.DrawGameObject(_spriteBatch);
 
             _spriteBatch.End();
         }
