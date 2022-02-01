@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ComponentDesignPattern.Assignment4
 {
-    public class AnimatedSpriteRenderer : MonoBehaviour
+    public class AnimatedSpriteRenderer : DrawableMonoBehaviour
     {
         //Fields
         private readonly Texture2D _spriteSheet;
@@ -124,7 +124,7 @@ namespace ComponentDesignPattern.Assignment4
             _currentSourceRectangle = _sourceRectangles[currentFrame];
         }
 
-        public void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
+        public override void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
         {
             Vector2 scaledOrigin =
                 new Vector2(pTransform.Origin.X * SingleSpriteWidth, pTransform.Origin.Y * SingleSpriteHeight);

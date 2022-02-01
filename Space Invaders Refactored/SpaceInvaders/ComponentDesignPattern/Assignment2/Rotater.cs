@@ -2,13 +2,13 @@
 
 namespace ComponentDesignPattern.Assignment2
 {
-    public class RotatorObject : GameObject
+    public class Rotater : GameObject
     {
         //Fields - configurable
         private readonly float _rotationSpeed;
 
         //Constructor
-        public RotatorObject(string pName, Transform pTransform, SpriteRenderer pRenderer, float pRotationSpeed) : base(pName, pTransform, pRenderer)
+        public Rotater(string pName, Transform pTransform, SpriteRenderer pRenderer, float pRotationSpeed) : base(pName, pTransform, pRenderer)
         {
             _rotationSpeed = pRotationSpeed;
         }

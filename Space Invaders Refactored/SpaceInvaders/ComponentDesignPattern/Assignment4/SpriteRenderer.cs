@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ComponentDesignPattern.Assignment4
 {
-    public class SpriteRenderer : MonoBehaviour
+    public class SpriteRenderer : DrawableMonoBehaviour
     {
         //Fields
         private Texture2D _texture;
@@ -53,7 +53,7 @@ namespace ComponentDesignPattern.Assignment4
         public SpriteRenderer(string pAssetName, ContentManager pContent) : this(pContent.Load<Texture2D>(pAssetName), Color.White) { }
         public SpriteRenderer(string pAssetName, ContentManager pContent, Color pColor, float pLayerDepth = 1.0f) : this(pContent.Load<Texture2D>(pAssetName), pColor, pLayerDepth) { }
 
-        public void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
+        public void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
         {
             Vector2 scaledOrigin = new Vector2(pTransform.Origin.X * _texture.Width, pTransform.Origin.Y * _texture.Height);
             float radians = MathHelper.ToRadians(pTransform.Rotation);

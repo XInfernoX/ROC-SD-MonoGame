@@ -30,7 +30,7 @@ namespace ComponentDesignPattern.Assignment1
             Texture2D starIndicator = Content.Load<Texture2D>("StarIndicators");
 
 
-            Transform transformTopLeft = new Transform(new Vector2(0, 0), new Vector2(0f, 0f));
+            Transform transformTopLeft = new Transform(new Vector2(100, 100), new Vector2(0f, 0f), 45);
             SpriteRenderer spriteRendererTopLeft = new SpriteRenderer(starIndicator);
             _littleStar1 = new GameObject("Star1", transformTopLeft, spriteRendererTopLeft);
 
@@ -45,8 +45,6 @@ namespace ComponentDesignPattern.Assignment1
             Transform transformBottomRight = new Transform(new Vector2(viewport.Width, viewport.Height), new Vector2(1f, 1f));
             SpriteRenderer spriteRendererBottomRight = new SpriteRenderer(starIndicator);
             _littleStar4 = new GameObject("Star2", transformBottomRight, spriteRendererBottomRight);
-
-
         }
 
         protected override void Update(GameTime pGameTime)

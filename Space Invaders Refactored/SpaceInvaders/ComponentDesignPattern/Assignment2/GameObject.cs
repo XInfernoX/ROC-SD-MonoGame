@@ -32,7 +32,7 @@ namespace ComponentDesignPattern.Assignment2
 
         public virtual void DrawGameObject(SpriteBatch pSpriteBatch)
         {
-            _spriteRenderer.Draw(_transform, pSpriteBatch);
+            _spriteRenderer.Draw(pSpriteBatch, _transform);
         }
     }
 }

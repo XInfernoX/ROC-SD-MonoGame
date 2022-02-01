@@ -41,7 +41,7 @@ namespace ComponentDesignPattern.Assignment4
             AnimatedSpriteRenderer animatedSpriteRenderer = new AnimatedSpriteRenderer(
                 Content.Load<Texture2D>("Megaman2"), 5, 2, 12f);
 
-            //_megaMan = new GameObject("MegaMan", megaManTransform, animatedSpriteRenderer);
+            _megaMan = new GameObject("MegaMan", megaManTransform, animatedSpriteRenderer);
         }
 
         protected override void Update(GameTime pGameTime)

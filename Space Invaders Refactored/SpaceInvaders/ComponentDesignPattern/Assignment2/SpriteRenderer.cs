@@ -14,6 +14,8 @@ namespace ComponentDesignPattern.Assignment2
         //Temporarily
         private SpriteFont _font;
         private string _text;
+        private LocationPresets _textAnchorPoint = LocationPresets.Bottom;
+        private LocationPresets _textOrigin = LocationPresets.Top;
 
         //Properties
         public int Width => _texture.Width;
@@ -40,6 +42,18 @@ namespace ComponentDesignPattern.Assignment2
             set => _font = value;
         }
 
+        public LocationPresets TextAlignment
+        {
+            get => _textAnchorPoint;
+            set => _textAnchorPoint = value;
+        }
+
+        public LocationPresets TextOrigin
+        {
+            get => _textOrigin;
+            set => _textOrigin = value;
+        }
+
         //Constructor
         public SpriteRenderer(Texture2D pTexture, Color pColor, float pLayerDepth = 1.0f)
         {
@@ -53,7 +67,7 @@ namespace ComponentDesignPattern.Assignment2
         public SpriteRenderer(string pAssetName, ContentManager pContent) : this(pContent.Load<Texture2D>(pAssetName), Color.White) { }
         public SpriteRenderer(string pAssetName, ContentManager pContent, Color pColor, float pLayerDepth = 1.0f) : this(pContent.Load<Texture2D>(pAssetName), pColor, pLayerDepth) { }
 
-        public void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
+        public void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
         {
             Vector2 scaledOrigin = new Vector2(pTransform.Origin.X * _texture.Width, pTransform.Origin.Y * _texture.Height);
             float radians = MathHelper.ToRadians(pTransform.Rotation);
@@ -61,10 +75,14 @@ namespace ComponentDesignPattern.Assignment2
 
             if (_font != null)
             {
-                Vector2 textPosition = pTransform.Position;
-                textPosition.X -= _font.MeasureString(_text).X / 2;
-                textPosition.Y += (1.0f - pTransform.Origin.Y) * Height;
-                pSpriteBatch.DrawString(_font, _text, textPosition, Color.White);
+                Vector2 textAnchorPoint = _textAnchorPoint.ToCoordinate();
+
+                Vector2 relativeScaledAnchorPoint = new Vector2((textAnchorPoint.X - pTransform.Origin.X) * _texture.Width, (textAnchorPoint.Y - pTransform.Origin.Y) * _texture.Height);
+                Vector2 textPosition = pTransform.Position + relativeScaledAnchorPoint;
+
+                Vector2 textSize = _font.MeasureString(_text);
+                Vector2 textOrigin = _textOrigin.ToCoordinate();
+                pSpriteBatch.DrawString(_font, _text, textPosition, Color.Red, 0, textOrigin * textSize, 1.0f, SpriteEffects.None, _layerDepth);
             }
 
 

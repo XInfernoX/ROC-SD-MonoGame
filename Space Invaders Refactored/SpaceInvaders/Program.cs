@@ -3,8 +3,6 @@
 using Microsoft.Xna.Framework;
 using StateGame;
 
-// ReSharper disable ConvertToUsingDeclaration
-
 public static class Program
 {
     public enum GameType

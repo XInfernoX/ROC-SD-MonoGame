@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Megaman.png</SourceFile>
-  <SourceTime>2022-01-27T15:00:05.8696588+01:00</SourceTime>
-  <DestFile>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/bin/Windows/Content/Megaman.xnb</DestFile>
-  <DestTime>2022-01-27T15:00:31.142603+01:00</DestTime>
+  <SourceFile>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Megaman.png</SourceFile>
+  <SourceTime>2022-01-27T15:02:24.8643763+01:00</SourceTime>
+  <DestFile>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/bin/Windows/Content/Megaman.xnb</DestFile>
+  <DestTime>2022-01-27T18:51:49.9397659+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
