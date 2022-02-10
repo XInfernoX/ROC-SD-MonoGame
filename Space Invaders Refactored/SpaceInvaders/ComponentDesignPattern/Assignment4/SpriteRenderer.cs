@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ComponentDesignPattern.Assignment4
 {
-    public class SpriteRenderer : DrawableMonoBehaviour
+    public class SpriteRenderer : MonoBehaviour
     {
         //Fields
         private Texture2D _texture;
@@ -14,6 +14,8 @@ namespace ComponentDesignPattern.Assignment4
         //Temporarily
         private SpriteFont _font;
         private string _text;
+        private LocationPresets _textAnchorPoint = LocationPresets.Bottom;
+        private LocationPresets _textOrigin = LocationPresets.Top;
 
         //Properties
         public int Width => _texture.Width;
@@ -40,6 +42,18 @@ namespace ComponentDesignPattern.Assignment4
             set => _font = value;
         }
 
+        public LocationPresets TextAlignment
+        {
+            get => _textAnchorPoint;
+            set => _textAnchorPoint = value;
+        }
+
+        public LocationPresets TextOrigin
+        {
+            get => _textOrigin;
+            set => _textOrigin = value;
+        }
+
         //Constructor
         public SpriteRenderer(Texture2D pTexture, Color pColor, float pLayerDepth = 1.0f)
         {
@@ -53,7 +67,7 @@ namespace ComponentDesignPattern.Assignment4
         public SpriteRenderer(string pAssetName, ContentManager pContent) : this(pContent.Load<Texture2D>(pAssetName), Color.White) { }
         public SpriteRenderer(string pAssetName, ContentManager pContent, Color pColor, float pLayerDepth = 1.0f) : this(pContent.Load<Texture2D>(pAssetName), pColor, pLayerDepth) { }
 
-        public void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
+        public void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
         {
             Vector2 scaledOrigin = new Vector2(pTransform.Origin.X * _texture.Width, pTransform.Origin.Y * _texture.Height);
             float radians = MathHelper.ToRadians(pTransform.Rotation);
@@ -61,44 +75,15 @@ namespace ComponentDesignPattern.Assignment4
 
             if (_font != null)
             {
-                Vector2 textPosition = pTransform.Position;
-                textPosition.X -= _font.MeasureString(_text).X / 2;
-                textPosition.Y += (1.0f - pTransform.Origin.Y) * Height;
-                pSpriteBatch.DrawString(_font, _text, textPosition, Color.White);
+                Vector2 textAnchorPoint = _textAnchorPoint.ToCoordinate();
+
+                Vector2 relativeScaledAnchorPoint = new Vector2((textAnchorPoint.X - pTransform.Origin.X) * _texture.Width, (textAnchorPoint.Y - pTransform.Origin.Y) * _texture.Height);
+                Vector2 textPosition = pTransform.Position + relativeScaledAnchorPoint;
+
+                Vector2 textSize = _font.MeasureString(_text);
+                Vector2 textOrigin = _textOrigin.ToCoordinate();
+                pSpriteBatch.DrawString(_font, _text, textPosition, Color.Red, 0, textOrigin * textSize, 1.0f, SpriteEffects.None, _layerDepth);
             }
-
-
-            //https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.SpriteBatch.html
-
-            //DestinationRectangle - The drawing bounds on screen.
-            //SourceRectangle - An optional region on the texture which will be rendered. If null - draws full texture.
-
-            //Texture2D texture;
-            //Vector2 position;
-            //Rectangle sourceRectangle;
-
-            //Color color;
-
-            //float rotation;
-            //Vector2 origin;
-            //Vector2 scale;
-            //SpriteEffect spriteEffect;
-
-            //float layerDepth;
-
-            //============================================================
-
-            //Texture2D texture
-            //Vector2 position
-            //Color color
-            //Vector2 origin
-            //float scale
-            //Vector2 scale
-            //SpriteEffect spriteEffect
-            //float rotation
-            //float layerDepth
-            //Rectangle sourceRectangle
-            //Rectangle destinationRectangle
         }
     }
 }

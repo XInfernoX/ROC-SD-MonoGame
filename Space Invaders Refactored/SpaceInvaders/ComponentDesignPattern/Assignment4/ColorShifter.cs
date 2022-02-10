@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment3
+namespace ComponentDesignPattern.Assignment4
 {
     public class ColorShifter : MonoBehaviour
     {

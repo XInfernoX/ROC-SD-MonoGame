@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment2
+namespace ComponentDesignPattern.Assignment3
 {
-    public class Scaler : GameObject
+    public class ScalerObject : GameObject
     {
         //Fields
         private readonly float _scaleSpeed;
@@ -14,7 +14,7 @@ namespace ComponentDesignPattern.Assignment2
         public float ScaleSpeed => _scaleSpeed;
 
         //Constructors
-        public Scaler(string pName, Transform pTransform, SpriteRenderer pRenderer, float pScaleSpeed) : base(pName, pTransform, pRenderer)
+        public ScalerObject(string pName, Transform pTransform, SpriteRenderer pRenderer, float pScaleSpeed) : base(pName, pTransform, pRenderer)
         {
             _scaleSpeed = pScaleSpeed;
             _defaultScale = Transform.Scale;

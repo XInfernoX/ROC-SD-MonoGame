@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ComponentDesignPattern.Assignment4
+namespace ComponentDesignPattern.Assignment5
 {
     public class AnimatedSpriteRenderer : DrawableMonoBehaviour
     {

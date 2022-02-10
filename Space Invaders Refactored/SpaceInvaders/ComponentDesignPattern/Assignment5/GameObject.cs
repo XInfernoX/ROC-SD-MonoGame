@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ComponentDesignPattern.Assignment4
+namespace ComponentDesignPattern.Assignment5
 {
     public class GameObject
     {
@@ -11,7 +11,8 @@ namespace ComponentDesignPattern.Assignment4
         private string _name;
 
         private Transform _transform;
-        private SpriteRenderer _spriteRenderer;
+
+        private DrawableMonoBehaviour _renderer;
 
         private List<MonoBehaviour> _components = new List<MonoBehaviour>();
 
@@ -19,17 +20,17 @@ namespace ComponentDesignPattern.Assignment4
         public string Name => _name;
         public Transform Transform => _transform;
 
-        protected SpriteRenderer SpriteRenderer => _spriteRenderer;//Temporarily
+        protected DrawableMonoBehaviour Renderer => _renderer;//Temporarily
 
         //Constructor
-        public GameObject(string pName, Transform pTransform, SpriteRenderer pRenderer, params MonoBehaviour[] pComponents)
+        public GameObject(string pName, Transform pTransform, DrawableMonoBehaviour pRenderer, params MonoBehaviour[] pComponents)
         {
             _name = pName;
             _transform = pTransform;
-            _spriteRenderer = pRenderer;
+            _renderer = pRenderer;
 
             _components.Add(pTransform);
-            _components.Add(pRenderer);
+            _components.Add(_renderer);
 
             _components.AddRange(pComponents);
 
@@ -65,7 +66,7 @@ namespace ComponentDesignPattern.Assignment4
 
         public virtual void DrawGameObject(SpriteBatch pSpriteBatch)
         {
-            _spriteRenderer.Draw(_transform, pSpriteBatch);
+            _renderer.Draw(pSpriteBatch, _transform);
         }
 
         public void AddComponent(MonoBehaviour pBehaviour)

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment1
+namespace ComponentDesignPattern.Assignment5
 {
-    public class Transform
+    public class Transform : MonoBehaviour
     {
         //Fields
         private Vector2 _position;

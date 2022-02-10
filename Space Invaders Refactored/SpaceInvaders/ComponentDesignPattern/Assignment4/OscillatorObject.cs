@@ -1,29 +1,29 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment3
+namespace ComponentDesignPattern.Assignment4
 {
-    public class Oscillator : MonoBehaviour
+    public class OscillatorObject : GameObject
     {
+        //Fields - configurable
         private readonly float _speed = 10;
         private readonly float _amplitude = 1;
 
-        private Vector2 _oscillateMidPoint;
+        //Fields - internal
+        private readonly Vector2 _oscillateMidPoint;
         private float _time;
 
-        public Oscillator(float pSpeed, float pAmplitude)
+        //Constructors
+        public OscillatorObject(string pName, Transform pTransform, SpriteRenderer pRenderer, float pSpeed, float pAmplitude) : base(pName, pTransform, pRenderer)
         {
             _speed = pSpeed;
             _amplitude = pAmplitude;
 
-        }
-
-        public override void Start()
-        {
             _oscillateMidPoint = Transform.Position;
         }
 
-        public override void UpdateMonoBehaviour(GameTime pGameTime)
+        //Methods
+        public override void UpdateGameObject(GameTime pGameTime)
         {
             _time += (float)(pGameTime.ElapsedGameTime.TotalSeconds * _speed);
 

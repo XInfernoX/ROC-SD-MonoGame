@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace ComponentDesignPattern.Assignment4
+namespace ComponentDesignPattern.Assignment5
 {
     public class DrawableMonoBehaviour : MonoBehaviour
     {

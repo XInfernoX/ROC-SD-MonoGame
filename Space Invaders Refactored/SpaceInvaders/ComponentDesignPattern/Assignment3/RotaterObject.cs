@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment2
+namespace ComponentDesignPattern.Assignment3
 {
-    public class Rotater : GameObject
+    public class RotaterObject : GameObject
     {
         //Fields - configurable
         private readonly float _rotationSpeed;
 
         //Constructor
-        public Rotater(string pName, Transform pTransform, SpriteRenderer pRenderer, float pRotationSpeed) : base(pName, pTransform, pRenderer)
+        public RotaterObject(string pName, Transform pTransform, SpriteRenderer pRenderer, float pRotationSpeed) : base(pName, pTransform, pRenderer)
         {
             _rotationSpeed = pRotationSpeed;
         }

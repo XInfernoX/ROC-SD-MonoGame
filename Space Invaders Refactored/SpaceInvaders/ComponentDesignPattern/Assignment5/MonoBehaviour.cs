@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ComponentDesignPattern.Assignment3
+namespace ComponentDesignPattern.Assignment5
 {
     public abstract class MonoBehaviour
     {
