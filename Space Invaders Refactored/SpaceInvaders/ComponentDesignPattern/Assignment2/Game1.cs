@@ -9,9 +9,9 @@ namespace ComponentDesignPattern.Assignment2
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private GameObject _rotatorObject;
-        private GameObject _scalerObject;
-        private GameObject _oscillatorObject;
+        private RotaterObject _rotatorObject;
+        private ScalerObject _scalerObject;
+        private OscillatorObject _oscillatorObject;
 
         public Game1()
         {

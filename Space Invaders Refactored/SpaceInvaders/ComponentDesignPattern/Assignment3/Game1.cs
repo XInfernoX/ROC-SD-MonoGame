@@ -12,7 +12,8 @@ namespace ComponentDesignPattern.Assignment3
         {
             PositionTest,
             RotationTest,
-            ScaleTest
+            ScaleTest,
+            ScaleTest2
         }
 
         //Fields
@@ -26,6 +27,7 @@ namespace ComponentDesignPattern.Assignment3
         private GameObject[] _positionTestObjects;
         private RotaterObject[] _rotateTestObjects;
         private ScalerObject[] _scaleTestObjects;
+        private FlipObject _flipObject;
 
         public Game1()
         {
@@ -107,28 +109,33 @@ namespace ComponentDesignPattern.Assignment3
 
             Transform scaleTestTransform1 = new Transform(new Vector2(viewport.Width * 0.3f, viewport.Height * 0.3f), new Vector2(0.5f, 0.5f), 0, new Vector2(0.5f, 0.5f));
             SpriteRenderer scaleTestRenderer1 = new SpriteRenderer(starIndicator);
-            scaleTestRenderer1.SpriteFont = defaultFont;
             _scaleTestObjects[0] = new ScalerObject("Scaler1", scaleTestTransform1, scaleTestRenderer1, 1);
+            scaleTestRenderer1.SpriteFont = defaultFont;
             scaleTestRenderer1.Text = $"Scale:{scaleTestTransform1.Scale}\nScaleSpeed:{_scaleTestObjects[0].ScaleSpeed}";
 
             Transform scaleTestTransform2 = new Transform(new Vector2(viewport.Width * 0.7f, viewport.Height * 0.3f), new Vector2(0.5f, 0.5f), 0, new Vector2(1f, 1f));
             SpriteRenderer scaleTestRenderer2 = new SpriteRenderer(starIndicator);
-            scaleTestRenderer2.SpriteFont = defaultFont;
             _scaleTestObjects[1] = new ScalerObject("Scaler2", scaleTestTransform2, scaleTestRenderer2, 2);
+            scaleTestRenderer2.SpriteFont = defaultFont;
             scaleTestRenderer2.Text = $"Scale:{scaleTestTransform2.Scale}\nScaleSpeed:{_scaleTestObjects[1].ScaleSpeed}";
 
             Transform scaleTestTransform3 = new Transform(new Vector2(viewport.Width * 0.3f, viewport.Height * 0.7f), new Vector2(0.5f, 0.5f), 0, new Vector2(1.5f, 1.5f));
             SpriteRenderer scaleTestRenderer3 = new SpriteRenderer(starIndicator);
-            scaleTestRenderer3.SpriteFont = defaultFont;
             _scaleTestObjects[2] = new ScalerObject("Scaler3", scaleTestTransform3, scaleTestRenderer3, 3);
+            scaleTestRenderer3.SpriteFont = defaultFont;
             scaleTestRenderer3.Text = $"Scale:{scaleTestTransform3.Scale}\nScaleSpeed:{_scaleTestObjects[2].ScaleSpeed}";
 
             Transform scaleTestTransform4 = new Transform(new Vector2(viewport.Width * 0.7f, viewport.Height * 0.7f), new Vector2(0.5f, 0.5f), 0, new Vector2(2f, 2f));
             SpriteRenderer scaleTestRenderer4 = new SpriteRenderer(starIndicator);
-            scaleTestRenderer4.SpriteFont = defaultFont;
             _scaleTestObjects[3] = new ScalerObject("Scaler4", scaleTestTransform4, scaleTestRenderer4, 4);
+            scaleTestRenderer4.SpriteFont = defaultFont;
             scaleTestRenderer4.Text = $"Scale:{scaleTestTransform4.Scale}\nScaleSpeed:{_scaleTestObjects[3].ScaleSpeed}";
 
+
+            //FlipTestSetup
+            Transform flipTestTransform = new Transform(new Vector2(viewport.Width * 0.5f, viewport.Height * 0.5f), new Vector2(0, 1), 0, new Vector2(3,3));
+            SpriteRenderer flipTestRenderer = new SpriteRenderer(starIndicator);
+            _flipObject = new FlipObject("Scale2", flipTestTransform, flipTestRenderer, 2f);
         }
 
         //Update Methods
@@ -146,6 +153,9 @@ namespace ComponentDesignPattern.Assignment3
                     break;
                 case TransformTest.ScaleTest:
                     UpdateScaleTest(pGameTime);
+                    break;
+                case TransformTest.ScaleTest2:
+                    UpdateScaleTest2(pGameTime);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -176,6 +186,11 @@ namespace ComponentDesignPattern.Assignment3
             }
         }
 
+        private void UpdateScaleTest2(GameTime pGameTime)
+        {
+            _flipObject.UpdateGameObject(pGameTime);
+        }
+
         //Draw Methods
         protected override void Draw(GameTime pGameTime)
         {
@@ -183,7 +198,7 @@ namespace ComponentDesignPattern.Assignment3
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin(SpriteSortMode.BackToFront);
+            _spriteBatch.Begin();
 
             switch (_state)
             {
@@ -195,6 +210,9 @@ namespace ComponentDesignPattern.Assignment3
                     break;
                 case TransformTest.ScaleTest:
                     DrawScaleTest();
+                    break;
+                case TransformTest.ScaleTest2:
+                    DrawScaleTest2();
                     break;
             }
 
@@ -223,6 +241,11 @@ namespace ComponentDesignPattern.Assignment3
             {
                 _scaleTestObjects[i].DrawGameObject(_spriteBatch);
             }
+        }
+
+        private void DrawScaleTest2()
+        {
+            _flipObject.DrawGameObject(_spriteBatch);
         }
 
         private void StateTogglerCheck()

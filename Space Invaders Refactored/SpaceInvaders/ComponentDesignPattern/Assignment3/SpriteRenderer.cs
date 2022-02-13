@@ -9,7 +9,9 @@ namespace ComponentDesignPattern.Assignment3
         //Fields
         private Texture2D _texture;
         private Color _color;
+        private SpriteEffects _spriteEffects;
         private float _layerDepth;
+
 
         //Temporarily
         private SpriteFont _font;
@@ -27,6 +29,12 @@ namespace ComponentDesignPattern.Assignment3
         {
             get => _color;
             set => _color = value;
+        }
+
+        public SpriteEffects SpriteEffects
+        {
+            get => _spriteEffects;
+            set => _spriteEffects = value;
         }
 
         //Temporarily
@@ -71,7 +79,7 @@ namespace ComponentDesignPattern.Assignment3
         {
             Vector2 scaledOrigin = new Vector2(pTransform.Origin.X * _texture.Width, pTransform.Origin.Y * _texture.Height);
             float radians = MathHelper.ToRadians(pTransform.Rotation);
-            pSpriteBatch.Draw(_texture, pTransform.Position, null, _color, radians, scaledOrigin, pTransform.Scale, SpriteEffects.None, _layerDepth);
+            pSpriteBatch.Draw(_texture, pTransform.Position, null, _color, radians, scaledOrigin, pTransform.Scale, _spriteEffects, _layerDepth);
 
             if (_font != null)
             {
@@ -82,7 +90,7 @@ namespace ComponentDesignPattern.Assignment3
 
                 Vector2 textSize = _font.MeasureString(_text);
                 Vector2 textOrigin = _textOrigin.ToCoordinate();
-                pSpriteBatch.DrawString(_font, _text, textPosition, Color.Red, 0, textOrigin * textSize, 1.0f, SpriteEffects.None, _layerDepth);
+                pSpriteBatch.DrawString(_font, _text, textPosition, Color.Red, 0, textOrigin * textSize, 1.0f, _spriteEffects, _layerDepth);
             }
 
 
