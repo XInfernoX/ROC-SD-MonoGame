@@ -2,9 +2,11 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using ComponentDesignPattern.Assignment5.Interfaces;
+
 namespace ComponentDesignPattern.Assignment5
 {
-    public class SpriteRenderer : DrawableMonoBehaviour
+    public class SpriteRenderer : Component, IDrawableComponent
     {
         //Fields
         private Texture2D _texture;

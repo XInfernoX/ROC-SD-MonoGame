@@ -35,6 +35,8 @@ namespace ComponentDesignPattern.Assignment4
 
             //Applying the calculated RGB value to the SpriteRenderer based on the _hue value
             //Saturation is hardcoded to 1.0f and Lightness is hardcoded to 0.5f for the brightest color representation
+
+            //TODO Change SpriteRenderer property to a cached reference to the attached SpriteRenderer component via GetComponent<T>
             SpriteRenderer.Color = HSLToRGB(_hue, 1.0f, 0.5f);
         }
 

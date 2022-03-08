@@ -186,6 +186,34 @@ namespace SpaceInvadersRefactored
                 _updateableComponents[i].LateUpdate(pGameTime);
         }
 
+        public void CollisionCheck2(GameObject pOther)
+        {
+            bool collision = false;
+
+            for (int myColliderComponentIndex = 0; myColliderComponentIndex < _collideableComponents.Count; myColliderComponentIndex++)
+            {
+                ICollideable myCurrentCollider = _collideableComponents[myColliderComponentIndex];
+
+                Collider[] otherColliders = pOther.GetComponents<Collider>();
+                for (int otherComponentIndex = 0; otherComponentIndex < otherColliders.Length; otherComponentIndex++)
+                {
+                    if (myCurrentCollider.CollisionCheck(otherColliders[otherComponentIndex]))
+                    {
+                        collision = true;
+                        CallOnCollisionEventMethods(this, pOther);
+                        break;
+                    }
+                }
+
+                if (collision)
+                    break;
+            }
+        }
+
+
+
+
+
         /// <summary>Checks all collider components of this GameObject with all collider components of another GameObject for a collision</summary>
         /// <param name="pOther">Reference to the other GameObject to check collision against</param>
         public void CollisionCheck(GameObject pOther)

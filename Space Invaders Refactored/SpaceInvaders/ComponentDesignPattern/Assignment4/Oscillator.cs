@@ -15,7 +15,6 @@ namespace ComponentDesignPattern.Assignment4
         {
             _speed = pSpeed;
             _amplitude = pAmplitude;
-
         }
 
         public override void Start()

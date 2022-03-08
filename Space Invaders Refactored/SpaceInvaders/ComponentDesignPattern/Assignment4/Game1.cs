@@ -33,9 +33,6 @@ namespace ComponentDesignPattern.Assignment4
         Texture2D _littleStarTexture;
         private SpriteFont _defaultFont;
 
-        //AnimatedSprite
-        private GameObject _megaMan;
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -51,11 +48,33 @@ namespace ComponentDesignPattern.Assignment4
             base.LoadContent();
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
             Viewport viewport = _graphics.GraphicsDevice.Viewport;
-
-
             _littleStarTexture = Content.Load<Texture2D>("LittleStar");
             _defaultFont = Content.Load<SpriteFont>("Arial");
+
+
+            Transform testTransform = new Transform(new Vector2(viewport.Width * 0.5f, viewport.Height * 0.5f));
+            SpriteRenderer testRenderer = new SpriteRenderer(_littleStarTexture);
+            Rotator testRotator = new Rotator(10);
+            Oscillator testOscillator = new Oscillator(10, 2);
+            ColorShifter testColorShifter = new ColorShifter(2.0f);
+            Scaler testScaler = new Scaler(2.0f);//Optional
+
+            GameObject test = new GameObject("Test", testTransform, 
+                testRenderer, testRotator, testOscillator, testColorShifter, testScaler);
+
+
+
+
+
+
+
+
+
+
+
+
 
             //Starting point for students
             Transform rotatorTransform = new Transform(new Vector2(viewport.Width * 0.2f, viewport.Height * 0.5f));
@@ -71,7 +90,7 @@ namespace ComponentDesignPattern.Assignment4
             _oscillatorObject = new OscillatorObject("OscillatorTest", oscillatorTransform, oscillatorRenderer, 1, 10);
 
             Transform colorShifterTransform = new Transform(new Vector2(viewport.Width * 0.8f, viewport.Height * 0.5f));
-            SpriteRenderer colorShifterSpriteRenderer = new SpriteRenderer(_littleStarTexture) ;
+            SpriteRenderer colorShifterSpriteRenderer = new SpriteRenderer(_littleStarTexture);
             colorShifterSpriteRenderer.SpriteFont = _defaultFont;
             colorShifterSpriteRenderer.Text = "ColorShifter (C)";
             _colorShifterObject = new ColorShifterObject("ColorShifterTest", colorShifterTransform, colorShifterSpriteRenderer, 0.1f);
@@ -206,7 +225,7 @@ namespace ComponentDesignPattern.Assignment4
                     }
                     break;
                 case AssignmentState.AnimatedSprite:
-                    
+
                     break;
             }
 

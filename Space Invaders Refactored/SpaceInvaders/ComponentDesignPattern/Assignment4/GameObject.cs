@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,7 +12,6 @@ namespace ComponentDesignPattern.Assignment4
         private string _name;
 
         private Transform _transform;
-        private SpriteRenderer _spriteRenderer;
 
         private List<MonoBehaviour> _components = new List<MonoBehaviour>();
 
@@ -19,7 +19,44 @@ namespace ComponentDesignPattern.Assignment4
         public string Name => _name;
         public Transform Transform => _transform;
 
-        protected SpriteRenderer SpriteRenderer => _spriteRenderer;//Temporarily
+        //Constructor
+   
+
+
+
+
+        public T GetComponent<T>() where T : MonoBehaviour
+        {
+            for (int i = 0; i < _components.Count; i++)
+            {
+                if (_components[i] is T behaviour)
+                    return behaviour;
+            }
+
+            return null;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region Not For Students to see >:E
+
+        //Temporarily
+        private SpriteRenderer _spriteRenderer;
+        protected SpriteRenderer SpriteRenderer => _spriteRenderer;
+
 
         //Constructor
         public GameObject(string pName, Transform pTransform, SpriteRenderer pRenderer, params MonoBehaviour[] pComponents)
@@ -38,7 +75,6 @@ namespace ComponentDesignPattern.Assignment4
                 pComponents[i].SetOwner(this);
             }
         }
-
 
         public void AwakeComponents()
         {
@@ -78,20 +114,13 @@ namespace ComponentDesignPattern.Assignment4
             _components.Remove(pBehaviour);
             pBehaviour.SetOwner(null);
         }
+        #endregion
 
-        public T GetComponent<T>() where T : MonoBehaviour
-        {
-            for (int i = 0; i < _components.Count; i++)
-            {
-                if (_components[i] is T)
-                {
-                    Console.WriteLine("Found " + typeof(T));
-                    return _components[i] as T;
-                }
-            }
 
-            return null;
-        }
+
+
+
+
 
         public T[] GetComponents<T>() where T : MonoBehaviour
         {

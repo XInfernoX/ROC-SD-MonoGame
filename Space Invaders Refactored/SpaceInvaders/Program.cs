@@ -1,7 +1,6 @@
 ﻿using System;
 
 using Microsoft.Xna.Framework;
-using StateGame;
 
 public static class Program
 {
@@ -87,7 +86,7 @@ public static class Program
 
         #region Advanced2
 
-        using (Game game = new ComponentDesignPattern.Assignment3.Game1())
+        using (Game game = new ComponentDesignPattern.Assignment5.Game1())
             game.Run();
         #endregion
     }

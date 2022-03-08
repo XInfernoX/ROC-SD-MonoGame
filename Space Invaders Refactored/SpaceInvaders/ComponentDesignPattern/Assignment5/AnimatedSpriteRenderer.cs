@@ -1,11 +1,14 @@
 ﻿using System;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using ComponentDesignPattern.Assignment5.Interfaces;
+
 namespace ComponentDesignPattern.Assignment5
 {
-    public class AnimatedSpriteRenderer : DrawableMonoBehaviour
+    public class AnimatedSpriteRenderer : Component, IUpdateableComponent, IDrawableComponent
     {
         //Fields
         private readonly Texture2D _spriteSheet;
@@ -93,10 +96,6 @@ namespace ComponentDesignPattern.Assignment5
         {
         }
 
-
-
-
-
         public AnimatedSpriteRenderer(string pAssetName, ContentManager pContent, int pHorizontalSpriteCount, int pVerticalSpriteCount) :
         this(pContent.Load<Texture2D>(pAssetName), pHorizontalSpriteCount, pVerticalSpriteCount, 1.0f, Color.White)
         {
@@ -112,19 +111,26 @@ namespace ComponentDesignPattern.Assignment5
         {
         }
 
-        public override void UpdateMonoBehaviour(GameTime pGameTime)
+        public void Update(GameTime pGameTime)
         {
             _animationTime += (float)pGameTime.ElapsedGameTime.TotalSeconds * _timeModifier;
             _animationTime %= 1.0f;
 
             int currentFrame = (int)(_animationTime * _spriteCount);
 
-            Console.WriteLine($"time:{_animationTime}, currentFrame:{currentFrame}");
-
             _currentSourceRectangle = _sourceRectangles[currentFrame];
         }
 
-        public override void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
+        public void LateUpdate(GameTime pGameTime)
+        {
+        }
+
+        public void OnCollision(GameObject pGameObject)
+        {
+            
+        }
+
+        public void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
         {
             Vector2 scaledOrigin =
                 new Vector2(pTransform.Origin.X * SingleSpriteWidth, pTransform.Origin.Y * SingleSpriteHeight);

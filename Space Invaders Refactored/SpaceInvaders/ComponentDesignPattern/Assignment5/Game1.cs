@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ComponentDesignPattern.Assignment5
@@ -9,10 +11,7 @@ namespace ComponentDesignPattern.Assignment5
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private GameObject _littleStar1;
-        private GameObject _littleStar2;
-
-        private GameObject _megaMan;
+        private List<GameObject> _gameObjects = new List<GameObject>();
 
         public Game1()
         {
@@ -28,28 +27,35 @@ namespace ComponentDesignPattern.Assignment5
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Viewport viewport = GraphicsDevice.Viewport;
 
-            Transform keyTransform = new Transform(new Vector2(50, 50), new Vector2(0.5f, 0.5f), 0, new Vector2(1, 1));
-            SpriteRenderer keyRenderer = new SpriteRenderer(Content.Load<Texture2D>("LittleStar"), Color.Blue, 0.0f);
+            AnimatedSpriteRenderer animatedSpriteRenderer = new AnimatedSpriteRenderer(Content.Load<Texture2D>("Megaman2"), 5, 2, 12f);
+            _gameObjects.Add(new GameObject(this, "MegaMan", new Vector2(viewport.Width / 2.0f, viewport.Height / 2.0f), animatedSpriteRenderer));
 
-            Transform keyTransform2 = new Transform(new Vector2(75, 75), new Vector2(0.5f, 0.5f), 0, new Vector2(1, 1));
-            SpriteRenderer keyRenderer2 = new SpriteRenderer(Content.Load<Texture2D>("LittleStar"), Color.Red, 1);
+            AwakeGameObjects();
+            StartGameObjects();
+        }
 
-            _littleStar1 = new GameObject("Key", keyTransform, keyRenderer);
-            _littleStar2 = new GameObject("Key2", keyTransform2, keyRenderer2);
+        private void AwakeGameObjects()
+        {
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                _gameObjects[i].AwakeComponents();
+            }
+        }
 
-            Transform megaManTransform = new Transform(new Vector2(viewport.Width * 0.5f, viewport.Height * 0.5f));
-            AnimatedSpriteRenderer animatedSpriteRenderer = new AnimatedSpriteRenderer(
-                Content.Load<Texture2D>("Megaman2"), 5, 2, 12f);
-
-            _megaMan = new GameObject("MegaMan", megaManTransform, animatedSpriteRenderer);
+        private void StartGameObjects()
+        {
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                _gameObjects[i].StartComponents();
+            }
         }
 
         protected override void Update(GameTime pGameTime)
         {
-            _littleStar1.UpdateGameObject(pGameTime);
-            _littleStar2.UpdateGameObject(pGameTime);
-
-            _megaMan.UpdateGameObject(pGameTime);
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                _gameObjects[i].Update(pGameTime);
+            }
         }
 
         protected override void Draw(GameTime pGameTime)
@@ -60,10 +66,10 @@ namespace ComponentDesignPattern.Assignment5
 
             _spriteBatch.Begin(SpriteSortMode.BackToFront);
 
-            _littleStar1.DrawGameObject(_spriteBatch);
-            _littleStar2.DrawGameObject(_spriteBatch);
-
-            _megaMan.DrawGameObject(_spriteBatch);
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                _gameObjects[i].Draw(_spriteBatch);
+            }
 
             _spriteBatch.End();
         }

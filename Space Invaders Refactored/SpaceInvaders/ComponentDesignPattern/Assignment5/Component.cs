@@ -1,18 +1,37 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace ComponentDesignPattern.Assignment5
+﻿namespace ComponentDesignPattern.Assignment5
 {
     public class Component
     {
-        public virtual void Update(GameTime pGameTime)
+        //Fields
+        protected GameObject _owner;
+
+        //Properties
+        public Transform Transform => _owner.Transform;
+
+        //Methods
+        public virtual void Awake()
         {
 
         }
 
-        public virtual void Draw(Transform pTransform, SpriteBatch pSpriteBatch)
+        public virtual void Start()
         {
 
+        }
+        
+        public void SetOwner(GameObject pOwner)
+        {
+            _owner = pOwner;
+        }
+
+        protected T GetComponent<T>() where T : Component
+        {
+            return _owner.GetComponent<T>();
+        }
+
+        protected T[] GetComponents<T>() where T : Component
+        {
+            return _owner.GetComponents<T>();
         }
     }
 }

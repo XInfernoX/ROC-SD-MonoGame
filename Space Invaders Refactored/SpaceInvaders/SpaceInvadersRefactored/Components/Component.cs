@@ -1,9 +1,10 @@
 ﻿using System;
+using SpaceInvadersRefactored.Interfaces;
 
 namespace SpaceInvadersRefactored.Components
 {
     //CONSIDER whether we want to hide "_owner.", Makes sense from a Unity resemblance perspective, but might show students the relation between Components and owners
-    public abstract class Component : IDisposable
+    public abstract class Component : IComponent, IDisposable
     {
         //Fields
         private GameObject _gameObject;
@@ -49,6 +50,11 @@ namespace SpaceInvadersRefactored.Components
         public override string ToString()
         {
             return $"Unspecified Component";
+        }
+
+        public IComponent Copy()
+        {
+            throw new NotImplementedException();
         }
 
         public virtual void Dispose()

@@ -1,41 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 
+using ComponentDesignPattern.Assignment5.Interfaces;
+
 namespace ComponentDesignPattern.Assignment5
 {
-    public abstract class MonoBehaviour
+    public abstract class MonoBehaviour : Component, IUpdateableComponent
     {
-        private GameObject _owner;
-
-        public Transform Transform => _owner.Transform;
-
-        public void SetOwner(GameObject pOwner)
+        //Methods
+        public virtual void Update(GameTime pGameTime)
         {
-            _owner = pOwner;
         }
 
-        public virtual void Awake()
+        public void LateUpdate(GameTime pGameTime)
         {
-
         }
 
-        public virtual void Start()
+        public virtual void OnCollision(GameObject pOther)
         {
 
-        }
-
-        public virtual void UpdateMonoBehaviour(GameTime pGameTime)
-        {
-
-        }
-
-        protected T GetComponent<T>() where T : MonoBehaviour
-        {
-            return _owner.GetComponent<T>();
-        }
-
-        protected T[] GetComponents<T>() where T : MonoBehaviour
-        {
-            return _owner.GetComponents<T>();
         }
     }
 }
