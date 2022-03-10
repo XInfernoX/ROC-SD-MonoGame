@@ -20,8 +20,8 @@ namespace ComponentDesignPattern.Assignment5
 
         private readonly List<IUpdateableComponent> _updateableComponents = new List<IUpdateableComponent>();
         private readonly List<IDrawableComponent> _drawableComponents = new List<IDrawableComponent>();
-        private readonly List<ColliderRectangle> _colliderComponents = new List<ColliderRectangle>();
-        private readonly List<ICollideableComponent<ColliderRectangle, Rectangle>> _collideableComponents = new List<ICollideableComponent<ColliderRectangle, Rectangle>>();
+        //private readonly List<RectangleCollider> _colliderComponents = new List<RectangleCollider>();
+        private readonly List<ICollideableComponent> _collideableComponents = new List<ICollideableComponent>();
 
         //Properties
         public string Name => _name;
@@ -90,63 +90,66 @@ namespace ComponentDesignPattern.Assignment5
         public GameObject(Game1 pGame, string pName, Vector2 pPosition, Vector2 pOrigin, float pRotation, params Component[] pComponents) : this(pGame, pName, pPosition, pOrigin, pRotation, Vector2.One, pComponents) { }
 
         //Methods
+        //public void CollisionCheck(GameObject pOther)
+        //{
+        //    bool collision = false;
+
+        //    for (int myColliderComponentIndex = 0; myColliderComponentIndex < _colliderComponents.Count; myColliderComponentIndex++)
+        //    {
+        //        RectangleCollider myCurrentColliderRectangle = _colliderComponents[myColliderComponentIndex];
+
+        //        RectangleCollider[] otherColliders = pOther.GetComponents<RectangleCollider>();
+        //        for (int otherComponentIndex = 0; otherComponentIndex < otherColliders.Length; otherComponentIndex++)
+        //        {
+        //            if (myCurrentColliderRectangle.CollisionCheck(otherColliders[otherComponentIndex]))
+        //            {
+        //                collision = true;
+        //                InvokeOnCollisionEventMethods(pOther);
+        //                break;
+        //            }
+        //        }
+
+        //        if (collision)
+        //            break;
+        //    }
+        //}
+
+        /// <summary>Checks if there is a collision between two GameObjects by checking all possible collisions between all collideabl components attached to both GameObjects</summary>
+        /// <param name="pOther">A reference to the other GameObject to check Collision against</param>
         public void CollisionCheck(GameObject pOther)
         {
-            bool collision = false;
-
-            for (int myColliderComponentIndex = 0; myColliderComponentIndex < _colliderComponents.Count; myColliderComponentIndex++)
+            //Loop through all "my" collideable components
+            for (int myColliderIndex = 0; myColliderIndex < _collideableComponents.Count; myColliderIndex++)
             {
-                ColliderRectangle myCurrentColliderRectangle = _colliderComponents[myColliderComponentIndex];
+                //Cache "my" current collider
+                ICollideableComponent myCurrentCollider = _collideableComponents[myColliderIndex];
 
-                ColliderRectangle[] otherColliders = pOther.GetComponents<ColliderRectangle>();
-                for (int otherComponentIndex = 0; otherComponentIndex < otherColliders.Length; otherComponentIndex++)
+                //Retrieve list of "other's" colliders
+                List<ICollideableComponent> otherColliders = pOther._collideableComponents;
+
+                //Loop through all "other's" colliders to see if it colliders with myCurrentCollider
+                for (int otherColliderIndex = 0; otherColliderIndex < otherColliders.Count; otherColliderIndex++)
                 {
-                    if (myCurrentColliderRectangle.CollisionCheck(otherColliders[otherComponentIndex]))
+                    //Check if there is a collision between myCurrentCollider and otherCurrentCollider
+                    if (myCurrentCollider.CollisionCheck(otherColliders[otherColliderIndex]))
                     {
-                        collision = true;
-                        CallOnCollisionEventMethods(pOther);
-                        break;
+                        InvokeOnCollisionEventMethods(pOther);
+                        return;
                     }
                 }
-
-                if (collision)
-                    break;
             }
         }
 
-        public void CollisionCheck2(GameObject pOther)
-        {
-            bool collision = false;
-
-            for (int myColliderComponentIndex = 0; myColliderComponentIndex < _colliderComponents.Count; myColliderComponentIndex++)
-            {
-                ICollideableComponent<ColliderRectangle, Rectangle> myCurrentCollider = _collideableComponents[myColliderComponentIndex];
-
-                List<ICollideableComponent<ColliderRectangle, Rectangle>> otherColliders = pOther._collideableComponents;
-                for (int otherComponentIndex = 0; otherComponentIndex < otherColliders.Count; otherComponentIndex++)
-                {
-                    if (myCurrentCollider.CollisionCheck(otherColliders[otherComponentIndex]))
-                    {
-                        collision = true;
-                        CallOnCollisionEventMethods(pOther);
-                        break;
-                    }
-                }
-
-                if (collision)
-                    break;
-            }
-        }
-
-
-        private void CallOnCollisionEventMethods(GameObject pOtherGameObject)
+        /// <summary>Invokes the OnCollision event method on all updateable components from both GameObjects (this one + other)</summary>
+        /// <param name="pOtherGameObject">A reference to the other GameObject to invoke its OnCollision event methods</param>
+        private void InvokeOnCollisionEventMethods(GameObject pOtherGameObject)
         {
             for (int i = 0; i < _updateableComponents.Count; i++)
                 _updateableComponents[i].OnCollision(pOtherGameObject);
 
-            List<IUpdateableComponent> secondUpdatables = pOtherGameObject._updateableComponents;
-            for (int i = 0; i < secondUpdatables.Count; i++)
-                secondUpdatables[i].OnCollision(this);
+            List<IUpdateableComponent> otherUpdateableComponents = pOtherGameObject._updateableComponents;
+            for (int i = 0; i < otherUpdateableComponents.Count; i++)
+                otherUpdateableComponents[i].OnCollision(this);
         }
 
         /// <summary>Looks for a Component of type T on this GameObject and returns the first instance found</summary>
@@ -191,10 +194,10 @@ namespace ComponentDesignPattern.Assignment5
             if (pComponent is IUpdateableComponent updateableComponent)
                 _updateableComponents.Add(updateableComponent);
 
-            if(pComponent is ColliderRectangle colliderComponent)
-                _colliderComponents.Add(colliderComponent);
+            //if(pComponent is RectangleCollider colliderComponent)
+            //    _colliderComponents.Add(colliderComponent);
 
-            if (pComponent is ICollideableComponent<ColliderRectangle, Rectangle> collideableComponent)
+            if (pComponent is ICollideableComponent collideableComponent)
                 _collideableComponents.Add(collideableComponent);
         }
 
@@ -206,10 +209,10 @@ namespace ComponentDesignPattern.Assignment5
             if (pComponent is IUpdateableComponent updateableComponent)
                 _updateableComponents.Remove(updateableComponent);
 
-            if (pComponent is ColliderRectangle colliderComponent)
-                _colliderComponents.Remove(colliderComponent);
+            //if (pComponent is RectangleCollider colliderComponent)
+            //    _colliderComponents.Remove(colliderComponent);
 
-            if (pComponent is ICollideableComponent<ColliderRectangle, Rectangle> collideableComponent)
+            if (pComponent is ICollideableComponent collideableComponent)
                 _collideableComponents.Remove(collideableComponent);
 
             _allComponents.Remove(pComponent);
@@ -219,17 +222,13 @@ namespace ComponentDesignPattern.Assignment5
         public void AwakeComponents()
         {
             for (int i = 0; i < _allComponents.Count; i++)
-            {
                 _allComponents[i].Awake();
-            }
         }
         /// <summary>Starts all Components attached to this GameObject</summary>
         public void StartComponents()
         {
             for (int i = 0; i < _allComponents.Count; i++)
-            {
                 _allComponents[i].Start();
-            }
         }
         /// <summary>Updates all Components attached to this GameObject</summary>
         /// <param name="pGameTime">GameTime reference (should be from _game.Update(GameTime))</param>
@@ -259,7 +258,6 @@ namespace ComponentDesignPattern.Assignment5
         /// Overrides object.ToString() method, this method gets automatically called when this GameObject is printed to the Console.
         /// This method prints the name of this GameObject and all attached Components, useful for debugging purposes
         /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             string fullName = $"GameObject: {_name}\n";

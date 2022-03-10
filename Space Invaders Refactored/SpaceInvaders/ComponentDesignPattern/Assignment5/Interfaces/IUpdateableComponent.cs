@@ -10,12 +10,4 @@ namespace ComponentDesignPattern.Assignment5.Interfaces
 
         void OnCollision(GameObject pOther);
     }
-
-    public interface ICollideableComponent<T, U>
-    {
-        U Collider { get; }
-        void UpdateCollider();
-
-        bool CollisionCheck(ICollideableComponent<T, U> pOther);
-    }
 }

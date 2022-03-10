@@ -27,6 +27,8 @@ namespace ComponentDesignPattern.Assignment5
         private Rectangle _currentSourceRectangle;
 
         //Properties
+        public Vector2 Size => new Vector2(SingleSpriteWidth, SingleSpriteHeight);
+
         public int SingleSpriteWidth => _spriteSheet.Width / _horizontalSpriteCount;
         public int SingleSpriteHeight => _spriteSheet.Height / _verticalSpriteCount;
 
@@ -138,5 +140,6 @@ namespace ComponentDesignPattern.Assignment5
             pSpriteBatch.Draw(_spriteSheet, pTransform.Position, _currentSourceRectangle, _color, radians, scaledOrigin, pTransform.Scale,
                 SpriteEffects.None, _layerDepth);
         }
+
     }
 }

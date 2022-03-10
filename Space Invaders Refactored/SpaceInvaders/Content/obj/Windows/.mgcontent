@@ -7,6 +7,8 @@
     <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/alien1.png</File>
     <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Arial.spritefont</File>
     <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/background.png</File>
+    <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Circle.png</File>
+    <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/CircleTransparent.png</File>
     <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Enemy.png</File>
     <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Flag.png</File>
     <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Knight.png</File>
@@ -31,6 +33,8 @@
     <File>C:/Users/XInfernoX/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Weapon.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
