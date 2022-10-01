@@ -4,9 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/MonoGame-UnityFramework/MonoGame-UnityFramework/MonoGame-UnityFramework/Content/tile_0000.png</File>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/MonoGame-UnityFramework/MonoGame-UnityFramework/MonoGame-UnityFramework/Content/tile_0044.png</File>
-    <File>C:/Users/dmeel/OneDrive - ROC van Twente/MonoGame-UnityFramework/MonoGame-UnityFramework/MonoGame-UnityFramework/Content/tile_0111.png</File>
+    <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/MonoGame-UnityFramework/MonoGame-UnityFramework/Content/tile_0000.png</File>
+    <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/MonoGame-UnityFramework/MonoGame-UnityFramework/Content/tile_0044.png</File>
+    <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/MonoGame-UnityFramework/MonoGame-UnityFramework/Content/tile_0111.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

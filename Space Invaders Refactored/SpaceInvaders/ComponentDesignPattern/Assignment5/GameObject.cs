@@ -77,7 +77,7 @@ namespace ComponentDesignPattern.Assignment5
         /// <param name="pGame">A reference to the game this GameObject belongs to (usually you would need to use 'this' here)</param>
         /// <param name="pName">Name of the GameObject</param>
         /// <param name="pPosition">Starting position of the GameObject</param>
-        /// <param name="pOrigin">Location of the origin (center/pivot point) in UV coodinates (percentage-like values) Ranges[0,1]</param>
+        /// <param name="pOrigin">Location of the origin (center/pivot point) in UV coordinates (percentage-like values) Ranges[0,1]</param>
         /// <param name="pComponents">Starting components of the GameObject</param>public GameObject(SpaceInvaders pGame, string pName, Vector2 pPosition, params Component[] pComponents) : this(pGame, pName, pPosition, new Vector2(0.5f, 0.5f), 0, Vector2.One, pComponents) { }
         public GameObject(Game1 pGame, string pName, Vector2 pPosition, Vector2 pOrigin, params Component[] pComponents) : this(pGame, pName, pPosition, pOrigin, 0, Vector2.One, pComponents) { }
         /// <summary>Creates a GameObject with starting Components</summary>
@@ -188,8 +188,11 @@ namespace ComponentDesignPattern.Assignment5
             pComponent.SetOwner(this);
             _allComponents.Add(pComponent);
 
-            if (pComponent is IDrawableComponent drawableComponent)
-                _drawableComponents.Add(drawableComponent);
+            if (pComponent is IDrawableComponent)
+            {
+                IDrawableComponent component = pComponent as IDrawableComponent;
+                _drawableComponents.Add(component);
+            }
 
             if (pComponent is IUpdateableComponent updateableComponent)
                 _updateableComponents.Add(updateableComponent);

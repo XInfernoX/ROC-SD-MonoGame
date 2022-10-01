@@ -1,4 +1,4 @@
-﻿namespace StateGameRefactored1
+﻿namespace StateDesignPattern.Assignment2
 {
     public enum GameState
     {

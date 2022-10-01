@@ -53,42 +53,21 @@ namespace ComponentDesignPattern.Assignment4
             _littleStarTexture = Content.Load<Texture2D>("LittleStar");
             _defaultFont = Content.Load<SpriteFont>("Arial");
 
-
-            Transform testTransform = new Transform(new Vector2(viewport.Width * 0.5f, viewport.Height * 0.5f));
-            SpriteRenderer testRenderer = new SpriteRenderer(_littleStarTexture);
-            Rotator testRotator = new Rotator(10);
-            Oscillator testOscillator = new Oscillator(10, 2);
-            ColorShifter testColorShifter = new ColorShifter(2.0f);
-            Scaler testScaler = new Scaler(2.0f);//Optional
-
-            GameObject test = new GameObject("Test", testTransform, 
-                testRenderer, testRotator, testOscillator, testColorShifter, testScaler);
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //Starting point for students
+            //RotatorObject
             Transform rotatorTransform = new Transform(new Vector2(viewport.Width * 0.2f, viewport.Height * 0.5f));
             SpriteRenderer rotatorRenderer = new SpriteRenderer(_littleStarTexture);
             rotatorRenderer.SpriteFont = _defaultFont;
             rotatorRenderer.Text = "Rotator (A)";
             _rotatorObject = new RotatorObject("RotatorTest", rotatorTransform, rotatorRenderer, 10);
 
+            //OscillatorObject
             Transform oscillatorTransform = new Transform(new Vector2(viewport.Width * 0.5f, viewport.Height * 0.5f));
             SpriteRenderer oscillatorRenderer = new SpriteRenderer(_littleStarTexture);
             oscillatorRenderer.SpriteFont = _defaultFont;
             oscillatorRenderer.Text = "Oscillator (B)";
             _oscillatorObject = new OscillatorObject("OscillatorTest", oscillatorTransform, oscillatorRenderer, 1, 10);
 
+            //ColorShifterObject
             Transform colorShifterTransform = new Transform(new Vector2(viewport.Width * 0.8f, viewport.Height * 0.5f));
             SpriteRenderer colorShifterSpriteRenderer = new SpriteRenderer(_littleStarTexture);
             colorShifterSpriteRenderer.SpriteFont = _defaultFont;

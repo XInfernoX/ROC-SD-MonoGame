@@ -77,3 +77,4 @@ C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\MonoGame-UnityF
 C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\MonoGame-UnityFramework\MonoGame-UnityFramework\obj\Debug\netcoreapp3.1\MonoGame-UnityFramework.dll
 C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\MonoGame-UnityFramework\MonoGame-UnityFramework\obj\Debug\netcoreapp3.1\MonoGame-UnityFramework.pdb
 C:\Users\dmeel\OneDrive - ROC van Twente\MonoGame-UnityFramework\MonoGame-UnityFramework\MonoGame-UnityFramework\obj\Debug\netcoreapp3.1\MonoGame-UnityFramework.genruntimeconfig.cache
+C:\Users\dmeel\Documents\Projects\ROC\MonoGame-UnityFramework\MonoGame-UnityFramework\MonoGame-UnityFramework\obj\Debug\netcoreapp3.1\MonoGame-UnityFramework.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using StateGameRefactored1;
 
-namespace StateGameRefactored
+namespace StateDesignPattern.Assignment2
 {
-    public class StateGame : Game
+    public class Game1 : Game
     {
         //Fields
         private GraphicsDeviceManager _graphics;
@@ -39,7 +38,7 @@ namespace StateGameRefactored
         private readonly Color _pressedColor = Color.Red;
 
         //Constructor
-        public StateGame()
+        public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -83,7 +82,7 @@ namespace StateGameRefactored
             Texture2D playerShieldTexture = Content.Load<Texture2D>("KnightShield");
             Texture2D playerWeaponTexture = Content.Load<Texture2D>("KnightWeapon");
             Texture2D playerWeaponShieldTexture = Content.Load<Texture2D>("KnightWeaponShield");
-            _player = new Player(new Vector2(viewPort.Width / 2, third * 2), playerTexture, 3, 
+            _player = new Player(new Vector2(viewPort.Width / 2, third * 2), playerTexture, 3,
                 _shield, _weapon, playerShieldTexture, playerWeaponTexture, playerWeaponShieldTexture);
 
             //Enemy
@@ -153,7 +152,7 @@ namespace StateGameRefactored
             }
 
             _spriteBatch.End();
-            
+
             base.Draw(pGameTime);
         }
 

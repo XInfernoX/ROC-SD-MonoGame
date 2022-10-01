@@ -4,7 +4,7 @@ namespace ComponentDesignPattern.Assignment4
 {
     public abstract class MonoBehaviour
     {
-        private GameObject _owner;
+        protected GameObject _owner;
 
         public Transform Transform => _owner.Transform;
 

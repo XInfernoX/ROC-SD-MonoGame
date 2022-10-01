@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,10 +19,6 @@ namespace ComponentDesignPattern.Assignment4
         public Transform Transform => _transform;
 
         //Constructor
-   
-
-
-
 
         public T GetComponent<T>() where T : MonoBehaviour
         {

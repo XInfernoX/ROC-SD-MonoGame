@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace StateGameRefactored1
+namespace StateDesignPattern.Assignment2
 {
     public class ButtonBase : GameObject
     {
-        protected StateGameRefactored.StateGame _game;
+        protected Game _game;
 
         private ButtonStatus _status;
         private Color _currentButtonColor;
@@ -15,7 +15,7 @@ namespace StateGameRefactored1
         private Color _hoverColor;
         private Color _pressedColor;
 
-        public ButtonBase(Vector2 pPosition, Texture2D pTexture, StateGameRefactored.StateGame pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor) : base(pPosition, pTexture)
+        public ButtonBase(Vector2 pPosition, Texture2D pTexture, Game pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor) : base(pPosition, pTexture)
         {
             _game = pGame;
 
@@ -90,7 +90,8 @@ namespace StateGameRefactored1
 
         public override void Draw(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.Draw(_texture, _position, _currentButtonColor);
+            //pSpriteBatch.Draw(_texture, _position, _currentButtonColor);
+            pSpriteBatch.Draw(Texture, Position, _currentButtonColor);
         }
 
         protected virtual void OnButtonClick() { }

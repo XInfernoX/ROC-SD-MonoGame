@@ -1,12 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using StateGameRefactored1;
 
-namespace StateGameRefactored
+namespace StateDesignPattern.Assignment2
 {
     public class MenuButton : ButtonBase
     {
-        public MenuButton(Vector2 pPosition, Texture2D pTexture, StateGameRefactored.StateGame pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor)
+        public MenuButton(Vector2 pPosition, Texture2D pTexture, Game pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor)
             : base(pPosition, pTexture, pGame, pDefaultColor, pHoverColor, pPressedColor) { }
 
         protected override void OnButtonClick()

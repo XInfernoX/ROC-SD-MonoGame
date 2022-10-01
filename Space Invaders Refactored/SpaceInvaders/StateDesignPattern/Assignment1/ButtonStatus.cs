@@ -1,4 +1,4 @@
-﻿namespace StateGame
+﻿namespace StateDesignPattern.Assignment1
 {
     public enum ButtonStatus
     {

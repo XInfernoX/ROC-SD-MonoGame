@@ -129,17 +129,15 @@ namespace ComponentDesignPattern.Assignment5
 
         public void OnCollision(GameObject pGameObject)
         {
-            
+
         }
 
         public void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
         {
-            Vector2 scaledOrigin =
-                new Vector2(pTransform.Origin.X * SingleSpriteWidth, pTransform.Origin.Y * SingleSpriteHeight);
+            Vector2 scaledOrigin = new Vector2(pTransform.Origin.X * SingleSpriteWidth, pTransform.Origin.Y * SingleSpriteHeight);
             float radians = MathHelper.ToRadians(pTransform.Rotation);
-            pSpriteBatch.Draw(_spriteSheet, pTransform.Position, _currentSourceRectangle, _color, radians, scaledOrigin, pTransform.Scale,
-                SpriteEffects.None, _layerDepth);
-        }
 
+            pSpriteBatch.Draw(_spriteSheet, pTransform.Position, _currentSourceRectangle, _color, radians, scaledOrigin, pTransform.Scale, SpriteEffects.None, _layerDepth);
+        }
     }
 }

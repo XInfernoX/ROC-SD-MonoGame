@@ -2,6 +2,7 @@
 
 namespace ComponentDesignPattern.Assignment5
 {
+    //Component that keeps track of transformation data. It determines how a GameObject is placed in a 2D world
     public class Transform : Component
     {
         //Fields

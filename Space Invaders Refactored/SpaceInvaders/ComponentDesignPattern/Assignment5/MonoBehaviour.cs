@@ -4,6 +4,7 @@ using ComponentDesignPattern.Assignment5.Interfaces;
 
 namespace ComponentDesignPattern.Assignment5
 {
+    //Base class for most custom components, it is Updateable and gets notified upon certain events, such as OnCollision
     public abstract class MonoBehaviour : Component, IUpdateableComponent
     {
         //Methods
@@ -15,6 +16,7 @@ namespace ComponentDesignPattern.Assignment5
         {
         }
 
+        //Event methods
         public virtual void OnCollision(GameObject pOther)
         {
 

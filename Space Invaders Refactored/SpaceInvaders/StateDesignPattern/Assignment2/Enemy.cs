@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace StateGameRefactored1
+namespace StateDesignPattern.Assignment2
 {
     public class Enemy : GameObject
     {
@@ -47,7 +47,7 @@ namespace StateGameRefactored1
         {
             Vector2 currentWayPoint = _wayPoints[_currentWayPointIndex].Position;
 
-            Vector2 patrolDirection = (currentWayPoint - _position);
+            Vector2 patrolDirection = currentWayPoint - _position;
 
             patrolDirection.Normalize();
             Vector2 patrolTranslation =

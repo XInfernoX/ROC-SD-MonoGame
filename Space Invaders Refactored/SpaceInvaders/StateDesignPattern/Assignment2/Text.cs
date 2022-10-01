@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace StateGameRefactored1
+namespace StateDesignPattern.Assignment2
 {
     public class Text : GameObject
     {
@@ -52,7 +52,7 @@ namespace StateGameRefactored1
         }
 
         //Constructors
-        public Text(Vector2 pPosition, SpriteFont pSpriteFont, string pText, Color pColor) : base(pPosition) 
+        public Text(Vector2 pPosition, SpriteFont pSpriteFont, string pText, Color pColor) : base(pPosition)
         {
             _font = pSpriteFont;
             _text = pText;

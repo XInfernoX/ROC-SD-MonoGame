@@ -1,5 +1,6 @@
 ﻿namespace ComponentDesignPattern.Assignment5
 {
+    //Base class for all Components
     public class Component
     {
         //Fields

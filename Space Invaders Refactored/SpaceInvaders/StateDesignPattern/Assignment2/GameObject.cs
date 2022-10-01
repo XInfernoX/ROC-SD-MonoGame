@@ -1,31 +1,28 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
-namespace StateGameRefactored1
+namespace StateDesignPattern.Assignment2
 {
-    public class GameObject
+    public class GameObject : IDisposable
     {
         // Fields
-        protected bool _active = true;
-        protected Vector2 _position = Vector2.Zero;
-        protected Texture2D _texture;
+        private Vector2 _position = Vector2.Zero;
+        private Texture2D _texture;
         protected Rectangle _collider = Rectangle.Empty;
+        protected bool _active = true;
 
         // Properties
         public Vector2 Position
         {
-            get { return _position; }
-            set
-            {
-                _position = value;
-                _collider.X = (int)value.X;
-                _collider.Y = (int)value.Y;
-            }
+            get => _position;
+            set => _position = value;
         }
 
         public Texture2D Texture
         {
-            get { return _texture; }
+            get => _texture;
             set
             {
                 _texture = value;
@@ -33,37 +30,16 @@ namespace StateGameRefactored1
             }
         }
 
-        public Rectangle Collider//Readonly
-        {
-            get { return _collider; }
-        }
-
-        public int Width//Readonly
-        {
-            get { return _texture.Width; }
-        }
-
-        public int Height//Readonly
-        {
-            get { return _texture.Height; }
-        }
-
-        public bool Active
-        {
-            get { return _active; }
-            set { _active = value; }
-        }
-
+        //Properties - Readonly
+        public Rectangle Collider=> _collider;
+        public int Width => _texture.Width;
+        public int Height => _texture.Height;
+        public bool Active => _active;
 
         //Constructors
-        public GameObject() { }
-
-        public GameObject(Vector2 pPosition, Texture2D pTexture, bool pActive = true)
+        public GameObject()
         {
-            _position = pPosition;
-            Texture = pTexture;//Property also creates _collider from texture data
 
-            _active = pActive;
         }
 
         public GameObject(Vector2 pPosition)
@@ -71,43 +47,57 @@ namespace StateGameRefactored1
             _position = pPosition;
         }
 
-        public GameObject(Vector2 pPosition, Texture2D pTexture)
-        {
-            _position = pPosition;
-            Texture = pTexture;
-        }
-
         // Copy constructor
         public GameObject(GameObject pOriginal)
         {
-            _active = pOriginal._active;
             _position = pOriginal._position;
             _texture = pOriginal._texture;
             _collider = pOriginal._collider;
         }
 
         //Methods
+        public virtual void LoadContent(ContentManager pContent)
+        {
+
+        }
+        public virtual void Update(GameTime pTime)
+        {
+
+        }
+
         public bool Collision(GameObject pOther)
         {
-            if (_active & _collider.Intersects(pOther._collider))
+            if (_active)
             {
-                return true;
+                UpdateCollider();
+                pOther.UpdateCollider();
+
+                if (_collider.Intersects(pOther._collider))
+                {
+                    return true;
+                }
             }
+
             return false;
         }
 
         public bool Contains(Point pPoint)
         {
-            if (_active & _collider.Contains(pPoint))
+            if (_active)
             {
-                return true;
+                UpdateCollider();
+                if (_collider.Contains(pPoint))
+                {
+                    return true;
+                }
             }
+
             return false;
         }
 
         public virtual void Draw(SpriteBatch pSpriteBatch)
         {
-            if (Active)
+            if (_active)
             {
                 pSpriteBatch.Draw(_texture, _position, Color.White);
             }
@@ -115,13 +105,30 @@ namespace StateGameRefactored1
 
         public virtual void Draw(SpriteBatch pSpriteBatch, Color pColor, float pScale = 1)
         {
-            if (Active)
+            if (_active)
             {
                 Vector2 scale = Vector2.One * pScale;
                 pSpriteBatch.Draw(_texture, _position, null, pColor, 0, Vector2.One / 2, scale, SpriteEffects.None, 0);
             }
         }
 
-        public virtual void Update(GameTime pGameTime) { }
+        private void UpdateCollider()
+        {
+            _collider.X = (int)_position.X;
+            _collider.Y = (int)_position.Y;
+        }
+
+        public void Destroy()
+        {
+            Dispose();
+        }
+
+
+        public virtual void Dispose()
+        {
+            Console.WriteLine("GameObject.Dispose()");
+
+            _texture.Dispose();
+        }
     }
 }

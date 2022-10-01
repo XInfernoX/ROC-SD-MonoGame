@@ -11,7 +11,7 @@ namespace ComponentDesignPattern.Assignment5
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private List<GameObject> _gameObjects = new List<GameObject>();
+        private readonly List<GameObject> _gameObjects = new List<GameObject>();
 
         public Game1()
         {
@@ -32,11 +32,11 @@ namespace ComponentDesignPattern.Assignment5
 
             //GameObject1
             Transform transform = new Transform(new Vector2(200, 200), new Vector2(0.5f, 0.5f), 0,Vector2.One);
-            SpriteRenderer spriteRenderer = new SpriteRenderer(rectangleTexture);
+            SpriteRenderer spriteRenderer = new SpriteRenderer(circleTexture);
             AnimatedSpriteRenderer animatedSpriteRenderer = new AnimatedSpriteRenderer(Content.Load<Texture2D>("Megaman2"), 5, 2, 12f);
             SphereCollider collider = new SphereCollider(spriteRenderer);
             MegaMan megaMan = new MegaMan();
-            _gameObjects.Add(new GameObject(this, "MegaMan", transform, spriteRenderer, collider, megaMan));
+            _gameObjects.Add(new GameObject(this, "MegaMan", transform, animatedSpriteRenderer, collider, megaMan));
 
 
             //GameObject2
@@ -79,7 +79,8 @@ namespace ComponentDesignPattern.Assignment5
             for (int i = 0; i < _gameObjects.Count; i++)
                 _gameObjects[i].LateUpdate(pGameTime);
         }
-
+        
+        //Game1 class
         protected void CollisionCheckAllGameObjects(GameTime pGameTime)//CONSIDER passing pGameTime to CollisionCheck
         {
             for (int outerI = 0; outerI < _gameObjects.Count - 1; outerI++)
