@@ -6,7 +6,7 @@ namespace StateDesignPattern.Assignment2
 {
     public class ButtonBase : GameObject
     {
-        protected Game _game;
+        protected Game1 _game;
 
         private ButtonStatus _status;
         private Color _currentButtonColor;
@@ -15,7 +15,7 @@ namespace StateDesignPattern.Assignment2
         private Color _hoverColor;
         private Color _pressedColor;
 
-        public ButtonBase(Vector2 pPosition, Texture2D pTexture, Game pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor) : base(pPosition, pTexture)
+        public ButtonBase(Vector2 pPosition, Texture2D pTexture, Game1 pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor) : base(pPosition, pTexture)
         {
             _game = pGame;
 

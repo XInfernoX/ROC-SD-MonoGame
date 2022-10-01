@@ -7,8 +7,8 @@ public static class Program
     public enum GameType
     {
         Assignment1,
-        StateGameComplete,
-        StateGameRefactored1,
+        Assignment2,
+        Assignment21,
         StateGameRefactored2,
         StateGameRefactored3,
         SpaceInvaders,
@@ -27,8 +27,8 @@ public static class Program
 
 
         GameType type = GameType.Assignment1;                   //End result of Assignment 1
-        //GameType type = GameType.StateGameComplete;             //Assignment 2 - Intermediate result (students refactor this to StateGameRefactored1)
-        //GameType type = GameType.StateGameRefactored1;        //Enums + basic classes
+        //GameType type = GameType.Assignment2;                 //Assignment 2 - Intermediate result (students refactor this to Assignment21)
+        //GameType type = GameType.Assignment21;                //Enums + basic classes
         //GameType type = GameType.StateGameRefactored2;        //Polymorphism + inheritance
         //GameType type = GameType.StateGameRefactored3;        //States in separate classes + FSM
         //GameType type = GameType.SpaceInvaders;               //StartPoint end year 2
@@ -42,13 +42,13 @@ public static class Program
                     game.Run();
                 break;
 
-            case GameType.StateGameComplete:
-                using (Game game = new StateDesignPattern.Assignment1.Game2())
+            case GameType.Assignment2:
+                using (Game game = new StateDesignPattern.Assignment2.Game1())
                     game.Run();
                 break;
 
-            case GameType.StateGameRefactored1:
-                using (Game game = new StateGameRefactored.StateGame())
+            case GameType.Assignment21:
+                using (Game game = new StateDesignPattern.Assignment2.Game2())
                     game.Run();
                 break;
 

@@ -2,11 +2,10 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace StateDesignPattern.Assignment2
 {
-    //TODO swap CoreExample.GameObject for StateGameComplete.GameObject 
+    //TODO swap CoreExample.GameObject for Assignment2.GameObject 
     public class Game2 : Game
     {
         //Fields
@@ -17,37 +16,35 @@ namespace StateDesignPattern.Assignment2
         private GameState _gameState = GameState.Menu;
 
         //NewButtons
-        private PlayButton _playButton2;
-        private QuitButton _quitButton2;
-        private MenuButton _menuButton2;
+        private PlayButton _playButton;
+        private QuitButton _quitButton;
+        private MenuButton _menuButton;
+
+        //Player
+        private Player _player;
+
+        //Enemy
+        private Enemy _enemy;
+        private Enemy _enemy2;
+
+        //Pickups
+        private Shield _shield;
+        private Weapon _weapon;
+
+        //Resources
+        private SpriteFont _arial;
+        private Texture2D _buttonTexture;
 
         //ButtonColors
         private readonly Color _defaultColor = Color.White;
         private readonly Color _hoverColor = Color.Aquamarine;
         private readonly Color _pressedColor = Color.Red;
 
-        //Resources
-        private Texture2D _buttonTexture;
 
+        //WayPoints
+        private GameObject[] _wayPoints1;
+        private GameObject[] _wayPoints2;
 
-        private Texture2D _enemyTexture;
-        private Texture2D _weaponTexture;
-        private Texture2D _shieldTexture;
-        private Texture2D _flagTexture;
-
-        private SpriteFont _arial;
-
-        //Player
-        private  GameObject _player;
-        private float _playerSpeed = 3;
-
-        //Enemy
-        private Enemy _enemy;
-
-
-        //Pickups
-        private readonly GameObject _shield;
-        private readonly GameObject _weapon;
 
         //Constructor
         public Game2()
@@ -55,23 +52,6 @@ namespace StateDesignPattern.Assignment2
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-            _playButton = new GameObject();
-            _menuButton = new GameObject();
-            _quitButton = new GameObject();
-
-            _player = new GameObject();
-            _enemy = new GameObject();
-
-            _weapon = new GameObject();
-            _shield = new GameObject();
-
-            _wayPoints = new GameObject[]
-            {
-                new GameObject(),
-                new GameObject(),
-                new GameObject()
-            };
         }
 
         protected override void Initialize()
@@ -88,78 +68,56 @@ namespace StateDesignPattern.Assignment2
             Viewport viewPort = GraphicsDevice.Viewport;
             float third = viewPort.Height / 3;
 
+            //Resources
+            SpriteFont arial = Content.Load<SpriteFont>("Arial");
+            _buttonTexture = Content.Load<Texture2D>("UI_Title_64x64");
+            Texture2D _flagTexture = Content.Load<Texture2D>("Flag");
 
             //NewButtons
-            _playButton2 = new PlayButton(new Vector2(viewPort.Width / 2, third), _buttonTexture, this, _defaultColor, _hoverColor, _pressedColor);
-            _quitButton2 = new QuitButton(new Vector2(viewPort.Width / 2, third * 2), _buttonTexture, this, _defaultColor, _hoverColor, _pressedColor);
-            _menuButton2 = new MenuButton(new Vector2(viewPort.Width - _buttonTexture.Width, 0), _buttonTexture, this, _defaultColor, _hoverColor, _pressedColor);
-
-
-            //Textures
-            _buttonTexture = Content.Load<Texture2D>("UI_Title_64x64");
-            _playerTexture = Content.Load<Texture2D>("Knight");
-            _playerShieldTexture = Content.Load<Texture2D>("KnightShield");
-            _playerWeaponTexture = Content.Load<Texture2D>("KnightWeapon");
-            _playerWeaponShieldTexture = Content.Load<Texture2D>("KnightWeaponShield");
-            _enemyTexture = Content.Load<Texture2D>("Enemy");
-            _weaponTexture = Content.Load<Texture2D>("Weapon");
-            _shieldTexture = Content.Load<Texture2D>("Shield");
-            _flagTexture = Content.Load<Texture2D>("Flag");
-
-            //Fonts
-            _arial = Content.Load<SpriteFont>("Arial");
-
-
-
-
-            //PlayButton
-            _playButton.Texture = _buttonTexture;
-            _playButton.Position = new Vector2(viewPort.Width / 2, third);
-
-            //QuitButton
-            _quitButton.Texture = _buttonTexture;
-            _quitButton.Position = new Vector2(viewPort.Width / 2, third * 2);
-
-            //MenuButton
-            _menuButton.Texture = _buttonTexture;
-            _menuButton.Position = new Vector2(viewPort.Width - _buttonTexture.Width, 0);
+            // _playButton = new PlayButton(new Vector2(viewPort.Width / 2, third), _buttonTexture, this, _defaultColor, _hoverColor, _pressedColor);
+            //_quitButton = new QuitButton(new Vector2(viewPort.Width / 2, third * 2), _buttonTexture, this, _defaultColor, _hoverColor, _pressedColor);
+            //_menuButton = new MenuButton(new Vector2(viewPort.Width - _buttonTexture.Width, 0), _buttonTexture, this, _defaultColor, _hoverColor, _pressedColor);
 
             //Player
-            _player.Texture = _playerTexture;
-            _player.Position = new Vector2(viewPort.Width / 2, third * 2);
+            _player = new Player(new Vector2(viewPort.Width / 2, third * 2), 140);
+            _player.LoadContent(Content);
 
-            //Enemy
-            _enemy.Texture = _enemyTexture;
-            _enemy.Position = new Vector2(viewPort.Width / 2, third);
+            //Enemy1
+            _wayPoints1 = new GameObject[]
+            {
+                new GameObject(new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f), _flagTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f), _flagTexture),
+                new GameObject(new Vector2(viewPort.Width / 2, viewPort.Height / 2), _flagTexture)
+            };
+            _enemy = new Enemy(new Vector2(viewPort.Width / 2, third), 100, _player, _wayPoints1, 10);
+            _enemy.LoadContent(Content);
+
+            _wayPoints2 = new GameObject[]
+            {
+                new GameObject(new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f), _flagTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f), _flagTexture),
+                new GameObject(new Vector2(viewPort.Width / 2, viewPort.Height / 2), _flagTexture)
+            };
+            _enemy2 = new Enemy(new Vector2(viewPort.Width / 2, third), 100, _player, _wayPoints2, 10);
+            _enemy2.LoadContent(Content);
+
+
+
 
             //Pickups
-            _weapon.Texture = _weaponTexture;
-            _weapon.Position = new Vector2(100, third);
-            _shield.Texture = _shieldTexture;
-            _shield.Position = new Vector2(viewPort.Width - 100, third);
-            _shield.Position = new Vector2(viewPort.Width - 100, third);
+            _weapon = new Weapon(new Vector2(100, third), _player);
+            _weapon.LoadContent(Content);
 
-            //WayPoints
-            for (int i = 0; i < _wayPoints.Length; i++)
-            {
-                _wayPoints[i].Texture = _flagTexture;
-            }
-            _wayPoints[0].Position = new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f);
-            _wayPoints[1].Position = new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f);
-            _wayPoints[2].Position = new Vector2(viewPort.Width / 2, viewPort.Height / 2);
+            _shield = new Shield(new Vector2(viewPort.Width - 100, third), _player);
+            _shield.LoadContent(Content);
         }
 
-        private void MoveToLevel1()
+        public void MoveGameStateTo(GameState pState)
         {
-            _gameState = GameState.Level1;
+            _gameState = pState;
         }
 
-        private void MoveToMenu()
-        {
-            _gameState = GameState.Menu;
-        }
-
-        private void QuitGame()
+        public void QuitGame()
         {
             Exit();
         }
@@ -183,13 +141,13 @@ namespace StateDesignPattern.Assignment2
 
         private void UpdateMenu(GameTime pGameTime)
         {
-            _playButton2.Update(pGameTime);
-            _quitButton2.Update(pGameTime);
+            _playButton.Update(pGameTime);
+            _quitButton.Update(pGameTime);
         }
 
         private void UpdateLevel1(GameTime pGameTime)
         {
-            _menuButton2.Update(pGameTime);
+            _menuButton.Update(pGameTime);
             _player.Update(pGameTime);
         }
 
@@ -218,8 +176,8 @@ namespace StateDesignPattern.Assignment2
 
         private void DrawMenu(GameTime pGameTime)
         {
-            _playButton.Draw(_spriteBatch, _currentPlayButtonColor);
-            _quitButton.Draw(_spriteBatch, _currentQuitButtonColor);
+            _playButton.Draw(_spriteBatch);
+            _quitButton.Draw(_spriteBatch);
 
             Vector2 textOffset = new Vector2(_buttonTexture.Width / 2, _buttonTexture.Height / 2);
 
@@ -232,7 +190,7 @@ namespace StateDesignPattern.Assignment2
 
         private void DrawLevel1(GameTime pGameTime)
         {
-            _menuButton.Draw(_spriteBatch, _currentMenuButtonColor);
+            _menuButton.Draw(_spriteBatch);
 
             Vector2 textOffset = new Vector2(_buttonTexture.Width / 2, _buttonTexture.Height / 2);
 
@@ -244,9 +202,14 @@ namespace StateDesignPattern.Assignment2
             _shield.Draw(_spriteBatch, Color.White);
             _weapon.Draw(_spriteBatch, Color.White);
 
-            for (int i = 0; i < _wayPoints.Length; i++)
+            for (int i = 0; i < _wayPoints1.Length; i++)
             {
-                _wayPoints[i].Draw(_spriteBatch);
+                _wayPoints1[i].Draw(_spriteBatch);
+            }
+
+            for (int i = 0; i < _wayPoints2.Length; i++)
+            {
+                _wayPoints2[i].Draw(_spriteBatch);
             }
         }
     }

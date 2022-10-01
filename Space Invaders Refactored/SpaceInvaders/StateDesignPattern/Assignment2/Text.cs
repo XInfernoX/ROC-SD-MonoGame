@@ -63,7 +63,7 @@ namespace StateDesignPattern.Assignment2
 
         public override void Draw(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.DrawString(_font, _text, _position - _offset / 2, _color);
+            pSpriteBatch.DrawString(_font, _text, Position - _offset / 2, _color);
         }
     }
 }

@@ -47,6 +47,20 @@ namespace StateDesignPattern.Assignment2
             _position = pPosition;
         }
 
+        public GameObject(Vector2 pPosition, Texture2D pTexture)
+        {
+            _position = pPosition;
+            Texture = pTexture;
+        }
+
+        public GameObject(Vector2 pPosition, Texture2D pTexture, bool pActive = true)
+        {
+            _position = pPosition;
+            Texture = pTexture;//Property also creates _collider from texture data
+
+            _active = pActive;
+        }
+
         // Copy constructor
         public GameObject(GameObject pOriginal)
         {
