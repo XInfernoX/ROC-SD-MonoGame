@@ -2,9 +2,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace StateDesignPattern.Assignment2
 {
+    //Strings en magic numbers
+    //Enums
+    //State Design Pattern
+    //Overload
+    //Overload vs Override
+
     public class Game1 : Game
     {
         //Fields
@@ -17,9 +22,14 @@ namespace StateDesignPattern.Assignment2
         //Entities
         private Player _player;
 
+        private Enemy _enemy1;
+        private GameObject[] _wayPoints1;
 
-        private Enemy _enemy;
-        private GameObject[] _wayPoints;
+        private Enemy _enemy2;
+        private GameObject[] _wayPoints2;
+
+        private Enemy _enemy3;
+        private GameObject[] _wayPoints3;
 
 
         //Pickups
@@ -28,23 +38,10 @@ namespace StateDesignPattern.Assignment2
         private Gate _gate1;
         private Gate _gate2;
 
-
-
-
         //Buttons
         private PlayButton _playButton;
         private QuitButton _quitButton;
         private MenuButton _menuButton;
-
-        //Text
-        private Text _playText;
-        private Text _quitText;
-        private Text _menuText;
-
-        //Colors
-        private readonly Color _defaultColor = Color.White;
-        private readonly Color _hoverColor = Color.Aquamarine;
-        private readonly Color _pressedColor = Color.Red;
 
         //Constructor
         public Game1()
@@ -52,6 +49,16 @@ namespace StateDesignPattern.Assignment2
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+        }
+
+        protected override void Initialize()
+        {
+            _graphics.IsFullScreen = false;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.ApplyChanges();
+
+            base.Initialize();
         }
 
         protected override void LoadContent()
@@ -63,8 +70,14 @@ namespace StateDesignPattern.Assignment2
             Viewport viewPort = GraphicsDevice.Viewport;
             float third = viewPort.Height / 3;
 
+            //Textures and fonts
+            Texture2D wayPointTexture = Content.Load<Texture2D>("Flag");
+            Texture2D buttonTexture = Content.Load<Texture2D>("UI_Title_64x64");
+            SpriteFont font = Content.Load<SpriteFont>("Arial");
+
+
             //Player
-            _player = new Player(new Vector2(viewPort.Width / 2, third * 2), 140);
+            _player = new Player(new Vector2(viewPort.Width / 2, third * 2), 300);
             _player.LoadContent(Content);
 
             //Pickups
@@ -74,42 +87,58 @@ namespace StateDesignPattern.Assignment2
             _weapon = new Weapon(new Vector2(viewPort.Width - 100, third), _player);
             _weapon.LoadContent(Content);
 
-            _gate1 = new Gate(new Vector2(viewPort.Width - 200, 10), _player, this, GameState.Level2);
+            _gate1 = new Gate(new Vector2(viewPort.Width / 2.0f, 40), _player, this, GameState.Level2);
             _gate1.LoadContent(Content);
 
-            _gate2 = new Gate(new Vector2(10, 10), _player, this, GameState.Level1);
+            _gate2 = new Gate(new Vector2(40, 40), _player, this, GameState.Level1);
             _gate2.LoadContent(Content);
 
             _gate1.SetConnectedGate(_gate2);
             _gate2.SetConnectedGate(_gate1);
 
-            //Enemy
-            Texture2D wayPointTexture = Content.Load<Texture2D>("Flag");
-            _wayPoints = new GameObject[]
+            //Enemies
+            _wayPoints1 = new GameObject[]
             {
                 new GameObject(new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f), wayPointTexture),
                 new GameObject(new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f), wayPointTexture),
                 new GameObject(new Vector2(viewPort.Width / 2, viewPort.Height / 2), wayPointTexture)
             };
-            _enemy = new Enemy(new Vector2(viewPort.Width / 2, third), 2, _player, _wayPoints, 100);
-            _enemy.LoadContent(Content);
+            _enemy1 = new Enemy(new Vector2(viewPort.Width / 2, viewPort.Height / 2), 2, _player, _wayPoints1, 100);
+            _enemy1.LoadContent(Content);
+
+
+            _wayPoints2 = new GameObject[]
+            {
+                new GameObject(new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.1f), wayPointTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.4f, viewPort.Height * 0.1f), wayPointTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.4f, viewPort.Height * 0.9f), wayPointTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.1f, viewPort.Height * 0.9f), wayPointTexture),
+            };
+            _enemy2 = new Enemy(new Vector2(viewPort.Width * 0.35f, viewPort.Height * 0.5f), 2, _player, _wayPoints2, 100);
+            _enemy2.LoadContent(Content);
+
+            _wayPoints3 = new GameObject[]
+            {
+                new GameObject(new Vector2(viewPort.Width * 0.6f, viewPort.Height * 0.1f), wayPointTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.1f), wayPointTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.6f, viewPort.Height * 0.9f), wayPointTexture),
+                new GameObject(new Vector2(viewPort.Width * 0.9f, viewPort.Height * 0.9f), wayPointTexture),
+             };
+            _enemy3 = new Enemy(new Vector2(viewPort.Width * 0.75f, viewPort.Height * 0.5f), 2, _player, _wayPoints3, 100);
+            _enemy3.LoadContent(Content);
 
 
             //Buttons
-            Texture2D buttonTexture = Content.Load<Texture2D>("UI_Title_64x64");
-            _playButton = new PlayButton(new Vector2(viewPort.Width / 2, third), buttonTexture, this, _defaultColor,
-                _hoverColor, _pressedColor);
-            _quitButton = new QuitButton(new Vector2(viewPort.Width / 2, third * 2), buttonTexture, this, _defaultColor,
-                _hoverColor, _pressedColor);
-            _menuButton = new MenuButton(new Vector2(viewPort.Width - buttonTexture.Width, 0), buttonTexture, this,
-                _defaultColor, _hoverColor, _pressedColor);
+            ButtonColorScheme colorScheme = new ButtonColorScheme(Color.White, Color.Aquamarine, Color.Red, Color.White, font);
 
-            //Text
-            Vector2 buttonSize = new Vector2(buttonTexture.Width, buttonTexture.Height);
-            SpriteFont font = Content.Load<SpriteFont>("Arial");
-            _playText = new Text(_playButton.Position + buttonSize / 2, font, "Play", Color.White);
-            _quitText = new Text(_quitButton.Position + buttonSize / 2, font, "Quit", Color.White);
-            _menuText = new Text(_menuButton.Position + buttonSize / 2, font, "Menu", Color.White);
+            _playButton = new PlayButton(new Vector2(viewPort.Width / 2, third), this, colorScheme, "Play");
+            _playButton.LoadContent(Content);
+
+            _quitButton = new QuitButton(new Vector2(viewPort.Width / 2, third * 2), this, colorScheme, "Quit");
+            _quitButton.LoadContent(Content);
+
+            _menuButton = new MenuButton(new Vector2(viewPort.Width, 0), this, colorScheme, new Vector2(1, 0), "Menu");
+            _menuButton.LoadContent(Content);
         }
 
         protected override void Update(GameTime pGameTime)
@@ -124,8 +153,10 @@ namespace StateDesignPattern.Assignment2
                     break;
                 case GameState.Level1:
                     _menuButton.Update(pGameTime);
+
                     _player.Update(pGameTime);
-                    _enemy.Update(pGameTime);
+                    _enemy1.Update(pGameTime);
+
                     _shield.Update(pGameTime);
                     _weapon.Update(pGameTime);
                     _gate1.Update(pGameTime);
@@ -134,7 +165,11 @@ namespace StateDesignPattern.Assignment2
 
                 case GameState.Level2:
                     _menuButton.Update(pGameTime);
+
                     _player.Update(pGameTime);
+                    _enemy2.Update(pGameTime);
+                    _enemy3.Update(pGameTime);
+
                     _gate2.Update(pGameTime);
 
                     break;
@@ -152,34 +187,38 @@ namespace StateDesignPattern.Assignment2
                 case GameState.Menu:
 
                     _playButton.Draw(_spriteBatch);
-                    _playText.Draw(_spriteBatch);
-
                     _quitButton.Draw(_spriteBatch);
-                    _quitText.Draw(_spriteBatch);
 
                     break;
                 case GameState.Level1:
 
                     _menuButton.Draw(_spriteBatch);
-                    _menuText.Draw(_spriteBatch);
 
                     _player.Draw(_spriteBatch);
-                    _enemy.Draw(_spriteBatch);
+                    _enemy1.Draw(_spriteBatch);
+                    for (int i = 0; i < _wayPoints1.Length; i++)
+                        _wayPoints1[i].Draw(_spriteBatch);
+
                     _shield.Draw(_spriteBatch);
                     _weapon.Draw(_spriteBatch);
                     _gate1.Draw(_spriteBatch);
-
-                    for (int i = 0; i < _wayPoints.Length; i++)
-                    {
-                        _wayPoints[i].Draw(_spriteBatch);
-                    }
-
                     break;
 
                 case GameState.Level2:
-
                     _menuButton.Draw(_spriteBatch);
+
                     _player.Draw(_spriteBatch);
+                    _enemy2.Draw(_spriteBatch);
+                    for (int i = 0; i < _wayPoints2.Length; i++)
+                    {
+                        _wayPoints2[i].Draw(_spriteBatch);
+                    }
+                    _enemy3.Draw(_spriteBatch);
+                    for (int i = 0; i < _wayPoints3.Length; i++)
+                    {
+                        _wayPoints3[i].Draw(_spriteBatch);
+                    }
+
                     _gate2.Draw(_spriteBatch);
 
                     break;

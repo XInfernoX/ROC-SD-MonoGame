@@ -224,6 +224,18 @@
 /processorParam:TextureFormat=Color
 /build:rpgTile169.png;Gate.png
 
+#begin SeekPng.com_asteroid-png_1581435.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SeekPng.com_asteroid-png_1581435.png;Asteroid.png
+
 #begin Shield.png
 /importer:TextureImporter
 /processor:TextureProcessor

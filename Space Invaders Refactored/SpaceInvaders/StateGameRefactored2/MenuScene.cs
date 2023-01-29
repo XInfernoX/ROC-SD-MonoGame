@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace StateGameRefactored2
@@ -15,8 +16,8 @@ namespace StateGameRefactored2
             PlayButton playButton = new PlayButton(_game, _game.ButtonColorScheme, "Play");
             AddGameObject(playButton);
 
-            QuitButton quitButton = new QuitButton(_game,_game.ButtonColorScheme, "Quit");
-            AddGameObject(quitButton);
+            //QuitButton quitButton = new QuitButton(_game,_game.ButtonColorScheme, "Quit");
+            //AddGameObject(quitButton);
 
             base.LoadSceneContent(pContent, pViewPort);
         }

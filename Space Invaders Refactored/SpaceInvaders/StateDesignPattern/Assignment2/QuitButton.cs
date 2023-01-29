@@ -5,8 +5,11 @@ namespace StateDesignPattern.Assignment2
 {
     public class QuitButton : ButtonBase
     {
-        public QuitButton(Vector2 pPosition, Texture2D pTexture, Game1 pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor)
-            : base(pPosition, pTexture, pGame, pDefaultColor, pHoverColor, pPressedColor) { }
+        public QuitButton(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, string pText = "")
+            : base(pPosition, pGame, pColorScheme, pText) { }
+
+        public QuitButton(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, Vector2 pOrigin, string pText = "")
+            : base(pPosition, pGame, pColorScheme, pOrigin, pText) { }
 
         protected override void OnButtonClick()
         {

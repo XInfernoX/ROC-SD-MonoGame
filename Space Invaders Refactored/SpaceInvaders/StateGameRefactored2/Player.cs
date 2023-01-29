@@ -33,7 +33,7 @@ namespace StateGameRefactored2
         {
             _textures = new[] { pContent.Load<Texture2D>("Knight"), pContent.Load<Texture2D>("KnightShield"), pContent.Load<Texture2D>("KnightWeapon"), pContent.Load<Texture2D>("KnightWeaponShield") };
 
-            Texture = _textures[0];
+            Texture = _textures[(int)_playerState];
         }
 
         public void SetPlayerState(PlayerState pState)

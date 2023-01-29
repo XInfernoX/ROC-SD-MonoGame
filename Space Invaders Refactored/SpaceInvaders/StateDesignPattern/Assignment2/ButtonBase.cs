@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -6,24 +7,51 @@ namespace StateDesignPattern.Assignment2
 {
     public class ButtonBase : GameObject
     {
+        //Fields
         protected Game1 _game;
 
         private ButtonStatus _status;
         private Color _currentButtonColor;
+        private ButtonColorScheme _colorScheme;
 
-        private Color _defaultColor;
-        private Color _hoverColor;
-        private Color _pressedColor;
+        private string _text;
+        private Vector2 _textOffset;
 
-        public ButtonBase(Vector2 pPosition, Texture2D pTexture, Game1 pGame, Color pDefaultColor, Color pHoverColor, Color pPressedColor) : base(pPosition, pTexture)
+        //Properties
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                _textOffset = _colorScheme.Font.MeasureString(_text) / 2;
+            }
+        }
+
+        //Constructors
+        public ButtonBase(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, string pText = "") : base(pPosition)
         {
             _game = pGame;
+            _colorScheme = pColorScheme;
+            Text = pText;
 
-            _defaultColor = pDefaultColor;
-            _hoverColor = pHoverColor;
-            _pressedColor = pPressedColor;
+            SetButtonState(ButtonStatus.Default, _colorScheme.DefaultColor);
+        }
 
-            SetButtonState(ButtonStatus.Default, _defaultColor);
+        public ButtonBase(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, Vector2 pOrigin, string pText = "") : base(pPosition)
+        {
+            _game = pGame;
+            _colorScheme = pColorScheme;
+            Text = pText;
+            _origin = pOrigin;
+
+            SetButtonState(ButtonStatus.Default, _colorScheme.DefaultColor);
+        }
+
+        public override void LoadContent(ContentManager pContent)
+        {
+            Texture = pContent.Load<Texture2D>("UI_Title_64x64");
+            base.LoadContent(pContent);
         }
 
         public override void Update(GameTime pGameTime)
@@ -55,7 +83,7 @@ namespace StateDesignPattern.Assignment2
         {
             if (Contains(pMouseState.Position))
             {
-                SetButtonState(ButtonStatus.Hovered, _hoverColor);
+                SetButtonState(ButtonStatus.Hovered, _colorScheme.HoverColor);
             }
         }
 
@@ -63,12 +91,12 @@ namespace StateDesignPattern.Assignment2
         {
             if (!Contains(pMouseState.Position))
             {
-                SetButtonState(ButtonStatus.Default, _defaultColor);
+                SetButtonState(ButtonStatus.Default, _colorScheme.DefaultColor);
             }
 
             if (pMouseState.LeftButton == ButtonState.Pressed)
             {
-                SetButtonState(ButtonStatus.Pressed, _pressedColor);
+                SetButtonState(ButtonStatus.Pressed, _colorScheme.PressedColor);
             }
         }
 
@@ -78,20 +106,29 @@ namespace StateDesignPattern.Assignment2
             {
                 if (Contains(pMouseState.Position))
                 {
-                    SetButtonState(ButtonStatus.Hovered, _hoverColor);
+                    SetButtonState(ButtonStatus.Hovered, _colorScheme.HoverColor);
                     OnButtonClick();
                 }
                 else
                 {
-                    SetButtonState(ButtonStatus.Default, _defaultColor);
+                    SetButtonState(ButtonStatus.Default, _colorScheme.DefaultColor);
                 }
             }
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)
         {
+            if(Active)
+            {
+                pSpriteBatch.Draw(_texture, _position, _currentButtonColor);
+
+                Vector2 buttonCenter = new Vector2(_position.X + Width / 2, _position.Y + Height / 2);
+                pSpriteBatch.DrawString(_colorScheme.Font, _text, buttonCenter - _textOffset, _colorScheme.TextColor);
+            }
+
+
             //pSpriteBatch.Draw(_texture, _position, _currentButtonColor);
-            pSpriteBatch.Draw(Texture, Position, _currentButtonColor);
+            //pSpriteBatch.Draw(Texture, Position, _currentButtonColor);
         }
 
         protected virtual void OnButtonClick() { }

@@ -9,6 +9,7 @@ namespace StateDesignPattern.Assignment2
         private Player _player;
         private Game1 _game;
         private GameState _state;
+
         private Gate _connectedGate;
 
         public Gate(Vector2 pPosition, Player pPlayer, Game1 pGame, GameState pState) : base(pPosition)

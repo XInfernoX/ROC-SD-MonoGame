@@ -22,6 +22,7 @@
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Megaman2.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/player.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/rpgTile169.png</File>
+    <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/SeekPng.com_asteroid-png_1581435.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/Shield.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/StarIndicators.png</File>
     <File>C:/Users/dmeel/Documents/Projects/ROC/MonoGame-UnityFramework/Space Invaders Refactored/SpaceInvaders/Content/tile_0009.png</File>
@@ -51,6 +52,7 @@
     <File xsi:nil="true" />
     <File>Player.png</File>
     <File>Gate.png</File>
+    <File>Asteroid.png</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

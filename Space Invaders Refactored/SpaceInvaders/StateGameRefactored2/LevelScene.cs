@@ -16,7 +16,7 @@ namespace StateGameRefactored2
             float third = viewPort.Height / 3.0f;
 
             //Buttons
-            AddGameObject(new MenuButton(_game, _game.ButtonColorScheme, "Menu"));
+            //AddGameObject(new MenuButton(_game, _game.ButtonColorScheme, "Menu"));
 
             //Pickups
             GameObject shield = new Shield(new Vector2(100, third), pContent.Load<Texture2D>("Shield"), _player);
@@ -36,10 +36,10 @@ namespace StateGameRefactored2
                 AddGameObject(wayPoints[i]);
 
             
-            AddGameObject(new Enemy(new Vector2(viewPort.Width / 2.0f, third), pContent.Load<Texture2D>("Enemy"), 100, wayPoints, _player, 100, shield, weapon));
+            //AddGameObject(new Enemy(new Vector2(viewPort.Width / 2.0f, third), pContent.Load<Texture2D>("Enemy"), 100, wayPoints, _player, 100, shield, weapon));
 
-            Gate gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level2", new Vector2(0, 50),_game.DefaultFont);
-            AddGameObject(gate);
+            //Gate gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level2", new Vector2(0, 50),_game.DefaultFont);
+            //AddGameObject(gate);
         }
     }
 
@@ -51,8 +51,8 @@ namespace StateGameRefactored2
 
         protected override void CreateObjects(ContentManager pContent, Viewport pViewPort)
         {
-            Gate level1Gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level1", new Vector2(0, 50),_game.DefaultFont);
-            AddGameObject(level1Gate);
+            //Gate level1Gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level1", new Vector2(0, 50),_game.DefaultFont);
+            //AddGameObject(level1Gate);
 
 
         }
@@ -66,11 +66,11 @@ namespace StateGameRefactored2
 
         protected override void CreateObjects(ContentManager pContent, Viewport pViewPort)
         {
-            Gate level2Gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level2", new Vector2(0, 50), _game.DefaultFont);
-            AddGameObject(level2Gate);
+            //Gate level2Gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level2", new Vector2(0, 50), _game.DefaultFont);
+            //AddGameObject(level2Gate);
 
-            Gate level4Gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level4", new Vector2(0, 50), _game.DefaultFont);
-            AddGameObject(level4Gate);
+            //Gate level4Gate = new Gate(new Vector2(pViewPort.Width / 2.0f, 50), pContent.Load<Texture2D>("Gate"), _game, _player, "Level4", new Vector2(0, 50), _game.DefaultFont);
+            //AddGameObject(level4Gate);
         }
     }
 

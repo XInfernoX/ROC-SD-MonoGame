@@ -1,4 +1,4 @@
-﻿namespace StateDesignPattern.Assignment1
+﻿namespace CSharpAdvanced.CSharpAdvanced.StateGameRefactored
 {
     public enum ButtonStatus
     {

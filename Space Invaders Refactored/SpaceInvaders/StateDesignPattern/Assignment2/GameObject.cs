@@ -8,8 +8,10 @@ namespace StateDesignPattern.Assignment2
     public class GameObject : IDisposable
     {
         // Fields
-        private Vector2 _position = Vector2.Zero;
-        private Texture2D _texture;
+        protected Vector2 _position = Vector2.Zero;
+        protected Texture2D _texture;
+        protected Vector2 _origin = new Vector2(0.5f, 0.5f);
+
         protected Rectangle _collider = Rectangle.Empty;
         protected bool _active = true;
 
@@ -57,6 +59,15 @@ namespace StateDesignPattern.Assignment2
         {
             _position = pPosition;
             Texture = pTexture;//Property also creates _collider from texture data
+
+            _active = pActive;
+        }
+
+        public GameObject(Vector2 pPosition, Texture2D pTexture, Vector2 pOrigin, bool pActive = true)
+        {
+            _position = pPosition;
+            Texture = pTexture;//Property also creates _collider from texture data
+            _origin = pOrigin;
 
             _active = pActive;
         }
@@ -113,16 +124,7 @@ namespace StateDesignPattern.Assignment2
         {
             if (_active)
             {
-                pSpriteBatch.Draw(_texture, _position, Color.White);
-            }
-        }
-
-        public virtual void Draw(SpriteBatch pSpriteBatch, Color pColor, float pScale = 1)
-        {
-            if (_active)
-            {
-                Vector2 scale = Vector2.One * pScale;
-                pSpriteBatch.Draw(_texture, _position, null, pColor, 0, Vector2.One / 2, scale, SpriteEffects.None, 0);
+                pSpriteBatch.Draw(_texture, _position, null, Color.White, 0, _origin, 1, SpriteEffects.None, 0);
             }
         }
 

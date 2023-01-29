@@ -23,9 +23,9 @@ namespace StateDesignPattern.Assignment2
         public bool HasShield => _hasShield;
 
         //Constructor
-        public Player(Vector2 pPosition, float speed) : base(pPosition)
+        public Player(Vector2 pPosition, float pSpeed) : base(pPosition)
         {
-            _speed = speed;
+            _speed = pSpeed;
         }
 
         //Methods

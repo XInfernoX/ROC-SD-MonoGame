@@ -10,13 +10,9 @@ namespace StateDesignPattern.Assignment1
     //virtual + override
     //Constructor
 
+    //Viewport tip?
     //Rectangle tip
     //Active tip
-
-
-
-
-
 
     public class Game1 : Game
     {
