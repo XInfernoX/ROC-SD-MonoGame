@@ -10,8 +10,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
     public enum AssignmentState
     {
         StartingPoint,
-        EndResult,
-        AnimatedSprite
+        EndResult
     }
 
     public class Game1 : Game
@@ -99,19 +98,10 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
             CreateStar(6, new Vector2(viewport.Width * 0.5f, viewport.Height * 0.8f), true, true, true);
 
             for (int i = 0; i < _littleStars.Length; i++)
-            {
                 _littleStars[i].AwakeComponents();
-            }
 
             for (int i = 0; i < _littleStars.Length; i++)
-            {
                 _littleStars[i].StartComponents();
-            }
-
-
-
-            //_megaMan = new GameObject()
-
         }
 
         private void CreateStar(int pIndex, Vector2 pPosition, bool pRotator, bool pOscillator, bool pColorShifter)
@@ -164,9 +154,6 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
                         _littleStars[i].UpdateGameObject(pGameTime);
                     }
                     break;
-                case AssignmentState.AnimatedSprite:
-
-                    break;
             }
         }
 
@@ -175,18 +162,12 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Space) && !_previousState.IsKeyDown(Keys.Space))//aka OnKeyDown
             {
-                Console.WriteLine($"before:{_state}");
+                //int stateIndex = (int)_state;
+                //stateIndex++;
+                //stateIndex %= Enum.GetNames(typeof(AssignmentState)).Length;
+                //_state = (AssignmentState)stateIndex;
 
-
-                int intState = (int)_state;
-                intState++;
-                intState %= 2;
-
-                _state = (AssignmentState)intState;
-
-                Console.WriteLine($"After:{_state}");
-
-                //_state = (AssignmentState)((int)_state++ % Enum.GetNames(typeof(AssignmentState)).Length);
+                _state = (AssignmentState)((int)++_state % Enum.GetNames(typeof(AssignmentState)).Length);
             }
 
             _previousState = keyboard;
@@ -209,12 +190,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
                     break;
                 case AssignmentState.EndResult:
                     for (int i = 0; i < _littleStars.Length; i++)
-                    {
                         _littleStars[i].DrawGameObject(_spriteBatch);
-                    }
-                    break;
-                case AssignmentState.AnimatedSprite:
-
                     break;
             }
 

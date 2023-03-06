@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces
+namespace CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces
 {
     public interface IDrawableComponent
     {

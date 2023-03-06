@@ -9,14 +9,9 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
     {
         private Player _player;
 
-        public Weapon(Vector2 pPosition, Player pPlayer) : base(pPosition)
+        public Weapon(Vector2 pPosition, Texture2D pTexture, Player pPlayer) : base(pPosition, pTexture)
         {
             _player = pPlayer;
-        }
-
-        public override void LoadContent(ContentManager pContent)
-        {
-            Texture = pContent.Load<Texture2D>("Weapon");
         }
 
         public override void Update(GameTime pTime)
@@ -27,16 +22,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
                 _player.AddWeapon();
 
                 _active = false;
-                Dispose();
             }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-
-            Console.WriteLine("Weapon.Dispose()");
-            _player = null;
         }
     }
 }

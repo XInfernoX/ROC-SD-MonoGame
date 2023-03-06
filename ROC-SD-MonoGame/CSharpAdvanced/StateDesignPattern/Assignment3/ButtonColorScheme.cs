@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class ButtonColorScheme
     {

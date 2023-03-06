@@ -9,41 +9,12 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
     {
         //Fields
         private string _name;
-
         private Transform _transform;
-
         private List<MonoBehaviour> _components = new List<MonoBehaviour>();
 
         //Properties
         public string Name => _name;
         public Transform Transform => _transform;
-
-        //Constructor
-
-        public T GetComponent<T>() where T : MonoBehaviour
-        {
-            for (int i = 0; i < _components.Count; i++)
-            {
-                if (_components[i] is T behaviour)
-                    return behaviour;
-            }
-
-            return null;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         #region Not For Students to see >:E
@@ -111,19 +82,24 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
         }
         #endregion
 
+        public T GetComponent<T>() where T : MonoBehaviour
+        {
+            for (int i = 0; i < _components.Count; i++)
+            {
+                if (_components[i] is T behaviour)
+                    return behaviour;
+            }
 
-
-
-
-
+            return null;
+        }
 
         public T[] GetComponents<T>() where T : MonoBehaviour
         {
             List<T> foundComponents = new List<T>();
             for (int i = 0; i < _components.Count; i++)
             {
-                if (_components[i] is T)
-                    foundComponents.Add(_components[i] as T);
+                if (_components[i] is T type)
+                    foundComponents.Add(type);
             }
 
             return foundComponents.ToArray();

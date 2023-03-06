@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
+namespace CSharpExpert.ComponentDesignPattern.Assignment3
 {
     public static class Utilities
     {

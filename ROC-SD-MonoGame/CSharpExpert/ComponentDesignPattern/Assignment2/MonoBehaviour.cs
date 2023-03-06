@@ -13,6 +13,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
             _owner = pOwner;
         }
 
+        //Event Methods
         public virtual void Awake()
         {
 
@@ -28,6 +29,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
 
         }
 
+        //Utility Methods
         protected T GetComponent<T>() where T : MonoBehaviour
         {
             return _owner.GetComponent<T>();

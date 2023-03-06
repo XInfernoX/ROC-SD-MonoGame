@@ -38,8 +38,12 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
         private Vector2 _textOffset = new Vector2(0, -40);
 
         //Constructors
-        public Enemy(Vector2 pPosition, int pSpeed, Player pPlayer, GameObject[] pWayPoints, float pPlayerDetectionRange = 100) : base(pPosition)
+        public Enemy(Vector2 pPosition, ContentManager pContent, int pSpeed, Player pPlayer, GameObject[] pWayPoints, float pPlayerDetectionRange = 100) : base(pPosition)
         {
+            Texture = pContent.Load<Texture2D>("Enemy");
+            SpriteFont font = pContent.Load<SpriteFont>("Arial");
+            _text = new Text(_position + _textOffset, font, Color.White, _state.ToString());
+
             _speed = pSpeed;
             _wayPoints = pWayPoints;
             _player = pPlayer;
@@ -47,20 +51,6 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
 
             _random = new Random();
             StartPatrolling(new GameTime());
-        }
-
-        //Methods - override
-        public override void LoadContent(ContentManager pContent)
-        {
-            Texture = pContent.Load<Texture2D>("Enemy");
-            SpriteFont font = pContent.Load<SpriteFont>("Arial");
-            _text = new Text(_position + _textOffset, font, _state.ToString(), Color.White);
-        }
-
-        public override void Draw(SpriteBatch pSpiteBatch)
-        {
-            base.Draw(pSpiteBatch);
-            _text.Draw(pSpiteBatch);
         }
 
         public override void Update(GameTime pGameTime)
@@ -238,6 +228,12 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
             pDirection.Normalize();
             Vector2 evadeTranslation = -pDirection * _speed;
             Position += evadeTranslation;
+        }
+
+        public override void Draw(SpriteBatch pSpiteBatch)
+        {
+            base.Draw(pSpiteBatch);
+            _text.Draw(pSpiteBatch);
         }
     }
 }

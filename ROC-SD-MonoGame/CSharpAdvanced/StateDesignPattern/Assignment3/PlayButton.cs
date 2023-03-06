@@ -2,26 +2,29 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class PlayButton : ButtonBase
     {
-        public PlayButton(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, string pText)
-            : base(pPosition, pGame, pColorScheme, pText)
+        public PlayButton(Game1 pGame, ButtonColorScheme pColorScheme, string pText = "Play")
+            : base(pGame, pColorScheme, pText)
         {
 
         }
 
-        public PlayButton(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, Vector2 pOrigin, string pText = "")
-            : base(pPosition, pGame, pColorScheme, pOrigin, pText)
+        public PlayButton(Game1 pGame, ButtonColorScheme pColorScheme, Vector2 pOrigin, string pText = "Play")
+            : base(pGame, pColorScheme, pOrigin, pText)
         {
 
         }
 
-        public override void LoadContent(ContentManager pContent, Viewport pViewPort)
+        public override void LoadContent(ContentManager pContent, Viewport pViewport)
         {
-            base.LoadContent(pContent, pViewPort);
-            Position = new Vector2(pViewPort.Width * 0.5f, pViewPort.Height * 0.33f);
+            float third = pViewport.Height / 3;
+
+            _position = new Vector2(pViewport.Width / 2, third);
+
+            base.LoadContent(pContent, pViewport);
         }
 
         protected override void OnButtonClick()

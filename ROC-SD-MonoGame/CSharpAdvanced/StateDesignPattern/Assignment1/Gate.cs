@@ -27,13 +27,5 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
                 _game.Exit();
             }
         }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-
-            _player = null;
-            _game = null;
-        }
     }
 }

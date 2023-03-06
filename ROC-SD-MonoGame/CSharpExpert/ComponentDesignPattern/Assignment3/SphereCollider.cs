@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
+﻿using System;
+using Microsoft.Xna.Framework;
+using CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
+namespace CSharpExpert.ComponentDesignPattern.Assignment3
 {
     public class SphereCollider : Component, ICollideableComponent
     {
@@ -41,6 +42,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
         public bool CollisionCheck(ICollideableComponent pOther)
         {
             //Double dispatch
+            Console.WriteLine("SphereCollider (ICollideableComponent)");
             return pOther.CollisionCheck(this);
         }
 
@@ -48,6 +50,8 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
         {
             //Sphere->Rectangle or Rectangle->Sphere collision checks should not matter
             //Reusing the implementation in the RectangleCollider class to avoid code duplication
+            Console.WriteLine("SphereCollider (RectangleCollider)");
+
             return pOther.CollisionCheck(this);
         }
 
@@ -64,6 +68,8 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
             float jointRadius = pOther.Radius + _radius;
 
             //If the difference is smaller than sum of both radii, there is a collision
+            Console.WriteLine("SphereCollider (SphereCollider)");
+
             return difference.Length() < jointRadius;
         }
     }

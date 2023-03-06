@@ -12,16 +12,11 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
 
         private Gate _connectedGate;
 
-        public Gate(Vector2 pPosition, Player pPlayer, Game1 pGame, GameState pState) : base(pPosition)
+        public Gate(Vector2 pPosition, Texture2D pTexture, Player pPlayer, Game1 pGame, GameState pState) : base(pPosition, pTexture)
         {
             _player = pPlayer;
             _game = pGame;
             _state = pState;
-        }
-
-        public override void LoadContent(ContentManager pContent)
-        {
-            Texture = pContent.Load<Texture2D>("Gate");
         }
 
         public void SetConnectedGate(Gate pConnectedGate)
@@ -36,14 +31,6 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
                 _game.SetGameState(_state);
                 _player.Position = _connectedGate.Position + new Vector2(0, 100);
             }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-
-            _player = null;
-            _game = null;
         }
     }
 }

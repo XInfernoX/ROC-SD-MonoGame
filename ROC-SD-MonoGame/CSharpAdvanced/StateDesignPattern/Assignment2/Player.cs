@@ -23,14 +23,10 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
         public bool HasShield => _hasShield;
 
         //Constructor
-        public Player(Vector2 pPosition, float pSpeed) : base(pPosition)
+        public Player(Vector2 pPosition, float pSpeed, ContentManager pContent) : base(pPosition)
         {
             _speed = pSpeed;
-        }
 
-        //Methods
-        public override void LoadContent(ContentManager pContent)
-        {
             _playerTexture = pContent.Load<Texture2D>("Knight");
             _playerShieldTexture = pContent.Load<Texture2D>("KnightShield");
             _playerWeaponTexture = pContent.Load<Texture2D>("KnightWeapon");
@@ -39,6 +35,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
             Texture = _playerTexture;
         }
 
+        //Methods
         public override void Update(GameTime pGameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();

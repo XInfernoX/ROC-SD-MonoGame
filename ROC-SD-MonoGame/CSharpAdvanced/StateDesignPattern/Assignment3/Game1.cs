@@ -3,9 +3,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
-    //TODO convert to Game1
+    //Added Scenes (SceneBase)
+    //Added LoadContent function to GameObject to reduce Constructor arguments
+
+    //TODO finish Enemy
     public class Game1 : Game
     {
         //Fields - MonoGame
@@ -46,13 +49,36 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
             _player.LoadContent(Content, GraphicsDevice.Viewport);
 
             //Scenes setup
-            _scenes.Add(new MenuScene(this, "Menu", _player));
-            _scenes.Add(new LevelScene(this, "Level1", _player));
-            _scenes.Add(new Level2Scene(this, "Level2", _player));
+
+            MenuScene menuScene = new MenuScene(this, "Menu", _player);
+            _scenes.Add(menuScene);
+
+            Level1Scene level1Scene = new Level1Scene(this, "Level1", _player);
+            _scenes.Add(level1Scene);
+
+            Level2Scene level2Scene = new Level2Scene(this, "Level2", _player);
+            _scenes.Add(level2Scene);
+
+            Level3Scene level3Scene = new Level3Scene(this, "Level3", _player);
+            _scenes.Add(level3Scene);
+
+            Level4Scene level4Scene = new Level4Scene(this, "Level4", _player);
+            _scenes.Add(level4Scene);
+
 
             //Scenes LoadContent
             for (int i = 0; i < _scenes.Count; i++)
                 _scenes[i].LoadSceneContent(Content, GraphicsDevice.Viewport);
+            
+
+            //Gate connections
+            ConnectTwoGates(level1Scene.Level2Gate, level2Scene.Level1Gate);
+
+
+
+
+
+
 
             ChangeSceneTo("Menu");
         }
@@ -82,17 +108,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
                 SceneBase scene = _scenes[i];
 
                 if (scene.Name == pSceneName)
-                {
-                    if (_currentScene != null)//In order to initialize a starting scene
-                    {
-                        _currentScene.OnSceneExit();
-                        _currentScene.RemoveGameObject(_player);
-                    }
-
-                    _currentScene = scene;
-                    _currentScene.AddGameObject(_player);
-                    _currentScene.OnSceneEnter();
-                }
+                    ChangeSceneTo(scene);
             }
         }
 
@@ -107,6 +123,12 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
             _currentScene = pScene;
             _currentScene.AddGameObject(_player);
             _currentScene.OnSceneEnter();
+        }
+
+        private void ConnectTwoGates(Gate pGate1, Gate pGate2)
+        {
+            pGate1.ConnectedGate = pGate2;
+            pGate2.ConnectedGate = pGate1;
         }
     }
 }

@@ -1,20 +1,25 @@
-﻿using Microsoft.Xna.Framework;
-using CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
+﻿using System;
+using Microsoft.Xna.Framework;
+using CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
+namespace CSharpExpert.ComponentDesignPattern.Assignment3
 {
     public class RectangleCollider : Component, ICollideableComponent
     {
         //Fields
         private readonly IDrawableComponent _drawableComponent;
-        private Rectangle _collider;//Contains Position and Size
+        private Rectangle _collider;
 
         //Constructor
         public RectangleCollider(IDrawableComponent pDrawableComponent)
         {
-            //NOTE cannot call transform property, since Component has not been added to GameObject yet
             _drawableComponent = pDrawableComponent;
-            _collider = Rectangle.Empty;
+        }
+
+        public override void Awake()
+        {
+            //NOTE Have to create the Rectangle in Awake, Transform is not accessible  since Component has not been added to GameObject and therefore the Owner of this Component has not been set
+            UpdateCollider();
         }
 
         //Methods
@@ -29,6 +34,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
         public bool CollisionCheck(ICollideableComponent pOther)
         {
             //Double dispatch
+            Console.WriteLine("RectangleCollider (ICollideableComponent)");
             return pOther.CollisionCheck(this);
         }
 
@@ -39,6 +45,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
             pOther.UpdateCollider();
 
             //If both rectangles intersect with each other, there is a collision
+            Console.WriteLine("RectangleCollider (RectangleCollider)");
             return _collider.Intersects(pOther._collider);
         }
 
@@ -65,6 +72,8 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
             float jointRadius = pOther.Radius + radius;
 
             //If the difference is smaller than sum of both radii, there is a collision
+            Console.WriteLine("RectangleCollider (SphereCollider)");
+
             return difference.Length() < jointRadius;
         }
     }

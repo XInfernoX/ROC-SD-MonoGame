@@ -1,17 +1,11 @@
 ﻿using System;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
+namespace CSharpExpert.ComponentDesignPattern.Assignment3
 {
-    public class MegaMan : MonoBehaviour
+    public class SimpleMovement : MonoBehaviour
     {
-        public override void OnCollision(GameObject pOther)
-        {
-            Console.WriteLine($"MegaMan collides with: {pOther.Name}");
-        }
-
         public override void Update(GameTime pGameTime)
         {
             KeyboardState state = Keyboard.GetState();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class SceneManger
     {

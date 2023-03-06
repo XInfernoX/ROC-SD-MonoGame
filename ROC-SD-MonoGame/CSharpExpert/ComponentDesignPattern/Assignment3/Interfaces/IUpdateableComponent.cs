@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces
+namespace CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces
 {
     public interface IUpdateableComponent
     {

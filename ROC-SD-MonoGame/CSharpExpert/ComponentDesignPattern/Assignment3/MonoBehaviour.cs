@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
+using CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
+namespace CSharpExpert.ComponentDesignPattern.Assignment3
 {
     //Base class for most custom components, it is Updateable and gets notified upon certain events, such as OnCollision
     public abstract class MonoBehaviour : Component, IUpdateableComponent

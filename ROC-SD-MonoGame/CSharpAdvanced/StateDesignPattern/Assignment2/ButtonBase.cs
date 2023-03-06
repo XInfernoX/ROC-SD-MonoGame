@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -16,44 +15,42 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
 
         private MouseState _lastMouseState;
 
-        private string _text;
-        private Vector2 _textOffset;
+        private Text _text;
 
         //Properties
-        public string Text
+        public Text Text
         {
-            get { return _text; }
-            set
-            {
-                _text = value;
-                _textOffset = _colorScheme.Font.MeasureString(_text) / 2;
-            }
+            get => _text;
+            set => _text = value;
         }
 
         //Constructors
-        public ButtonBase(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, string pText = "") : base(pPosition)
+        public ButtonBase(Vector2 pPosition, Texture2D pTexture, Game1 pGame, ButtonColorScheme pColorScheme, string pText = "") : base(pPosition, pTexture)
         {
             _game = pGame;
             _colorScheme = pColorScheme;
-            Text = pText;
+
+            //Makes sure the text will always be in the center of the Button
+            Vector2 textOriginOffset = _origin - new Vector2(0.5f, 0.5f);
+            Vector2 buttonCenterPosition = new Vector2(_position.X - pTexture.Width * textOriginOffset.X, _position.Y - pTexture.Height * textOriginOffset.Y);
+
+            _text = new Text(buttonCenterPosition, pColorScheme, pText);
 
             SetButtonState(ButtonStatus.Default, _colorScheme.DefaultColor);
         }
 
-        public ButtonBase(Vector2 pPosition, Game1 pGame, ButtonColorScheme pColorScheme, Vector2 pOrigin, string pText = "") : base(pPosition)
+        public ButtonBase(Vector2 pPosition, Texture2D pTexture, Game1 pGame, ButtonColorScheme pColorScheme, Vector2 pOrigin, string pText = "") : base(pPosition, pTexture, pOrigin)
         {
             _game = pGame;
             _colorScheme = pColorScheme;
-            Text = pText;
-            _origin = pOrigin;
+
+            //Makes sure the text will always be in the center of the Button
+            Vector2 textOrigin = _origin - new Vector2(0.5f, 0.5f);
+            Vector2 buttonCenter = new Vector2(_position.X - pTexture.Width * textOrigin.X, _position.Y - pTexture.Height * textOrigin.Y);
+
+            _text = new Text(buttonCenter, pColorScheme, pText);
 
             SetButtonState(ButtonStatus.Default, _colorScheme.DefaultColor);
-        }
-
-        public override void LoadContent(ContentManager pContent)
-        {
-            Texture = pContent.Load<Texture2D>("UI_Title_64x64");
-            base.LoadContent(pContent);
         }
 
         public override void Update(GameTime pGameTime)
@@ -124,11 +121,10 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
         {
             if (Active)
             {
-                pSpriteBatch.Draw(_texture, _position, _currentButtonColor);
-
-                Vector2 buttonCenter = new Vector2(_position.X + Width / 2, _position.Y + Height / 2);
-                pSpriteBatch.DrawString(_colorScheme.Font, _text, buttonCenter - _textOffset, _colorScheme.TextColor);
+                Vector2 scaledOrigin = new Vector2(_texture.Width * _origin.X, _texture.Height * _origin.Y);
+                pSpriteBatch.Draw(_texture, _position, null, _currentButtonColor, 0, scaledOrigin, 1, SpriteEffects.None, 0);
             }
+            _text.Draw(pSpriteBatch);
         }
 
         protected virtual void OnButtonClick() { }

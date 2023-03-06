@@ -27,16 +27,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
                 _player.AddWeapon();
 
                 _active = false;
-                Dispose();
             }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-
-            Console.WriteLine("Weapon.Dispose()");
-            _player = null;
         }
     }
 }

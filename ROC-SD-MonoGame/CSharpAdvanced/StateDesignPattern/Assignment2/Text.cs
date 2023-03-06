@@ -15,10 +15,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
         //Properties
         public string Label
         {
-            get
-            {
-                return _text;
-            }
+            get => _text;
             set
             {
                 _text = value;
@@ -28,10 +25,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
 
         public SpriteFont SpriteFont
         {
-            get
-            {
-                return _font;
-            }
+            get => _font;
             set
             {
                 _font = value;
@@ -41,29 +35,35 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
 
         public Color Color
         {
-            get
-            {
-                return _color;
-            }
-            set
-            {
-                _color = value;
-            }
+            get => _color;
+            set => _color = value;
         }
 
         //Constructors
-        public Text(Vector2 pPosition, SpriteFont pSpriteFont, string pText, Color pColor) : base(pPosition)
+        public Text(Vector2 pPosition, SpriteFont pSpriteFont, Color pColor, string pText) : base(pPosition)
         {
             _font = pSpriteFont;
-            _text = pText;
             _color = pColor;
 
+            _text = pText;
             _offset = pSpriteFont.MeasureString(pText);
+        }
+
+        public Text(Vector2 pPosition, ButtonColorScheme pButtonScheme, string pText) : base(pPosition)
+        {
+            _font = pButtonScheme.Font;
+            _color = pButtonScheme.TextColor;
+
+            _text = pText;
+            _offset = pButtonScheme.Font.MeasureString(pText);
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.DrawString(_font, _text, Position - _offset / 2, _color);
+            if (_active)
+            {
+                pSpriteBatch.DrawString(_font, _text, Position - _offset / 2, _color);
+            }
         }
     }
 }

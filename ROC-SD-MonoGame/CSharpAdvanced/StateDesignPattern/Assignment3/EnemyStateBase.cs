@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class EnemyStateBase
     {
@@ -13,15 +13,12 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
 
         private Random _random = new Random();
 
-
-
-
         //Constructor
-        public EnemyStateBase(Enemy pOwner, Player pPlayer, int speed)
+        public EnemyStateBase(Enemy pOwner, Player pPlayer, int pSpeed)
         {
             _owner = pOwner;
             _player = pPlayer;
-            _speed = speed;
+            _speed = pSpeed;
         }
 
         public virtual void UpdateState(GameTime pGameTime)
@@ -59,10 +56,10 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
             return playerDistance;
         }
 
-        protected void Move(Vector2 pDirection)
+        protected void Move(GameTime pGameTime, Vector2 pDirection)
         {
             pDirection.Normalize();
-            Vector2 translation = -pDirection * _speed;
+            Vector2 translation = _speed * (float)pGameTime.ElapsedGameTime.TotalSeconds * -pDirection;
             _owner.Position += translation;
         }
     }

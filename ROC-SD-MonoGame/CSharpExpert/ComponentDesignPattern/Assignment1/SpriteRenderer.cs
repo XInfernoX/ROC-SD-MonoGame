@@ -92,39 +92,6 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
                 Vector2 textOrigin = _textOrigin.ToCoordinate();
                 pSpriteBatch.DrawString(_font, _text, textPosition, Color.Red, 0, textOrigin * textSize, 1.0f, _spriteEffects, _layerDepth);
             }
-
-
-            //https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.SpriteBatch.html
-
-            //DestinationRectangle - The drawing bounds on screen.
-            //SourceRectangle - An optional region on the texture which will be rendered. If null - draws full texture.
-
-            //Texture2D texture;
-            //Vector2 position;
-            //Rectangle sourceRectangle;
-
-            //Color color;
-
-            //float rotation;
-            //Vector2 origin;
-            //Vector2 scale;
-            //SpriteEffect spriteEffect;
-
-            //float layerDepth;
-
-            //============================================================
-
-            //Texture2D texture
-            //Vector2 position
-            //Color color
-            //Vector2 origin
-            //float scale
-            //Vector2 scale
-            //SpriteEffect spriteEffect
-            //float rotation
-            //float layerDepth
-            //Rectangle sourceRectangle
-            //Rectangle destinationRectangle
         }
     }
 }

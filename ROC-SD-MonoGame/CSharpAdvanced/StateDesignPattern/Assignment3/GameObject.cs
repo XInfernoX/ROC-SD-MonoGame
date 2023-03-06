@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
-    public class GameObject : IDisposable
+    public class GameObject
     {
         // Fields
         protected Vector2 _position = Vector2.Zero;
@@ -29,6 +29,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
             {
                 _texture = value;
                 _collider = new Rectangle((int)_position.X, (int)_position.Y, value.Width, value.Height);
+                UpdateCollider();
             }
         }
 
@@ -129,26 +130,15 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         {
             if (_active)
             {
-                pSpriteBatch.Draw(_texture, _position, null, Color.White, 0, _origin, 1, SpriteEffects.None, 0);
+                Vector2 scaledOrigin = new Vector2(_texture.Width * _origin.X, _texture.Height * _origin.Y);
+                pSpriteBatch.Draw(_texture, _position, null, Color.White, 0, scaledOrigin, 1, SpriteEffects.None, 0);
             }
         }
 
         private void UpdateCollider()
         {
-            _collider.X = (int)_position.X;
-            _collider.Y = (int)_position.Y;
-        }
-
-        public void Destroy()
-        {
-            Dispose();
-        }
-
-        public virtual void Dispose()
-        {
-            Console.WriteLine("GameObject.Dispose()");
-
-            _texture.Dispose();
+            _collider.X = (int)_position.X - (int)(_texture.Width * _origin.X);
+            _collider.Y = (int)_position.Y - (int)(_texture.Height * _origin.Y);
         }
     }
 }

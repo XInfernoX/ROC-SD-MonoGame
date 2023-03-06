@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class Enemy : GameObject
     {
@@ -46,6 +47,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         {
             _currentState.UpdateState(pGameTime);
 
+            //Console.WriteLine(_currentState.GetType().Name);
             _text.Label = _currentState.GetType().Name;
             _text.Position = _position + _textOffset;
         }

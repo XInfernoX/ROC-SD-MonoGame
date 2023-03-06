@@ -32,7 +32,9 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
                 Y = MathF.Sin(_time * MathHelper.TwoPi)
             };
 
-            Transform.Position = _oscillateMidPoint + oscillateVector * _amplitude;
+            //Transform.Position = _oscillateMidPoint + oscillateVector * _amplitude;
+
+            Transform.Position += oscillateVector * _amplitude;
         }
     }
 }

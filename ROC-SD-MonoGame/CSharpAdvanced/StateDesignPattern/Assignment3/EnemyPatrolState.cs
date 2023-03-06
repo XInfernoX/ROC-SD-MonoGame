@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class EnemyPatrolState : EnemyStateBase
     {
@@ -27,7 +27,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         {
             //Patrol behaviour movement
             Vector2 currentWayPoint = _wayPoints[_currentWayPointIndex].Position;
-            Move(_owner.Position - currentWayPoint);
+            Move(pGameTime, _owner.Position - currentWayPoint);
 
             //Patrol behaviour update waypoint
             Vector2 wayPointDifference = _owner.Position - currentWayPoint;

@@ -5,7 +5,7 @@ using System;
 
 namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
 {
-    public class GameObject : IDisposable
+    public class GameObject
     {
         // Fields
         private Vector2 _position = Vector2.Zero;
@@ -130,19 +130,6 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
         {
             _collider.X = (int)_position.X;
             _collider.Y = (int)_position.Y;
-        }
-
-        public void Destroy()
-        {
-            Dispose();
-        }
-
-
-        public virtual void Dispose()
-        {
-            Console.WriteLine("GameObject.Dispose()");
-
-            _texture.Dispose();
         }
     }
 }

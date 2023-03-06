@@ -10,6 +10,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
     {
         private enum TransformTest
         {
+            SimpleBehavioursExample,
             PositionTest,
             RotationTest,
             ScaleTest,
@@ -23,6 +24,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
         private TransformTest _state;
         private KeyboardState _previousState;
 
+        private GameObject[] _exampleObjects;
         private GameObject[] _positionTestObjects;
         private RotaterObject[] _rotateTestObjects;
         private ScalerObject[] _scaleTestObjects;
@@ -50,8 +52,36 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Viewport viewport = _graphics.GraphicsDevice.Viewport;
 
+            Texture2D littleStarTexture = Content.Load<Texture2D>("LittleStar");
             Texture2D starIndicator = Content.Load<Texture2D>("StarIndicators");
             SpriteFont defaultFont = Content.Load<SpriteFont>("Arial");
+
+            //SimpleBehavioursExample
+            _exampleObjects = new GameObject[3];
+
+            //RotatorObject
+            Transform rotatorTransform = new Transform(new Vector2(viewport.Width * 0.2f, viewport.Height * 0.5f));
+            SpriteRenderer rotatorRenderer = new SpriteRenderer(littleStarTexture);
+            rotatorRenderer.SpriteFont = defaultFont;
+            rotatorRenderer.Text = "RotaterObject";
+            _exampleObjects[0] = new RotaterObject("RotatorObject", rotatorTransform, rotatorRenderer, 360);
+
+            //OscillatorObject
+            Transform oscillatorTransform = new Transform(new Vector2(viewport.Width * 0.5f, viewport.Height * 0.5f));
+            SpriteRenderer oscillatorRenderer = new SpriteRenderer(littleStarTexture);
+            oscillatorRenderer.SpriteFont = defaultFont;
+            oscillatorRenderer.Text = "OscillatorObject";
+            _exampleObjects[1] = new OscillatorObject("OscillatorObject", oscillatorTransform, oscillatorRenderer, 1, 20);
+
+            //ScalerObject
+            Transform scalerTransform = new Transform(new Vector2(viewport.Width * 0.8f, viewport.Height * 0.5f));
+            SpriteRenderer scalerRenderer = new SpriteRenderer(littleStarTexture);
+            scalerRenderer.SpriteFont = defaultFont;
+            scalerRenderer.Text = "ScalerObject";
+            _exampleObjects[2] = new ScalerObject("ScalerObject", scalerTransform, scalerRenderer, 1);
+
+
+
 
             //PositionTestSetup
             _positionTestObjects = new GameObject[4];
@@ -99,14 +129,14 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
             {
                 for (int y = 0; y < 3; y++, i++)
                 {
-                    Transform rotatorTransform = new Transform(
+                    Transform newRotatorTransform = new Transform(
                         new Vector2(viewport.Width * (0.3f * x) + horizontalSpacing, viewport.Height * (0.3f * y) + verticalSpacing),
                         new Vector2(0.5f * x, 0.5f * y));
-                    SpriteRenderer rotatorRenderer = new SpriteRenderer(starIndicator);
+                    SpriteRenderer newRotatorRenderer = new SpriteRenderer(starIndicator);
                     rotatorRenderer.SpriteFont = defaultFont;
                     rotatorRenderer.Text = $"Origin: [{x * 0.5f}, {y * 0.5f}]";
 
-                    _rotateTestObjects[i] = new RotaterObject($"RotatorTest{i}", rotatorTransform, rotatorRenderer, 180);
+                    _rotateTestObjects[i] = new RotaterObject($"RotatorTest{i}", newRotatorTransform, newRotatorRenderer, 180);
                 }
             }
 
@@ -165,6 +195,9 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
 
             switch (_state)
             {
+                case TransformTest.SimpleBehavioursExample:
+                    UpdateSimpleBehavioursExample(pGameTime);
+                    break;
                 case TransformTest.PositionTest:
                     UpdatePositionTest(pGameTime);
                     break;
@@ -179,6 +212,14 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void UpdateSimpleBehavioursExample(GameTime pGameTime)
+        {
+            for (int i = 0; i < _exampleObjects.Length; i++)
+            {
+                _exampleObjects[i].UpdateGameObject(pGameTime);
             }
         }
 
@@ -225,6 +266,9 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
 
             switch (_state)
             {
+                case TransformTest.SimpleBehavioursExample:
+                    DrawExampleObjects();
+                    break;
                 case TransformTest.PositionTest:
                     DrawPositionTest();
                     break;
@@ -240,6 +284,14 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
             }
 
             _spriteBatch.End();
+        }
+
+        private void DrawExampleObjects()
+        {
+            for (int i = 0; i < _exampleObjects.Length; i++)
+            {
+                _exampleObjects[i].DrawGameObject(_spriteBatch);
+            }
         }
 
         private void DrawPositionTest()

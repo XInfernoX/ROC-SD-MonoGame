@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
+namespace CSharpExpert.ComponentDesignPattern.Assignment3
 {
     //Component that keeps track of transformation data. It determines how a GameObject is placed in a 2D world
     public class Transform : Component
@@ -53,6 +54,13 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
         public void Translate(Vector2 pPosition)
         {
             _position += pPosition;
+        }
+
+        public void LookAt(Transform pTarget)
+        {
+            Vector2 direction = Vector2.Normalize(pTarget._position - _position);
+
+            _rotation = MathHelper.ToDegrees(MathF.Atan2(direction.Y, direction.X));
         }
     }
 }

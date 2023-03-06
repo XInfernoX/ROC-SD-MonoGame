@@ -1,8 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class MenuScene : SceneBase
     {
@@ -10,16 +9,13 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         {
         }
 
-        public override void LoadSceneContent(ContentManager pContent, Viewport pViewPort)
+        protected override void CreateObjects(ContentManager pContent, Viewport pViewPort)
         {
-            //Buttons
-            PlayButton playButton = new PlayButton(new Vector2(pViewPort.Width / 2, pViewPort.Height * 0.33f), _game, _game.ButtonColorScheme, "Play");
+            PlayButton playButton = new PlayButton(_game, _game.ButtonColorScheme);
             AddGameObject(playButton);
 
-            QuitButton quitButton = new QuitButton(new Vector2(pViewPort.Width / 2, pViewPort.Height * 0.66f), _game, _game.ButtonColorScheme, "Quit");
+            QuitButton quitButton = new QuitButton(_game, _game.ButtonColorScheme);
             AddGameObject(quitButton);
-
-            base.LoadSceneContent(pContent, pViewPort);
         }
 
         public override void OnSceneEnter()

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class Text : GameObject
     {
@@ -15,10 +15,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         //Properties
         public string Label
         {
-            get
-            {
-                return _text;
-            }
+            get => _text;
             set
             {
                 _text = value;
@@ -28,10 +25,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
 
         public SpriteFont SpriteFont
         {
-            get
-            {
-                return _font;
-            }
+            get => _font;
             set
             {
                 _font = value;
@@ -41,14 +35,8 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
 
         public Color Color
         {
-            get
-            {
-                return _color;
-            }
-            set
-            {
-                _color = value;
-            }
+            get => _color;
+            set => _color = value;
         }
 
         //Constructors
@@ -61,9 +49,21 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
             _offset = pSpriteFont.MeasureString(pText);
         }
 
+        public Text(Vector2 pPosition, ButtonColorScheme pButtonScheme, string pText) : base(pPosition)
+        {
+            _font = pButtonScheme.Font;
+            _color = pButtonScheme.TextColor;
+
+            _text = pText;
+            _offset = pButtonScheme.Font.MeasureString(pText);
+        }
+
         public override void Draw(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.DrawString(_font, _text, Position - _offset / 2, _color);
+            if (_active)
+            {
+                pSpriteBatch.DrawString(_font, _text, Position - _offset / 2, _color);
+            }
         }
     }
 }

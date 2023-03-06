@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class EnemyEvadeState : EnemyStateBase
     {
@@ -25,7 +25,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         public override void UpdateState(GameTime pGameTime)
         {
             //Evading
-            Move(_player.Position - _owner.Position);
+            Move(pGameTime, _player.Position - _owner.Position);
 
             //Patrol Transition
             float playerDistance = CalculatePlayerDistance();

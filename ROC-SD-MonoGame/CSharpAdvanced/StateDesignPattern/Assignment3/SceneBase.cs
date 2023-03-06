@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class SceneBase
     {
@@ -14,9 +14,11 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         protected Player _player;
         protected List<GameObject> _gameObjects = new List<GameObject>();
 
-        private SpriteFont _font;
-        private Vector2 _fontPosition;
-        private Vector2 _fontOrigin;
+        private Text _text;
+
+        //private SpriteFont _font;
+        //private Vector2 _fontPosition;
+        //private Vector2 _fontOrigin;
 
         //Properties
         public string Name => _name;
@@ -30,24 +32,20 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
         }
 
         //Methods
-        public virtual void LoadSceneContent(ContentManager pContent, Viewport pViewPort)
+        public void LoadSceneContent(ContentManager pContent, Viewport pViewport)
         {
-            _font = pContent.Load<SpriteFont>("Arial");
-            _fontPosition = new Vector2(pViewPort.Width / 2, 10);
-            Vector2 stringSize = _font.MeasureString(_name);
-            _fontOrigin = stringSize / 2;
+            _text = new Text(new Vector2(pViewport.Width / 2, 10), _game.ButtonColorScheme, _name);
+            _gameObjects.Add(_text);
 
-            CreateObjects(pContent, pViewPort);
+            CreateObjects(pContent, pViewport);
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
-                _gameObjects[i].LoadContent(pContent, pViewPort);
+                _gameObjects[i].LoadContent(pContent, pViewport);
             }
         }
 
-        protected virtual void CreateObjects(ContentManager pContent, Viewport pViewPort)
-        {
-        }
+        protected virtual void CreateObjects(ContentManager pContent, Viewport pViewPort) { }
 
         public void UpdateScene(GameTime pGameTime)
         {
@@ -59,11 +57,11 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
 
         public void DrawScene(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.DrawString(_font, _name, _fontPosition, Color.White, 0, _fontOrigin, 1, SpriteEffects.None, 0);
+            //pSpriteBatch.DrawString(_font, _name, _fontPosition, Color.White, 0, _fontOrigin, 1, SpriteEffects.None, 0);
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
-                _gameObjects[i].Draw(pSpriteBatch);//Probleem van opdracht 2 naar 3 met overloaded functie
+                _gameObjects[i].Draw(pSpriteBatch);
             }
         }
 

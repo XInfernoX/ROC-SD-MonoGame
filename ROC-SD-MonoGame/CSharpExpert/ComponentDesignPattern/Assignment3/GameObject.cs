@@ -2,10 +2,10 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
+using CSharpExpert.ComponentDesignPattern.Assignment3.Interfaces;
 
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment3
+namespace CSharpExpert.ComponentDesignPattern.Assignment3
 {
     public class GameObject
     {

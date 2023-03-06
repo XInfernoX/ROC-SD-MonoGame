@@ -48,6 +48,15 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
         public Transform(Vector2 pPosition, Vector2 pOrigin) : this(pPosition, pOrigin, 0, Vector2.One) { }
         public Transform(Vector2 pPosition, Vector2 pOrigin, float pRotation) : this(pPosition, pOrigin, pRotation, Vector2.One) { }
 
+        //Copy Constructor
+        public Transform(Transform pOtherTransform)
+        {
+            _position = pOtherTransform._position;
+            _rotation = pOtherTransform._rotation;
+            _scale = pOtherTransform._scale;
+            _origin = pOtherTransform._origin;
+        }
+
         //Methods
         public void Translate(Vector2 pPosition)
         {

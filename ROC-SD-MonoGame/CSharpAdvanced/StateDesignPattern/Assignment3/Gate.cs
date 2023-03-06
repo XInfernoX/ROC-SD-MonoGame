@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Diagnostics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 {
     public class Gate : GameObject
     {
@@ -16,11 +14,10 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
 
         private Gate _connectedGate;
 
-        public Gate(Vector2 pPosition, Player pPlayer, Game1 pGame, SceneBase pScene) : base(pPosition)
+        public Gate ConnectedGate
         {
-            _player = pPlayer;
-            _game = pGame;
-            _scene = pScene;
+            get => _connectedGate;
+            set=> _connectedGate = value;
         }
 
         public Gate(Vector2 pPosition, Player pPlayer, Game1 pGame, string pSceneName) : base(pPosition)
@@ -30,39 +27,32 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment3
             _sceneName = pSceneName;
         }
 
+        public Gate(Vector2 pPosition, Player pPlayer, Game1 pGame, SceneBase pScene) : base(pPosition)
+        {
+            _player = pPlayer;
+            _game = pGame;
+
+            _scene = pScene;
+        }
+
 
         public override void LoadContent(ContentManager pContent, Viewport pViewPort)
         {
             Texture = pContent.Load<Texture2D>("Gate");
         }
 
-        public void SetConnectedGate(Gate pConnectedGate)
-        {
-            _connectedGate = pConnectedGate;
-        }
-
         public override void Update(GameTime pTime)
         {
             if (Collision(_player))
             {
-                //_game.ChangeSceneTo(_scene.Name);
-
-
                 if (_scene != null)
                     _game.ChangeSceneTo(_scene);
                 else if (_sceneName != null)
                     _game.ChangeSceneTo(_sceneName);
 
-                _player.Position = _connectedGate.Position + new Vector2(0, 100);
+                if (_connectedGate != null)
+                    _player.Position = _connectedGate.Position + new Vector2(0, 100);
             }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-
-            _player = null;
-            _game = null;
         }
     }
 }

@@ -13,9 +13,9 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
             _player = pPlayer;
         }
 
-        public override void LoadContent(ContentManager pContent)
+        public Shield(Vector2 pPosition, Texture2D pTexture, Player pPlayer) : base(pPosition, pTexture)
         {
-            Texture = pContent.Load<Texture2D>("Shield");
+            _player = pPlayer;
         }
 
         public override void Update(GameTime pTime)
@@ -25,13 +25,6 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
                 _player.AddShield();
                 _active = false;
             }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-
-            _player = null;
         }
     }
 }
