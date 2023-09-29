@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Examples
 {
@@ -66,6 +67,7 @@ namespace Examples
 
             // (1 / 2) + 0.5f;
             // 0.5f + 0.5f = 1
+
 
         }
 

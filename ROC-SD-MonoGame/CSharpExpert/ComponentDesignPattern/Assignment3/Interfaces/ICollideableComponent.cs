@@ -9,5 +9,6 @@
         bool CollisionCheck(RectangleCollider pOther);
 
         bool CollisionCheck(SphereCollider pOther);
+
     }
 }

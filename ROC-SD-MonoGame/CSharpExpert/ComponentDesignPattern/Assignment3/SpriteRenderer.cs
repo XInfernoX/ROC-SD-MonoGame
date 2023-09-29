@@ -101,5 +101,12 @@ namespace CSharpExpert.ComponentDesignPattern.Assignment3
             //Rectangle sourceRectangle
             //Rectangle destinationRectangle
         }
+
+        public override void Awake()
+        {
+            Transform t = _owner.GetComponent<Transform>();
+
+            Transform t2 = GetComponent<Transform>();
+        }
     }
 }

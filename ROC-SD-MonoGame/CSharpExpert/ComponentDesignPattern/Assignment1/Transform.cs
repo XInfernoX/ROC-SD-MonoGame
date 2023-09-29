@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
+namespace CSharpExpert.ComponentDesignPattern.Assignment1
 {
     public class Transform
     {

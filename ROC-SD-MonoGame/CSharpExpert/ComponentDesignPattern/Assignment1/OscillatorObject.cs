@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
+namespace CSharpExpert.ComponentDesignPattern.Assignment1
 {
     public class OscillatorObject : GameObject
     {
@@ -32,9 +32,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
                 Y = MathF.Sin(_time * MathHelper.TwoPi)
             };
 
-            //Transform.Position = _oscillateMidPoint + oscillateVector * _amplitude;
-
-            Transform.Position += oscillateVector * _amplitude;
+            Transform.Position = _oscillateMidPoint + oscillateVector * _amplitude;
         }
     }
 }

@@ -3,7 +3,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
+namespace CSharpExpert.ComponentDesignPattern.Assignment2
 {
     public class GameObject
     {

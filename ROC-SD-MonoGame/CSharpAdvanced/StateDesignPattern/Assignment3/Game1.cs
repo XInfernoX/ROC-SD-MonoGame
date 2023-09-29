@@ -65,7 +65,6 @@ namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
             Level4Scene level4Scene = new Level4Scene(this, "Level4", _player);
             _scenes.Add(level4Scene);
 
-
             //Scenes LoadContent
             for (int i = 0; i < _scenes.Count; i++)
                 _scenes[i].LoadSceneContent(Content, GraphicsDevice.Viewport);
@@ -73,12 +72,8 @@ namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
 
             //Gate connections
             ConnectTwoGates(level1Scene.Level2Gate, level2Scene.Level1Gate);
-
-
-
-
-
-
+            ConnectTwoGates(level2Scene.Level3Gate, level3Scene.Level2Gate);
+            ConnectTwoGates(level3Scene.Level4Gate, level4Scene.Level3Gate);
 
             ChangeSceneTo("Menu");
         }

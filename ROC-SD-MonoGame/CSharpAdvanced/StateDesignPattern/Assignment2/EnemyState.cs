@@ -1,7 +1,11 @@
-﻿public enum EnemyState
+﻿namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment2
 {
-    Patrolling,
-    Idling,
-    Chasing,
-    Evading
+    public enum EnemyState
+    {
+        Patrolling,
+        Idling,
+        Chasing,
+        Evading
+    }
 }
+

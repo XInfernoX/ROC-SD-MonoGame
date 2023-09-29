@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment1
 {
     public class Player : GameObject
     {
@@ -45,7 +45,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
 
             Movement(pGameTime, keyboardState);
         }
-
+ 
         private void Movement(GameTime pGameTime, KeyboardState pKeyboardState)
         {
             //Player input registration

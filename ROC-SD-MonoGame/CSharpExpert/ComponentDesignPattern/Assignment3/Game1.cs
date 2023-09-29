@@ -37,9 +37,8 @@ namespace CSharpExpert.ComponentDesignPattern.Assignment3
             AnimatedSpriteRenderer animatedSpriteRenderer = new AnimatedSpriteRenderer(Content.Load<Texture2D>("Megaman"), 5, 2, 12f);
             //SphereCollider collider = new SphereCollider(spriteRenderer);
             RectangleCollider collider = new RectangleCollider(spriteRenderer);
-
-
             SimpleMovement simpleMovement = new SimpleMovement();
+
             _gameObjects.Add(new GameObject(this, "MegaMan", transform, animatedSpriteRenderer, collider, simpleMovement));
 
 
@@ -101,7 +100,9 @@ namespace CSharpExpert.ComponentDesignPattern.Assignment3
                 //(Collision A with B == collision B with A, and it does not matter for this implementation
                 //This makes sure all possible combinations are checked only once
                 for (int innerI = outerI + 1; innerI < _gameObjects.Count; innerI++)
+                {
                     outerGameObject.CollisionCheck(_gameObjects[innerI]);
+                }
             }
         }
 

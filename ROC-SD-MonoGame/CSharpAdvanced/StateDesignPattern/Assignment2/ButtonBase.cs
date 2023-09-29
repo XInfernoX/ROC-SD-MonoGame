@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment2
 {
     public class ButtonBase : GameObject
     {

@@ -17,8 +17,6 @@ namespace CSharpExpert.ComponentDesignPattern.Assignment3
         private Color _color;
         private float _layerDepth;
 
-
-
         private float _animationTime;
         private readonly float _timeModifier;
         private readonly int _spriteCount;
@@ -57,6 +55,7 @@ namespace CSharpExpert.ComponentDesignPattern.Assignment3
         }
 
 
+
         //Constructor
         public AnimatedSpriteRenderer(Texture2D pSpriteSheet, int pHorizontalSpriteCount, int pVerticalSpriteCount, float pAnimationSpeed, Color pColor, float pLayerDepth = 1.0f)
         {
@@ -70,6 +69,7 @@ namespace CSharpExpert.ComponentDesignPattern.Assignment3
 
             _spriteCount = pHorizontalSpriteCount * pVerticalSpriteCount;
             _sourceRectangles = new Rectangle[_spriteCount];
+
 
             for (int y = 0, i = 0; y < pVerticalSpriteCount; y++)
             {

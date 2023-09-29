@@ -1,4 +1,4 @@
-﻿namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
+﻿namespace CSharpExpert.ComponentDesignPattern.Assignment2
 {
     public enum LocationPresets
     {

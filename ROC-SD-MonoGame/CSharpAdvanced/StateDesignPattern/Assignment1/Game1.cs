@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment1
 {
     //Class
     //Namespace
@@ -40,7 +40,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
         {
             base.Initialize();
         }
-
+      
         protected override void LoadContent()
         {
             base.LoadContent();

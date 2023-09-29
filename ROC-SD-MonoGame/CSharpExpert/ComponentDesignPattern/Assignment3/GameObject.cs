@@ -187,11 +187,8 @@ namespace CSharpExpert.ComponentDesignPattern.Assignment3
             pComponent.SetOwner(this);
             _allComponents.Add(pComponent);
 
-            if (pComponent is IDrawableComponent)
-            {
-                IDrawableComponent component = pComponent as IDrawableComponent;
+            if (pComponent is IDrawableComponent component) 
                 _drawableComponents.Add(component);
-            }
 
             if (pComponent is IUpdateableComponent updateableComponent)
                 _updateableComponents.Add(updateableComponent);

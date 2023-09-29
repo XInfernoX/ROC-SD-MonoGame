@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
+namespace CSharpExpert.ComponentDesignPattern.Assignment1
 {
     public class Game1 : Game
     {
@@ -86,7 +86,7 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
             //PositionTestSetup
             _positionTestObjects = new GameObject[4];
 
-            Transform transformTopLeft = new Transform(new Vector2(0, 0), new Vector2(0f, 0f));
+            Transform transformTopLeft = new Transform(new Vector2(0, 0), new Vector2(0.5f, 0.5f));
             SpriteRenderer spriteRendererTopLeft = new SpriteRenderer(starIndicator);
             spriteRendererTopLeft.SpriteFont = defaultFont;
             spriteRendererTopLeft.Text = $"Position: {transformTopLeft.Position}\nOrigin:{transformTopLeft.Origin}";

@@ -12,15 +12,14 @@ namespace Tiled
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private Texture2D test;
+
         //Constructor
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-
-
         }
 
         protected override void Initialize()
@@ -40,6 +39,9 @@ namespace Tiled
             base.LoadContent();
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+
+            test = Content.Load<Texture2D>("Knight");
         }
 
         protected override void Update(GameTime pGameTime)

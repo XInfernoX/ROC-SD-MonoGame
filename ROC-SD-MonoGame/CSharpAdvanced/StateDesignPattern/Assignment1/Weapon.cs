@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment1
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment1
 {
     public class Weapon : GameObject
     {

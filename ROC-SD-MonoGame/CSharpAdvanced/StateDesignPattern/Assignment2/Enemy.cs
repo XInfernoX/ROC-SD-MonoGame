@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment2
 {
     public class Enemy : GameObject
     {

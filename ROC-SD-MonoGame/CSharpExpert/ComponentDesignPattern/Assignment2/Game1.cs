@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
+namespace CSharpExpert.ComponentDesignPattern.Assignment2
 {
     public enum AssignmentState
     {

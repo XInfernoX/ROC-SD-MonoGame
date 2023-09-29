@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpIntermediate.Asteroids
+namespace ROC_SD_MonoGame.CSharpIntermediate.Asteroids
 {
     public class Game1 : Game
     {

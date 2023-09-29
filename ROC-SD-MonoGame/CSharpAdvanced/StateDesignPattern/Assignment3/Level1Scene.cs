@@ -43,7 +43,7 @@ namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
             AddGameObject(new Enemy(new Vector2(pViewport.Width / 2.0f, third), pContent.Load<Texture2D>("Enemy"), 100, wayPoints, _player, 100));
 
             //Gates
-            _level2Gate = new Gate(new Vector2(pViewport.Width / 2.0f, 50), _player, _game, "Level2");
+            _level2Gate = new Gate(new Vector2(100, 50), _player, _game, "Level2");
             AddGameObject(_level2Gate);
         }
     }

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
+namespace CSharpExpert.ComponentDesignPattern.Assignment1
 {
     public class ScalerObject : GameObject
     {
@@ -18,10 +18,10 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
         public float ScaleFactor => _scaleFactor;
 
         //Constructors
-        public ScalerObject(string pName, Transform pTransform, SpriteRenderer pRenderer, float pScaleSpeed) : base(pName, pTransform, pRenderer)
+        public ScalerObject(string pName, Transform pTransform, SpriteRenderer pRenderer, float pScaleSpeed = 1, float pScaleFactor = 1) : base(pName, pTransform, pRenderer)
         {
             _scaleSpeed = pScaleSpeed;
-            _scaleFactor = pScaleSpeed * MathHelper.TwoPi;
+            _scaleFactor = pScaleFactor;
             
             _defaultScale = Transform.Scale;
         }
@@ -29,13 +29,9 @@ namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
         //Methods
         public override void UpdateGameObject(GameTime pGameTime)
         {
-            _time += (float)pGameTime.ElapsedGameTime.TotalSeconds * _scaleFactor;
+            _time += (float)pGameTime.ElapsedGameTime.TotalSeconds * MathHelper.TwoPi;
             Vector2 currentScale = ((MathF.Sin(_time) + 1) * 0.5f) * _scaleFactor * Vector2.One;
             Transform.Scale = _defaultScale * currentScale;
-        }
-
-        public override void DrawGameObject(SpriteBatch pSpriteBatch)
-        {
         }
     }
 }

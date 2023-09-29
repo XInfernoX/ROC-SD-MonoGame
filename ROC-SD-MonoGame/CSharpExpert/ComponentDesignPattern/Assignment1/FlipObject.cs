@@ -3,7 +3,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment1
+namespace CSharpExpert.ComponentDesignPattern.Assignment1
 {
     public class FlipObject : GameObject
     {

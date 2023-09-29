@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
+namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment2
 {
     //Strings en magic numbers
     //Enums
@@ -75,7 +75,7 @@ namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
             Texture2D buttonTexture = Content.Load<Texture2D>("UI_Title_64x64");
             Texture2D gateTexture = Content.Load<Texture2D>("Gate");
             Texture2D weaponTexture = Content.Load<Texture2D>("Weapon");
-            Texture2D shieldTexture = Content.Load<Texture2D>("Weapon");
+            Texture2D shieldTexture = Content.Load<Texture2D>("Shield");
 
             SpriteFont font = Content.Load<SpriteFont>("Arial");
 

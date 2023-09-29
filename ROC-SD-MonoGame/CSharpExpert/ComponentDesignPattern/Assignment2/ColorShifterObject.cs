@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace CSharpAdvanced.CSharpExpert.ComponentDesignPattern.Assignment2
+namespace CSharpExpert.ComponentDesignPattern.Assignment2
 {
     public class ColorShifterObject : GameObject
     {

@@ -26,10 +26,12 @@ namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment3
             AddGameObject(new MenuButton(_game, _game.ButtonColorScheme, new Vector2(1, 0)));
 
             //Gates
-            _level1Gate = new Gate(new Vector2(pViewport.Width / 2.0f, 50), _player, _game, "Level1");
+            _level1Gate = new Gate(new Vector2(200, 50), _player, _game, "Level1");
             AddGameObject(_level1Gate);
 
 
+            _level3Gate = new Gate(new Vector2(200, 300), _player, _game, "Level3");
+            AddGameObject(_level3Gate);
         }
     }
 }

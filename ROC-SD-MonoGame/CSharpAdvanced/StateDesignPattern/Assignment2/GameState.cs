@@ -1,4 +1,4 @@
-﻿namespace CSharpAdvanced.CSharpAdvanced.StateDesignPattern.Assignment2
+﻿namespace ROC_SD_MonoGame.CSharpAdvanced.StateDesignPattern.Assignment2
 {
     public enum GameState
     {
