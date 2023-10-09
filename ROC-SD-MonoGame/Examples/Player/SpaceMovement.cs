@@ -63,7 +63,6 @@ namespace ROC_SD_MonoGame.Examples.Player
         protected override void Update(GameTime pGameTime)
         {
             base.Update(pGameTime);
-
             UpdateSpaceShip(pGameTime);
         }
 

@@ -7,7 +7,7 @@ namespace ROC_SD_MonoGame
         [STAThread]
         private static void Main()
         {
-            using (var game = new Examples.MouseExamples.MouseCircling())
+            using (var game = new Examples.Ball.CannonPlacer())
                 game.Run();
         }
     }

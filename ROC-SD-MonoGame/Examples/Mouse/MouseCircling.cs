@@ -13,14 +13,25 @@ namespace ROC_SD_MonoGame.Examples.MouseExamples
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private int _circlingObjectCount = 6;
-        private float _circlingRadius = 100;
-
-        private float _circlingSpeed = 0.5f;
-
-        private float _time;
-
         private GameObject[] _objects;
+        private int _circlingObjectCount = 6;
+
+        //Main circling
+        private float _rotationTime;
+        private float _circlingSpeed = 0.5f;
+        
+        private float _minCirclingRadius = 50;
+        private float _maxCirclingRadius = 150;
+
+        //Sine circling
+        private float _sineTime;
+        private float _sineSpeed = 0.1f;
+
+
+        //Debug
+        private SpriteFont _font;
+        private float sineValue;
+
 
 
         //Constructor
@@ -56,6 +67,8 @@ namespace ROC_SD_MonoGame.Examples.MouseExamples
             {
                 _objects[i] = new GameObject(Vector2.Zero, texture);
             }
+
+            _font = Content.Load<SpriteFont>("Arial");
         }
 
         protected override void Update(GameTime pGameTime)
@@ -64,15 +77,22 @@ namespace ROC_SD_MonoGame.Examples.MouseExamples
 
             MouseState mouseState = Mouse.GetState();
 
-            _time += (float) pGameTime.ElapsedGameTime.TotalSeconds * _circlingSpeed;
+            _rotationTime += (float)pGameTime.ElapsedGameTime.TotalSeconds * _circlingSpeed;
+            _sineTime += (float)pGameTime.ElapsedGameTime.TotalSeconds * _sineSpeed;
+            
+            float rotationPercentage = _rotationTime % 1.0f;
+            float sinePercentage = _sineTime % 1.0f;
 
-            float currentCirclingSpeed = ((MathF.Sin(_time * MathF.PI * 2) / 2) + 0.5f) * _circlingSpeed;
+            float startRotation = rotationPercentage * 360.0f;
 
+            sineValue = (MathF.Sin(sinePercentage * MathF.PI * 2) / 2) + 0.5f;//[0, 1]
+            float sineRotation = sineValue * 360.0f;
 
-
-            float percentage = _time % 1.0f;
-            float startRotation = percentage * 360.0f;
+            //startRotation += sineRotation;
             float rotationIncrement = 360.0f / _objects.Length;
+
+            float currentCirclingRadius = MathHelper.Lerp(_minCirclingRadius, _maxCirclingRadius, sineValue);
+            //float currentCirclingRadius = MathHelper.Lerp(_maxCirclingRadius, _minCirclingRadius, sineValue);
 
             for (int i = 0; i < _objects.Length; i++)
             {
@@ -82,8 +102,8 @@ namespace ROC_SD_MonoGame.Examples.MouseExamples
                 //mouseOffset.X = MathF.Cos(currentRotation / 180 * MathF.PI) * _circlingRadius;
                 //mouseOffset.Y = MathF.Sin(currentRotation / 180 * MathF.PI) * _circlingRadius;
 
-                mouseOffset.X = MathF.Cos(MathHelper.ToRadians(currentRotation)) * _circlingRadius;
-                mouseOffset.Y = MathF.Sin(MathHelper.ToRadians(currentRotation)) * _circlingRadius;
+                mouseOffset.X = MathF.Cos(MathHelper.ToRadians(currentRotation)) * currentCirclingRadius;
+                mouseOffset.Y = MathF.Sin(MathHelper.ToRadians(currentRotation)) * currentCirclingRadius;
 
                 //_objects[i].Position = mouseState.Position.ToVector2() + mouseOffset;
                 _objects[i].Position = mouseState.Position.ToVector2() + mouseOffset;
@@ -102,6 +122,8 @@ namespace ROC_SD_MonoGame.Examples.MouseExamples
             {
                 _objects[i].Draw(_spriteBatch);
             }
+
+            _spriteBatch.DrawString(_font, sineValue.ToString(), Vector2.Zero, Color.Red);
 
             _spriteBatch.End();
         }

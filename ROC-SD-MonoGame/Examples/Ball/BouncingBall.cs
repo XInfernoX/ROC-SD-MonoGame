@@ -2,7 +2,6 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 
 namespace ROC_SD_MonoGame.Examples.Ball
@@ -15,11 +14,10 @@ namespace ROC_SD_MonoGame.Examples.Ball
 
         private Viewport _viewport;
 
-
         //Ball
         private Texture2D _texture;
         private Vector2 _position;
-        private Vector2 _velocity;
+        private Vector2 _direction;
         private Vector2 _origin;
 
         private float _speed = 200;
@@ -41,6 +39,9 @@ namespace ROC_SD_MonoGame.Examples.Ball
 
             _graphics.ApplyChanges();
 
+        
+
+
             base.Initialize();
         }
 
@@ -58,14 +59,21 @@ namespace ROC_SD_MonoGame.Examples.Ball
             _origin = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
             _position = new Vector2(_viewport.Width * 0.5f, _viewport.Height * 0.5f);
 
-            _velocity.X = (float)random.NextDouble();
-            _velocity.Y = (float)random.NextDouble();
+            _direction.X = (float)random.NextDouble();
+            _direction.Y = (float)random.NextDouble();
 
             int randomDegree = random.Next(0, 360);
-            _velocity.X = MathF.Cos(randomDegree);
-            _velocity.Y = MathF.Sin(randomDegree);
+            _direction.X = MathF.Cos(randomDegree);
+            _direction.Y = MathF.Sin(randomDegree);
 
-            _velocity.Normalize();
+            _direction.Normalize();
+
+
+
+            //_ball = new Ball(_viewport, _texture, Vector2.Zero);
+            Ball ball2 = new Ball(_viewport, _texture, Vector2.Zero);
+
+
         }
 
         protected override void Update(GameTime pGameTime)
@@ -75,6 +83,22 @@ namespace ROC_SD_MonoGame.Examples.Ball
             UpdateBall(pGameTime);
         }
 
+        private void UpdateBall(GameTime pGameTime)
+        {
+            BounceBall();
+
+            _position += _direction * (float)pGameTime.ElapsedGameTime.TotalSeconds * _speed;
+        }
+
+        private void BounceBall()
+        {
+            if (_position.X - _origin.X < 0 || _position.X + _origin.X > _viewport.Width)
+                _direction.X *= -1;
+
+
+            if (_position.Y - _origin.Y < 0 || _position.Y + _origin.Y > _viewport.Height)
+                _direction.Y *= -1;
+        }
         protected override void Draw(GameTime pGameTime)
         {
             base.Draw(pGameTime);
@@ -84,26 +108,10 @@ namespace ROC_SD_MonoGame.Examples.Ball
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(_texture, _position, null, Color.White, 0, _origin, Vector2.One, SpriteEffects.None, 0);
+            //_ball.DrawBall(_spriteBatch);
+
 
             _spriteBatch.End();
-        }
-
-        private void UpdateBall(GameTime pGameTime)
-        {
-            BounceBall();
-
-            _position += _velocity * (float)pGameTime.ElapsedGameTime.TotalSeconds * _speed;
-        }
-
-        //Methods
-
-        private void BounceBall()
-        {
-            if (_position.X - _origin.X < 0 || _position.X + _origin.X > _viewport.Width)
-                _velocity.X *= -1;
-
-            if (_position.Y - _origin.Y < 0 || _position.Y + _origin.Y > _viewport.Height)
-                _velocity.Y *= -1;
         }
     }
 }

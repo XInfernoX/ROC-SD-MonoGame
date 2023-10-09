@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
 
 namespace ROC_SD_MonoGame.Examples.Ball
 {
-    public class BallSpammer : Game
+    public class BallGame : Game
     {
         //Fields - MonoGame
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        protected GraphicsDeviceManager _graphics;
+        protected SpriteBatch _spriteBatch;
+        protected Viewport _viewport;
+        protected Texture2D _ballTexture;
+        protected Texture2D _cannonTexture;
+        protected Vector2 _centerPosition;
 
-        private Viewport _viewport;
-        private Texture2D _ballTexture;
-        private Vector2 _centerPosition;
-
-
-        //Ball
-        private List<Ball> _listOfBalls = new List<Ball>();
+        //Balls
+        protected List<Ball> _listOfBalls = new List<Ball>();
 
         //Constructor
-        public BallSpammer()
+        public BallGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -37,39 +33,24 @@ namespace ROC_SD_MonoGame.Examples.Ball
 
             _graphics.ApplyChanges();
 
-
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            Console.WriteLine("LoadContent");
-
             base.LoadContent();
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
             _viewport = GraphicsDevice.Viewport;
             _centerPosition = new Vector2(_viewport.Width * 0.5f, _viewport.Height * 0.5f);
 
-            _ballTexture = Content.Load<Texture2D>("ball");
-
-            _listOfBalls.Add(new Ball(_viewport, _ballTexture, _centerPosition));
+            _ballTexture = Content.Load<Texture2D>("cannonBallSmall");
+            _cannonTexture = Content.Load<Texture2D>("cannonSmall");
         }
 
         protected override void Update(GameTime pGameTime)
         {
             base.Update(pGameTime);
-
-            MouseState mouseState = Mouse.GetState();
-            KeyboardState keyboardState = Keyboard.GetState();
-
-            //if (keyboardState.IsKeyDown(Keys.Space))
-            if (mouseState.LeftButton == ButtonState.Pressed)
-            {
-                _listOfBalls.Add(new Ball(_viewport, _ballTexture, _centerPosition));
-            }
 
             for (int i = 0; i < _listOfBalls.Count; i++)
             {
@@ -91,6 +72,11 @@ namespace ROC_SD_MonoGame.Examples.Ball
             }
 
             _spriteBatch.End();
+        }
+
+        public void CreateBall(Vector2 pPosition, Vector2 pVelocity)
+        {
+            _listOfBalls.Add(new Ball(_viewport, _ballTexture, pPosition, pVelocity));
         }
     }
 }
